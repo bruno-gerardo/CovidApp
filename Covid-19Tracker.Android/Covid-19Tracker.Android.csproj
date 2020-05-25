@@ -45,7 +45,6 @@
     <AndroidKeyStore></AndroidKeyStore>
     <AndroidSigningStorePass></AndroidSigningStorePass>
     <AssemblyName></AssemblyName>
-    <SignAssembly>false</SignAssembly>
     <NoWarn></NoWarn>
     <AndroidKeyStore></AndroidKeyStore>
     <AndroidSigningStorePass></AndroidSigningStorePass>

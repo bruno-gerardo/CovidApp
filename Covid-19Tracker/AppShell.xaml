@@ -4,7 +4,7 @@
        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        mc:Ignorable="d"
-       xmlns:cenas="clr-namespace:Covid19Tracker.Views"
+       xmlns:views="clr-namespace:Covid19Tracker.Views"
        Title="Covid_19Tracker"
        x:Class="Covid_19Tracker.AppShell"
        Shell.NavBarIsVisible="False">
@@ -32,20 +32,20 @@
     <TabBar>
         <Tab Title="Browse" Icon="tab_feed.png">
             <ShellContent >
-                <cenas:HomePage/>
+                <views:HomePage/>
             </ShellContent>
         </Tab>
         <Tab Title="About" Icon="tab_about.png">
-            <ShellContent ContentTemplate="{DataTemplate cenas:NewsPage}" />
+            <ShellContent ContentTemplate="{DataTemplate views:NewsPage}" />
         </Tab>
         <Tab Title="About" Icon="tab_about.png">
-            <ShellContent ContentTemplate="{DataTemplate cenas:NewsPage}" />
+            <ShellContent ContentTemplate="{DataTemplate views:NewsPage}" />
         </Tab>
         <Tab Title="About" Icon="tab_about.png">
-            <ShellContent ContentTemplate="{DataTemplate cenas:NewsPage}" />
+            <ShellContent ContentTemplate="{DataTemplate views:NewsPage}" />
         </Tab>
         <Tab Title="About" Icon="tab_about.png">
-            <ShellContent ContentTemplate="{DataTemplate cenas:NewsPage}" />
+            <ShellContent ContentTemplate="{DataTemplate views:NewsPage}" />
         </Tab>
     </TabBar>
     <!-- Optional Templates 
