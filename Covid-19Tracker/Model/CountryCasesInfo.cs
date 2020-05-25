@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Covid19Tracker.Helpers;
 using Newtonsoft.Json;
 
 namespace Covid19Tracker.Model
@@ -36,5 +37,21 @@ namespace Covid19Tracker.Model
         public double ActivePerOneMillion { get; set; }
         public double RecoveredPerOneMillion { get; set; }
         public double CriticalPerOneMillion { get; set; }
+
+        public string CasesFormatted
+        {
+            get => Cases.TransformNumberToString();
+        }
+
+        public string DeathsFormatted
+        {
+            get => Deaths.TransformNumberToString();
+        }
+
+        public string RecoveredFormatted
+        {
+            get => Recovered.TransformNumberToString();
+        }
+
     }
 }

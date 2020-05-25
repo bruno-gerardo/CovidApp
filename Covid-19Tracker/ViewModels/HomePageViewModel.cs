@@ -159,10 +159,10 @@ namespace Covid19Tracker.ViewModels
 
             UpdatedTime = string.Format("Last Updated: {0}", globalCasesInfo.Updated.TransformLongToDateTime());
             Confirmed = globalCasesInfo.Cases.TransformNumberToString();
-            TodayCases = globalCasesInfo.TodayCases.TransformNumberToString();
+            TodayCases = string.Format("+{0}", globalCasesInfo.TodayCases.TransformNumberToString());
             Recovered = globalCasesInfo.Recovered.TransformNumberToString();
             Deaths = globalCasesInfo.Deaths.TransformNumberToString();
-            TodayDeaths = globalCasesInfo.TodayDeaths.TransformNumberToString();
+            TodayDeaths = string.Format("+{0}", globalCasesInfo.TodayDeaths.TransformNumberToString());
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
