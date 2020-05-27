@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             
+             Title="Home"
+             NavigationPage.HasNavigationBar="False"
              Shell.NavBarIsVisible="False"
              ios:Page.UseSafeArea="False"
              x:Class="Covid19Tracker.Views.HomePage">
@@ -12,8 +13,8 @@
     <ContentPage.Content>
             <Grid >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height=".3*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="4*"/>
                 </Grid.RowDefinitions>
                 <!--#region Pancake View-->
                 <pancakeView:PancakeView 
@@ -25,9 +26,11 @@
                                             Grid.RowSpan="2">
 
                     <Image Source="logo.png"
+                           Aspect="AspectFit"
                            VerticalOptions="StartAndExpand"
                            HorizontalOptions="CenterAndExpand"
-                           Margin="30,60"/>
+                           Grid.Row="0"
+                           Margin="30"/>
 
                 </pancakeView:PancakeView>
                 <pancakeView:PancakeView CornerRadius="30,30,0,0"
@@ -35,18 +38,27 @@
                                          Grid.Row="1">
                     <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
                         <ScrollView VerticalScrollBarVisibility="Never">
-                            <StackLayout Orientation="Vertical" Padding="16,30,0,0">
+                            <StackLayout Orientation="Vertical" Padding="16,30,16,0">
                                 <StackLayout>
-                                    <StackLayout Margin="16,0">
-                                        <Label Text="Worlwide Cases"
-                                           FontAttributes="Bold"
-                                           FontSize="Large"
-                                           TextColor="Black"/>
-                                        <Label Text="{Binding UpdatedTime}"
-                                           FontAttributes="Bold"
-                                           FontSize="Micro"
-                                           TextColor="#99A6C0"
-                                               Margin="0,0,0,10"/>
+                                    <StackLayout x:Name="WorldwideInfoStack" Margin="16,0" Orientation="Horizontal">
+                                        <StackLayout>
+                                            <Label Text="Worlwide Cases"
+                                                   FontAttributes="Bold"
+                                                   FontSize="Large"
+                                                   TextColor="Black"/>
+                                            <Label Text="{Binding UpdatedTime}"
+                                                   FontAttributes="Bold"
+                                                   FontSize="Micro"
+                                                   TextColor="#99A6C0"
+                                                   Margin="0,0,0,10"/>
+                                        </StackLayout>
+                                        <Label Text="Detalhes"
+                                               FontAttributes="Bold"
+                                               TextDecorations="Underline"
+                                               FontSize="Small"
+                                               TextColor="#3F94B5"
+                                               VerticalOptions="CenterAndExpand"
+                                               HorizontalOptions="EndAndExpand"/>
                                     </StackLayout>
                                     <pancakeView:PancakeView BackgroundColor="White"
                                                              HasShadow="False"
@@ -159,14 +171,16 @@
                                             Margin="16,0"/>
                                     <CollectionView HorizontalOptions="FillAndExpand" ItemSizingStrategy="MeasureAllItems"
                                                     HeightRequest="250" HorizontalScrollBarVisibility="Never"
-                                                    ItemsSource="{Binding MostAffectedCountriesList}" >
+                                                    ItemsSource="{Binding MostAffectedCountriesList}"
+                                                    SelectionMode="Single"
+                                                    SelectionChanged="CollectionView_SelectionChanged">
                                         <CollectionView.ItemsLayout>
-                                            <LinearItemsLayout Orientation="Horizontal"/>
+                                            <LinearItemsLayout Orientation="Horizontal" />
                                         </CollectionView.ItemsLayout>
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate>
                                                 <!--#region Card Country Info -->
-                                                <StackLayout VerticalOptions="FillAndExpand" Padding="10">
+                                                <StackLayout VerticalOptions="FillAndExpand" Padding="0,0,15,0">
 
                                                     <pancakeView:PancakeView BackgroundColor="White"
                                                                              VerticalOptions="CenterAndExpand"
@@ -184,6 +198,7 @@
                                                                                VerticalOptions="CenterAndExpand"
                                                                                HorizontalOptions="FillAndExpand"/>
                                                                         <Label Text="{Binding Country}"
+                                                                               TextColor="Black"
                                                                                FontAttributes="Bold"
                                                                                VerticalOptions="CenterAndExpand"
                                                                                HorizontalOptions="FillAndExpand"/>

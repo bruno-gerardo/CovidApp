@@ -11,8 +11,6 @@
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="1.4.2" />
     <PackageReference Include="RestSharp" Version="106.11.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="SkiaSharp" Version="1.68.3" />
-    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
@@ -20,5 +18,21 @@
     <Folder Include="Model\" />
     <Folder Include="Services\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Themes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\FabMDL2.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\Onboarding\Styles.xaml" />
+    <EmbeddedResource Remove="Themes\LightTheme.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\FabMDL2.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\Onboarding\Styles.xaml.cs" />
+    <Compile Remove="Themes\LightTheme.xaml.cs" />
   </ItemGroup>
 </Project>

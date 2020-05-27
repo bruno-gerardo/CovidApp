@@ -15,8 +15,8 @@
         <ResourceDictionary>
             <Color x:Key="NavigationPrimary">#2196F3</Color>
             <Style x:Key="BaseStyle" TargetType="Element">
-                <Setter Property="Shell.BackgroundColor" Value="White" />
-                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.BackgroundColor" Value="Black" />
+                <!--<Setter Property="Shell.ForegroundColor" Value="Gray" />-->
                 <Setter Property="Shell.TitleColor" Value="White" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
@@ -29,16 +29,15 @@
         </ResourceDictionary>
     </Shell.Resources>
     <!-- Your Pages -->
-    <TabBar>
-        <Tab Title="Browse" Icon="tab_feed.png">
-            <ShellContent >
-                <views:HomePage/>
-            </ShellContent>
+    <TabBar Route="mainPage">
+        <Tab Route="homePage" Title="Browse" Icon="tab_feed.png" IsTabStop="True" 
+             Shell.NavBarIsVisible="False">
+            <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
         </Tab>
-        <Tab Title="About" Icon="tab_about.png">
-            <ShellContent ContentTemplate="{DataTemplate views:NewsPage}" />
+        <Tab Route="searchPage" Title="Search" Icon="tab_about.png" IsTabStop="True">
+            <ShellContent ContentTemplate="{DataTemplate views:SearchPage}" />
         </Tab>
-        <Tab Title="About" Icon="tab_about.png">
+        <Tab Route="newsPage" Title="About" Icon="tab_about.png">
             <ShellContent ContentTemplate="{DataTemplate views:NewsPage}" />
         </Tab>
         <Tab Title="About" Icon="tab_about.png">

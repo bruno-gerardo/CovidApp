@@ -9,6 +9,7 @@ using System.Windows.Input;
 using Covid19Tracker.Helpers;
 using Covid19Tracker.Model;
 using Covid19Tracker.Services;
+using Covid19Tracker.Views;
 using Xamarin.Forms;
 
 namespace Covid19Tracker.ViewModels
@@ -109,8 +110,6 @@ namespace Covid19Tracker.ViewModels
             }
         }
 
-        public ICommand RefreshCommand => new Command(async () => await RefreshItemsAsync());
-
         public bool IsRefreshing
         {
             get => isRefreshing;
@@ -134,7 +133,6 @@ namespace Covid19Tracker.ViewModels
 
         public HomePageViewModel()
         {
-            
         }
 
         public async Task GlobalCasesInfoAsync()
