@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.NavBarIsVisible="True"
+             Title="Details"
+             Shell.FlyoutBehavior="Disabled"
+             NavigationPage.BackButtonTitle=""
+             x:Class="Covid19Tracker.Views.CountryDetailsPage">
+    <Shell.BackButtonBehavior>
+        <!--<BackButtonBehavior Command="{Binding BackCommand}"
+                            IconOverride="tab_about.png" />-->
+        <BackButtonBehavior Command="{Binding BackCommand}">
+            <BackButtonBehavior.IconOverride>
+                <FontImageSource FontFamily="MyAwesomeCustomFont" Glyph="&#xE76B;" Size="20" />
+            </BackButtonBehavior.IconOverride>
+        </BackButtonBehavior>
+    </Shell.BackButtonBehavior>
+    <ContentPage.Content>
+        <BoxView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="HotPink"/>
+    </ContentPage.Content>
+</ContentPage>
