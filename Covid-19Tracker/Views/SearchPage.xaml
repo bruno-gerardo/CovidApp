@@ -2,15 +2,57 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-
-             
-             Title="Search"
-             NavigationPage.BackButtonTitle=""
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:views="clr-namespace:Covid19Tracker.ViewModels"
+             Title="Search Page"
              ios:Page.UseSafeArea="False"
+             NavigationPage.BackButtonTitle=""
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
              x:Class="Covid19Tracker.Views.SearchPage">
+
     <ContentPage.Content>
-        <BoxView x:Name="cenas" VerticalOptions="FillAndExpand"
-                 HorizontalOptions="FillAndExpand"
-                 BackgroundColor="Green"/>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".12*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--#region Fake NavBar -->
+            <pancakeView:PancakeView BackgroundGradientAngle="255"
+                                    BackgroundGradientStartColor="#3F94B5"
+                                    BackgroundGradientEndColor="#1373A1"
+                                     Grid.Row="0"
+                                     Grid.RowSpan="2">
+                <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand" Margin="0,40">
+                    
+                    <SearchBar BackgroundColor="Transparent"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="FillAndExpand"
+                               WidthRequest="100"
+                               TextColor="White"
+                               Placeholder="Nome do País"
+                               PlaceholderColor="Black"
+                               CancelButtonColor="White"
+                               Margin="10,0"
+                               IsSpellCheckEnabled="False"
+                               />
+
+                </StackLayout>
+            </pancakeView:PancakeView>
+            <!--#endregion-->
+
+            <StackLayout VerticalOptions="FillAndExpand"
+                         Grid.Row="1"
+                         >
+                <ScrollView VerticalOptions="FillAndExpand"
+                            BackgroundColor="WhiteSmoke"
+                            >
+                    <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        
+                    </StackLayout>
+
+                </ScrollView>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

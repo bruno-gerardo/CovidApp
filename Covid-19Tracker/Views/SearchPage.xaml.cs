@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Covid19Tracker.ViewModels;
 using Xamarin.Forms;
 
 namespace Covid19Tracker.Views
@@ -10,19 +10,8 @@ namespace Covid19Tracker.Views
         public SearchPage()
         {
             InitializeComponent();
-
-            var tap = new TapGestureRecognizer();
-
-            tap.Tapped += Tap_Tapped;
-
-            cenas.GestureRecognizers.Add(tap);
+            BindingContext = new SearchPageViewModel();
         }
 
-
-
-        private async void Tap_Tapped(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("countryDetailsPage");
-        }
     }
 }

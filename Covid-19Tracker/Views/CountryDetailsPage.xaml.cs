@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
+using Covid19Tracker.Model;
+using Covid19Tracker.ViewModels;
 using Xamarin.Forms;
 
 namespace Covid19Tracker.Views
@@ -10,10 +12,11 @@ namespace Covid19Tracker.Views
         public CountryDetailsPage()
         {
             InitializeComponent();
-            BindingContext = this;
+            BindingContext = new CountryDetailsPageViewModel();
 
         }
 
-        public ICommand BackCommand => new Command( async () => await Shell.Current.Navigation.PopAsync());
+        
+
     }
 }

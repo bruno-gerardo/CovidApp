@@ -10,6 +10,7 @@ namespace Covid_19Tracker
     public partial class AppShell : Xamarin.Forms.Shell
     {
         // Constants of shell defined routes
+        public const string HomePage = "//mainPage/homePage";
         public const string SearchPage = "//mainPage/searchPage";
 
         // Constants of shell non-defined routes

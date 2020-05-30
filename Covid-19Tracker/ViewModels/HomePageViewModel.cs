@@ -14,6 +14,7 @@ using Xamarin.Forms;
 
 namespace Covid19Tracker.ViewModels
 {
+    
     public class HomePageViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -28,7 +29,6 @@ namespace Covid19Tracker.ViewModels
         private string todayDeaths;
         private string updatedTime;
         private ObservableCollection<CountryCasesInfo> mostAffectedCountriesList;
-
 
         public string Deaths
         {
@@ -154,6 +154,7 @@ namespace Covid19Tracker.ViewModels
             var globalCasesInfo = await Api.GetGlobalInfoAsync();
             var mostAffectedInfo = await Api.GetMostAffectedInfoAsync();
             MostAffectedCountriesList = new ObservableCollection<CountryCasesInfo>(mostAffectedInfo.Take(5).ToList());
+
 
             UpdatedTime = string.Format("Last Updated: {0}", globalCasesInfo.Updated.TransformLongToDateTime());
             Confirmed = globalCasesInfo.Cases.TransformNumberToString();

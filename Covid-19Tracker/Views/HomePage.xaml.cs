@@ -4,6 +4,7 @@ using System.Linq;
 using Covid_19Tracker;
 using Covid19Tracker.Model;
 using Covid19Tracker.ViewModels;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace Covid19Tracker.Views
@@ -43,7 +44,12 @@ namespace Covid19Tracker.Views
         async void CollectionView_SelectionChanged(System.Object sender, Xamarin.Forms.SelectionChangedEventArgs e)
         {
             if (e.CurrentSelection.FirstOrDefault() is CountryCasesInfo selectedCountry)
-                await Shell.Current.GoToAsync($"countryDetailsPage?{selectedCountry.Country}");
+            {
+                var countryName = selectedCountry;
+                var cenas = JsonConvert.SerializeObject(countryName);
+                cenas.Replace(":/", "://");
+                await Shell.Current.GoToAsync($"countryDetailsPage?CountryName={cenas}");
+            }
 
             ((CollectionView)sender).SelectedItem = null;
         }
