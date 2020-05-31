@@ -11,7 +11,8 @@ namespace Covid19Tracker.Services
         private static RestClient _restClient = new RestClient("https://disease.sh/v2/"); // API Corona
 
         private static string GetAll = "all";
-        private static string MostAffected = "countries?sort=cases";
+        private static string GetCountries = "countries";
+private static string MostAffected = "countries?sort=cases";
 
         public static async Task<GlobalCasesInfo> GetGlobalInfoAsync()
         {
@@ -52,6 +53,16 @@ namespace Covid19Tracker.Services
             //    };
 
             //return JsonConvert.DeserializeObject<List<CountryCasesInfo>>(response.Content);
+            return response.Data;
+        }
+
+        public static async Task<List<CountryCasesInfo>> GetCountriesAsync()
+        {
+            var request = new RestRequest(string.Format(GetCountries), Method.GET);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = await _restClient.ExecuteAsync<List<CountryCasesInfo>>(request);
+
             return response.Data;
         }
     }

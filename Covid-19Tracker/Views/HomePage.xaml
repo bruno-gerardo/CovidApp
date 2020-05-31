@@ -196,7 +196,9 @@
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate>
                                                 <!--#region Card Country Info -->
-                                                <StackLayout VerticalOptions="FillAndExpand" Padding="0,0,15,0">
+                                                <StackLayout VerticalOptions="FillAndExpand"
+                                                             Padding="7,0,7,0"
+                                                             BackgroundColor="#ccf5f5f5">
 
                                                     <pancakeView:PancakeView BackgroundColor="White"
                                                                              VerticalOptions="CenterAndExpand"
