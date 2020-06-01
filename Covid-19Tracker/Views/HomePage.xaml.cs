@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Covid_19Tracker;
 using Covid19Tracker.Model;
+using Covid19Tracker.Services;
 using Covid19Tracker.ViewModels;
 using Newtonsoft.Json;
 using Xamarin.Forms;
@@ -46,8 +47,9 @@ namespace Covid19Tracker.Views
             if (e.CurrentSelection.FirstOrDefault() is CountryCasesInfo selectedCountry)
             {
                 var countryName = selectedCountry;
+                //var teste = await Api.GetCountryTimeSeriesAsync(selectedCountry.CountryInfo.Iso3);
+                //selectedCountry.TimeSeries = teste.result;
                 var cenas = JsonConvert.SerializeObject(countryName);
-                cenas.Replace(":/", "://");
                 await Shell.Current.GoToAsync($"countryDetailsPage?CountryName={cenas}");
             }
 

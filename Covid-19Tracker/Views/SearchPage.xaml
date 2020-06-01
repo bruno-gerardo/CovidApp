@@ -85,7 +85,10 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <!--#region Card Country Info -->
-                                <StackLayout VerticalOptions="FillAndExpand" Padding="10" BackgroundColor="WhiteSmoke">
+                                <StackLayout VerticalOptions="FillAndExpand"
+                                             HorizontalOptions="CenterAndExpand"
+                                             Padding="20"
+                                             BackgroundColor="WhiteSmoke">
 
                                     <pancakeView:PancakeView BackgroundColor="White"
                                                              VerticalOptions="FillAndExpand"
@@ -175,66 +178,12 @@
                                                          >
                                                 <Label Text="&#xE970;"
                                                        TextColor="#99A6C0"
-                                                       FontFamily="MyAwesomeCustomFont"
+                                                       FontFamily="FabMDL2"
                                                        FontSize="Large"
                                                        VerticalOptions="CenterAndExpand"
                                                        HorizontalOptions="CenterAndExpand"/>
                                             </StackLayout>
                                         </Grid>
-
-
-                                            <!--<StackLayout HorizontalOptions="CenterAndExpand">
-                                                    <StackLayout Orientation="Horizontal"
-                                                                    HorizontalOptions="CenterAndExpand"
-                                                                    Margin="0,20">
-                                                        <Image Source="{Binding CountryInfo.Flag}"
-                                                                WidthRequest="30"
-                                                                Aspect="AspectFit"
-                                                                VerticalOptions="CenterAndExpand"
-                                                                HorizontalOptions="FillAndExpand"/>
-                                                        <Label Text="{Binding Country}"
-                                                                TextColor="Black"
-                                                                FontAttributes="Bold"
-                                                                VerticalOptions="CenterAndExpand"
-                                                                HorizontalOptions="FillAndExpand"/>
-                                                    </StackLayout>
-
-                                                    <StackLayout Orientation="Horizontal"
-                                                                    VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                                                        <Image Source="icon_confirmed.png"
-                                                                Aspect="AspectFit"
-                                                                HeightRequest="20"
-                                                                WidthRequest="20"/>
-                                                        <Label Text="{Binding CasesFormatted}"
-                                                                TextColor="#FF8748"
-                                                                FontAttributes="Bold"/>
-                                                    </StackLayout>
-
-                                                    <StackLayout Orientation="Horizontal"
-                                                                    VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                                                        <Image Source="icon_recovered.png"
-                                                                Aspect="AspectFit"
-                                                                HeightRequest="20"
-                                                                WidthRequest="20"/>
-                                                        <Label Text="{Binding RecoveredFormatted}"
-                                                                TextColor="#36C12C"
-                                                                FontAttributes="Bold"/>
-
-                                                    </StackLayout>
-
-                                                    <StackLayout Orientation="Horizontal"
-                                                                    VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                                                        <Image Source="icon_death.png"
-                                                                Aspect="AspectFit"
-                                                                WidthRequest="20"/>
-
-
-                                                        <Label Text="{Binding DeathsFormatted}"
-                                                                TextColor="#FF4848"
-                                                                FontAttributes="Bold"/>
-
-                                                    </StackLayout>
-                                            </StackLayout>-->
                                         </pancakeView:PancakeView>
                                 </StackLayout>
                                 <!--#endregion-->

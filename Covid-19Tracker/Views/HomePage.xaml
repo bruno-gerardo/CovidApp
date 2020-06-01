@@ -29,8 +29,8 @@
     <ContentPage.Content>
             <Grid >
                 <Grid.RowDefinitions>
+                    <RowDefinition Height=".25*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="4*"/>
                 </Grid.RowDefinitions>
                 <!--#region Pancake View-->
                 <pancakeView:PancakeView 
@@ -191,7 +191,7 @@
                                                     SelectionMode="Single"
                                                     SelectionChanged="CollectionView_SelectionChanged">
                                         <CollectionView.ItemsLayout>
-                                            <LinearItemsLayout Orientation="Horizontal" />
+                                            <LinearItemsLayout Orientation="Horizontal"/>
                                         </CollectionView.ItemsLayout>
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate>

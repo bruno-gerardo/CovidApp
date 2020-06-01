@@ -37,6 +37,7 @@ namespace Covid19Tracker.Model
         public double ActivePerOneMillion { get; set; }
         public double RecoveredPerOneMillion { get; set; }
         public double CriticalPerOneMillion { get; set; }
+        public List<TimeSeriesData> TimeSeries { get; set; }
 
         public string CasesFormatted
         {

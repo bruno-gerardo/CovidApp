@@ -4,7 +4,7 @@ using Xamarin.Forms.Xaml;
 //using Covid_19Tracker.Services;
 //using Covid_19Tracker.Views;
 
-[assembly: ExportFont("FabMDL2.ttf", Alias = "MyAwesomeCustomFont")]
+
 
 namespace Covid_19Tracker
 {
@@ -12,6 +12,10 @@ namespace Covid_19Tracker
     {
         public App()
         {
+            //Register Syncfusion license
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjY1Nzc1QDMxMzgyZTMxMmUzMGtVUWlSL3dpc1RTQTZyT21xNEY5RVE1UlhMUEcvdnhqTzZBYnNoMmZybms9");
+
+
             InitializeComponent();
 
             MainPage = new AppShell();

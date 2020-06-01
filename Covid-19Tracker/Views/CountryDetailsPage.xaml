@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             xmlns:views="clr-namespace:Covid19Tracker.ViewModels"
+             xmlns:sf="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              Shell.NavBarIsVisible="False"
              Title="Details"
              Shell.FlyoutBehavior="Disabled"
@@ -15,14 +15,14 @@
     <!--<Shell.BackButtonBehavior>
         <BackButtonBehavior Command="{Binding BackCommand}">
             <BackButtonBehavior.IconOverride>
-                <FontImageSource FontFamily="MyAwesomeCustomFont" Glyph="&#xE76B;" Size="20" />
+                <FontImageSource FontFamily="FabMDL2" Glyph="&#xE76B;" Size="20" />
             </BackButtonBehavior.IconOverride>
         </BackButtonBehavior>
     </Shell.BackButtonBehavior>-->
-    
+
     <ContentPage.Content>
 
-        <Grid RowSpacing="0" x:DataType="views:CountryDetailsPageViewModel">
+        <Grid RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height=".12*"/>
                 <RowDefinition Height="*"/>
@@ -33,19 +33,49 @@
                                     BackgroundGradientEndColor="#1373A1"
                                      Grid.Row="0"
                                      Grid.RowSpan="2">
-                <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand" Margin="0,20">
-                    <Label VerticalOptions="EndAndExpand"
-                           FontFamily="MyAwesomeCustomFont"
-                           Text="&#xE973;"
-                           TextColor="White"
-                           FontSize="20"
-                           Margin="10,40">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding BackCommand}"/>
-                        </Label.GestureRecognizers>
-                    </Label>
-                       
-                </StackLayout>
+                    
+                    
+                    <Grid VerticalOptions="StartAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout VerticalOptions="CenterAndExpand" 
+                                     Grid.Column="0"
+                                     >
+                            <Label VerticalOptions="CenterAndExpand"
+                                   FontFamily="FabMDL2"
+                                   Text="&#xE973;"
+                                   TextColor="White"
+                                   FontSize="20"
+                                   Margin="10,40">
+                            </Label>
+                            
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BackCommand}"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="CenterAndExpand"
+                                     Grid.Column="1"
+                                     >
+                            <Image Source="{Binding CountryInfo.Flag}"
+                                WidthRequest="30"
+                                Aspect="AspectFit"
+                                VerticalOptions="CenterAndExpand"/>
+                            <Label VerticalOptions="EndAndExpand"
+                                   HorizontalOptions="CenterAndExpand"
+                                   Text="{Binding CountryCases.Country}"
+                                   TextColor="White"
+                                   FontAttributes="Bold"
+                                   FontSize="20"
+                                   Margin="10,40">
+
+                            </Label>
+                        </StackLayout>
+                    </Grid>
             </pancakeView:PancakeView>
             <!--#endregion-->
 
@@ -55,15 +85,80 @@
                 <ScrollView VerticalOptions="FillAndExpand"
                             BackgroundColor="WhiteSmoke"
                             >
-                    <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                        <Image Source="{Binding CountryInfo.Flag}"
-                                WidthRequest="30"
-                                Aspect="AspectFit"
-                                VerticalOptions="CenterAndExpand"
-                                HorizontalOptions="FillAndExpand"/>
-                        
-                        <Label Text="{Binding CountryInfo.Long}" TextColor="Black" FontSize="Large"/>
-                        <Label Text="{Binding CountryInfo.Lat}" TextColor="Black" FontSize="Large"/>
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                        <StackLayout IsVisible="False">
+
+                            <Label Text="{Binding CountryCases.Cases, StringFormat='Casos Hoje: {0:# ### ### ###}'}"/>
+
+                    
+                            <Label Text="{Binding CountryCases.TodayCases, StringFormat='Casos Hoje: +{0:# ### ### ###}'}"/>
+                            <Label Text="{Binding CountryCases.Deaths, StringFormat='Mortes: {0:# ### ### ###}'}"/>
+                            <Label Text="{Binding CountryCases.TodayDeaths, StringFormat='Mortes Hoje: +{0:# ### ###}'}"/>
+                            <Label Text="{Binding CountryCases.Recovered, StringFormat='Recuperados: {0:# ### ###}'}"/>
+                            <Label Text="{Binding CountryCases.Active, StringFormat='Activos: {0:# ### ###}'}"/>
+                        </StackLayout>
+
+                        <pancakeView:PancakeView CornerRadius="20" Padding="10" BackgroundColor="White">
+                            <StackLayout>
+                                <Label Text="Last day" TextColor="Black" FontAttributes="Bold" FontSize="Medium"/>
+                                <Label Text="New cases at " TextColor="Black"/>
+                                <Label Text="{Binding CountryCases.TodayCases, StringFormat='{0:# ### ### ###}'}"/>
+                                <Label Text="{Binding CountryCases.TodayCases, StringFormat='{0:# ### ### ###}'}"/>
+                            </StackLayout>
+                        </pancakeView:PancakeView>
+
+                        <!--#region SF Chart -->
+                        <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White"  IsVisible="false">
+                            
+                        <sf:SfChart x:Name="chartView" HeightRequest="400"
+                                    HorizontalOptions="FillAndExpand"
+                                    BackgroundColor="Transparent"
+                                    TrackballCreated="chartView_TrackballCreated"
+                                    >
+                            <sf:SfChart.Legend>
+                                <sf:ChartLegend Margin="0,10" ToggleSeriesVisibility="True" DockPosition="Top"/>
+                            </sf:SfChart.Legend>
+
+                            <sf:SfChart.ChartBehaviors>
+                                <sf:ChartTrackballBehavior LabelDisplayMode="GroupAllPoints" ActivationMode="TouchMove" ShowLine="True">
+                                    <sf:ChartTrackballBehavior.LineStyle>
+                                        <sf:ChartLineStyle StrokeColor="#4499A6C0"/>
+                                    </sf:ChartTrackballBehavior.LineStyle>
+                                </sf:ChartTrackballBehavior>
+                            </sf:SfChart.ChartBehaviors>
+
+                            <sf:SfChart.PrimaryAxis>
+                                <sf:DateTimeAxis ShowMajorGridLines="False" LabelRotationAngle="-45" Interval="15" IntervalType="Days">
+                                    <sf:DateTimeAxis.AxisLineStyle>
+                                        <sf:ChartLineStyle StrokeColor="Transparent"/>
+                                        </sf:DateTimeAxis.AxisLineStyle>
+                                </sf:DateTimeAxis>
+                            </sf:SfChart.PrimaryAxis>
+ 
+                            <sf:SfChart.SecondaryAxis>
+                                <sf:NumericalAxis RangePadding="Auto" Minimum="0" ShowMajorGridLines="True" LabelCreated="NumericalAxis_LabelCreated">
+                                    <sf:NumericalAxis.AxisLineStyle>
+                                        <sf:ChartLineStyle StrokeColor="Transparent"/>
+                                        </sf:NumericalAxis.AxisLineStyle>
+                                        <sf:NumericalAxis.LabelStyle>
+                                            <sf:ChartAxisLabelStyle/>
+                                        </sf:NumericalAxis.LabelStyle>
+                                    </sf:NumericalAxis>
+
+                                
+                            </sf:SfChart.SecondaryAxis>
+
+                            <sf:SplineAreaSeries Label="Confirmados" ItemsSource="{Binding CountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="confirmed" StrokeWidth="3"
+                                                EnableAnimation="True" StrokeColor="#FF9E6B" Opacity=".2" Color="#FF9E6B" IsVisibleOnLegend="True"/>
+                            <sf:SplineAreaSeries Label="Recuperados" ItemsSource="{Binding CountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="recovered" StrokeWidth="3"
+                                                EnableAnimation="True" StrokeColor="#52A658" Opacity=".2" Color="#52A658"/>
+                            <sf:SplineAreaSeries Label="Mortes" ItemsSource="{Binding CountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="deaths" StrokeWidth="3"
+                                                EnableAnimation="True" StrokeColor="#E36172" Opacity=".2" Color="#E36172"/>
+                            
+                        </sf:SfChart>
+                           
+                        </pancakeView:PancakeView>
+                         <!--#endregion-->
                     </StackLayout>
 
                 </ScrollView>
