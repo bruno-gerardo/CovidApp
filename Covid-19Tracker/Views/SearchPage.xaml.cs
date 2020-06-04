@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Covid19Tracker.Helpers;
 using Covid19Tracker.Model;
 using Covid19Tracker.ViewModels;
 using Newtonsoft.Json;
@@ -16,14 +17,6 @@ namespace Covid19Tracker.Views
             InitializeComponent();
             vm = new SearchPageViewModel();
             BindingContext = vm;
-        }
-
-        protected async override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            if(vm.MostAffectedCountriesList == null)
-                await vm.GetData();
         }
 
         void SearchBar_TextChanged(System.Object sender, Xamarin.Forms.TextChangedEventArgs e)

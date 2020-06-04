@@ -76,69 +76,77 @@
                                                VerticalOptions="CenterAndExpand"
                                                HorizontalOptions="EndAndExpand"/>
                                     </StackLayout>
+
+                                    <!--#region Card World Stats-->
                                     <pancakeView:PancakeView BackgroundColor="White"
                                                              HasShadow="False"
-                                                             VerticalOptions="Start"
+                                                             VerticalOptions="FillAndExpand"
                                                              HorizontalOptions="FillAndExpand"
-                                                             HeightRequest="125"
                                                              Elevation="1"
                                                              CornerRadius="20">
-                                        <Grid HorizontalOptions="FillAndExpand" >
+                                        <Grid HorizontalOptions="FillAndExpand" Margin="0,15" >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
 
                                             <!--#region Coluna Confirmados -->
+                                            
                                             <StackLayout 
-                                                         VerticalOptions="FillAndExpand"
+                                                         VerticalOptions="CenterAndExpand"
                                                          HorizontalOptions="FillAndExpand"
-                                                         Grid.Column="0">
+                                                         Grid.Column="0" Grid.Row="1">
                                                 <Label Text="{Binding TodayCases}"
-                                                       TextColor="#FF8748"
+                                                       TextColor="{StaticResource ConfirmedColor}"
                                                        FontAttributes="Bold"
                                                        VerticalOptions="EndAndExpand"
                                                        HorizontalOptions="CenterAndExpand"/>
 
                                                 <Label Text="{Binding Confirmed}"
-                                                       TextColor="#FF8748"
+                                                       TextColor="{StaticResource ConfirmedColor}"
                                                        FontAttributes="Bold"
                                                        VerticalOptions="CenterAndExpand"
                                                        HorizontalOptions="CenterAndExpand"
-                                                       FontSize="30"/>
+                                                       FontSize="25"/>
                                                 
                                                 <Label Text="Confirmados"
                                                        TextColor="#99A6C0"
                                                        FontAttributes="Bold"
+                                                       FontSize="Small"
                                                        VerticalOptions="StartAndExpand"
                                                        HorizontalOptions="CenterAndExpand"/>
                                                 
                                             </StackLayout>
                                             <!--#endregion-->
 
-                                            <!--#region Coluna Mortes -->
+                                            <!--#region Coluna Activos -->
                                             <StackLayout 
-                                                         VerticalOptions="FillAndExpand"
+                                                         VerticalOptions="CenterAndExpand"
                                                          HorizontalOptions="FillAndExpand"
-                                                         Grid.Column="1">
-                                                
-                                                <Label Text="{Binding TodayDeaths}"
-                                                       TextColor="#FF4848"
+                                                         Grid.Column="1" Grid.Row="1">
+                                                <Label Text="N/A"
+                                                       TextColor="{StaticResource ActiveColor}"
                                                        FontAttributes="Bold"
                                                        VerticalOptions="EndAndExpand"
                                                        HorizontalOptions="CenterAndExpand"/>
 
-                                                <Label Text="{Binding Deaths}"
-                                                       TextColor="#FF4848"
+                                                <Label Text="{Binding Active}"
+                                                       TextColor="{StaticResource ActiveColor}"
                                                        FontAttributes="Bold"
                                                        VerticalOptions="CenterAndExpand"
                                                        HorizontalOptions="CenterAndExpand"
-                                                       FontSize="30"/>
-
-                                                <Label Text="Mortes"
+                                                       FontSize="25"/>
+                                                
+                                                <Label Text="Activos"
                                                        TextColor="#99A6C0"
                                                        FontAttributes="Bold"
+                                                       FontSize="Small"
                                                        VerticalOptions="StartAndExpand"
                                                        HorizontalOptions="CenterAndExpand"/>
                                                 
@@ -149,36 +157,66 @@
                                             <StackLayout 
                                                          VerticalOptions="FillAndExpand"
                                                          HorizontalOptions="FillAndExpand"
-                                                         Grid.Column="2">
+                                                         Grid.Column="2" Grid.Row="1">
 
-                                                <Label Text=""
-                                                       TextColor="#52A658"
+                                                <Label Text="{Binding TodayRecovered}"
+                                                       TextColor="{StaticResource RecoveredColor}"
                                                        FontAttributes="Bold"
                                                        VerticalOptions="EndAndExpand"
-                                                       HorizontalOptions="CenterAndExpand"
-                                                       FontSize="30"/>
-                                                
+                                                       HorizontalOptions="CenterAndExpand"/>
+
                                                 <Label Text="{Binding Recovered}"
-                                                       TextColor="#36C12C"
+                                                       TextColor="{StaticResource RecoveredColor}"
                                                        FontAttributes="Bold"
                                                        VerticalOptions="EndAndExpand"
                                                        HorizontalOptions="CenterAndExpand"
-                                                       FontSize="30"
-                                                       Margin="0,10,0,0"/>
+                                                       FontSize="25"/>
 
                                                 <Label Text="Recuperados"
                                                        TextColor="#99A6C0"
                                                        FontAttributes="Bold"
+                                                       FontSize="Small"
                                                        VerticalOptions="CenterAndExpand"
                                                        HorizontalOptions="CenterAndExpand"
-                                                       Margin="0,0,0,4"/>
+                                                       LineBreakMode="NoWrap"/>
+                                                
+                                            </StackLayout>
+                                            <!--#endregion-->
+
+                                            <!--#region Coluna Mortes -->
+                                            <StackLayout 
+                                                         VerticalOptions="FillAndExpand"
+                                                         HorizontalOptions="FillAndExpand"
+                                                         Grid.Column="3" Grid.Row="1">
+                                                
+                                                <Label Text="{Binding TodayDeaths}"
+                                                       TextColor="{StaticResource DeathsColor}"
+                                                       FontAttributes="Bold"
+                                                       VerticalOptions="EndAndExpand"
+                                                       HorizontalOptions="CenterAndExpand"/>
+
+                                                <Label Text="{Binding Deaths}"
+                                                       TextColor="{StaticResource DeathsColor}"
+                                                       FontAttributes="Bold"
+                                                       VerticalOptions="CenterAndExpand"
+                                                       HorizontalOptions="CenterAndExpand"
+                                                       FontSize="25"/>
+
+                                                <Label Text="Mortes"
+                                                       TextColor="#99A6C0"
+                                                       FontAttributes="Bold"
+                                                       FontSize="Small"
+                                                       VerticalOptions="StartAndExpand"
+                                                       HorizontalOptions="CenterAndExpand"/>
                                                 
                                             </StackLayout>
                                             <!--#endregion-->
                                         </Grid>
                                     </pancakeView:PancakeView>
+                                    <!--#endregion-->
                                 </StackLayout>
-                        
+
+                                <!--#region Most Affected Countries -->
                                 <StackLayout Orientation="Vertical" Margin="0,35,0,0" >
                                     <Label  Text="Most Affected Countries"
                                             FontAttributes="Bold"
@@ -206,10 +244,10 @@
                                                                              HeightRequest="200"
                                                                              Elevation="1"
                                                                              CornerRadius="20">
-                                                            <StackLayout HorizontalOptions="CenterAndExpand">
+                                                            <StackLayout HorizontalOptions="CenterAndExpand" Margin="0,10">
                                                                     <StackLayout Orientation="Horizontal"
                                                                                  HorizontalOptions="CenterAndExpand"
-                                                                                 Margin="0,20">
+                                                                                 Margin="0,10">
                                                                         <Image Source="{Binding CountryInfo.Flag}"
                                                                                WidthRequest="30"
                                                                                Aspect="AspectFit"
@@ -229,7 +267,18 @@
                                                                                HeightRequest="20"
                                                                                WidthRequest="20"/>
                                                                         <Label Text="{Binding CasesFormatted}"
-                                                                               TextColor="#FF8748"
+                                                                               TextColor="#0790BA"
+                                                                               FontAttributes="Bold"/>
+                                                                    </StackLayout>
+
+                                                                    <StackLayout Orientation="Horizontal"
+                                                                                 VerticalOptions="CenterAndExpand">
+                                                                        <Image Source="icon_confirmed.png"
+                                                                               Aspect="AspectFit"
+                                                                               HeightRequest="20"
+                                                                               WidthRequest="20"/>
+                                                                        <Label Text="{Binding ActiveFormatted}"
+                                                                               TextColor="{StaticResource ActiveColor}"
                                                                                FontAttributes="Bold"/>
                                                                     </StackLayout>
 
@@ -240,7 +289,7 @@
                                                                                HeightRequest="20"
                                                                                WidthRequest="20"/>
                                                                         <Label Text="{Binding RecoveredFormatted}"
-                                                                               TextColor="#36C12C"
+                                                                               TextColor="{StaticResource RecoveredColor}"
                                                                                FontAttributes="Bold"/>
 
                                                                     </StackLayout>
@@ -253,7 +302,7 @@
 
 
                                                                         <Label Text="{Binding DeathsFormatted}"
-                                                                               TextColor="#FF4848"
+                                                                               TextColor="{StaticResource DeathsColor}"
                                                                                FontAttributes="Bold"/>
 
                                                                     </StackLayout>
@@ -265,6 +314,7 @@
                                         </CollectionView.ItemTemplate>
                                     </CollectionView>
                                 </StackLayout>
+                                <!--#endregion-->
                             </StackLayout>
                         </ScrollView>
                     </RefreshView>

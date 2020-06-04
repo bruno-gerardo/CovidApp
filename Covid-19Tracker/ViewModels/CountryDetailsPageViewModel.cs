@@ -39,16 +39,14 @@ namespace Covid19Tracker.ViewModels
 
         public CountryInfo CountryInfo { get; private  set; }
 
-
-        
-
         public ICommand BackCommand => new Command(async () => await Shell.Current.Navigation.PopAsync());
 
 
         public async Task GetData()
         {
             var timeSeries = await Api.GetCountryTimeSeriesAsync(CountryInfo.Iso3);
-            CountryCases.TimeSeries = new List<TimeSeriesData>(timeSeries.result);
+            if(timeSeries != null)
+                CountryCases.TimeSeries = new List<TimeSeriesData>(timeSeries.result);
             PropertyChanged(this, new PropertyChangedEventArgs("CountryCases"));
         }
 

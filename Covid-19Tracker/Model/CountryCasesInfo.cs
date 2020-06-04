@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Covid19Tracker.Helpers;
 using Newtonsoft.Json;
+using Xamarin.Forms;
 
 namespace Covid19Tracker.Model
 {
@@ -37,6 +39,16 @@ namespace Covid19Tracker.Model
         public double ActivePerOneMillion { get; set; }
         public double RecoveredPerOneMillion { get; set; }
         public double CriticalPerOneMillion { get; set; }
+        public string ConfirmedRankingPosition { get; set; }
+        public string DeathsRankingPosition { get; set; }
+        public string RecoveredRankingPosition { get; set; }
+        public string ActiveRankingPosition { get; set; }
+
+       
+        public GridLength RecoveredPercentage { get => new GridLength((Recovered*100) / Cases, GridUnitType.Star); }
+        public GridLength ActivePercentage { get => new GridLength((Active*100) / Cases, GridUnitType.Star); }
+        public GridLength DeathsPercentage { get => new GridLength((Deaths*100) / Cases, GridUnitType.Star); }
+        
         public List<TimeSeriesData> TimeSeries { get; set; }
 
         public string CasesFormatted
@@ -54,5 +66,11 @@ namespace Covid19Tracker.Model
             get => Recovered.TransformNumberToString();
         }
 
+        public string ActiveFormatted
+        {
+            get => Active.TransformNumberToString();
+        }
+
     }
+
 }

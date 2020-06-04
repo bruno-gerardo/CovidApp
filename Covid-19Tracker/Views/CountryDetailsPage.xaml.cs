@@ -18,15 +18,13 @@ namespace Covid19Tracker.Views
 
             vm = new CountryDetailsPageViewModel();
             BindingContext = vm;
-
-
-           
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
             await vm.GetData();
+
         }
 
         void NumericalAxis_LabelCreated(System.Object sender, ChartAxisLabelEventArgs e)
@@ -55,5 +53,7 @@ namespace Covid19Tracker.Views
                 }
             }
         }
+
+
     }
 }

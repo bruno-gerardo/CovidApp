@@ -9,6 +9,7 @@ namespace Covid19Tracker.Model
         public int Deaths { get; set; }
         public int TodayDeaths { get; set; }
         public int Recovered { get; set; }
+        public int TodayRecovered { get; set; }
         public int Active { get; set; }
         public int Critical { get; set; }
         public int CasesPerOneMillion { get; set; }

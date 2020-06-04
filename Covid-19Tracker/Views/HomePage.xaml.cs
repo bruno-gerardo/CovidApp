@@ -47,8 +47,6 @@ namespace Covid19Tracker.Views
             if (e.CurrentSelection.FirstOrDefault() is CountryCasesInfo selectedCountry)
             {
                 var countryName = selectedCountry;
-                //var teste = await Api.GetCountryTimeSeriesAsync(selectedCountry.CountryInfo.Iso3);
-                //selectedCountry.TimeSeries = teste.result;
                 var cenas = JsonConvert.SerializeObject(countryName);
                 await Shell.Current.GoToAsync($"countryDetailsPage?CountryName={cenas}");
             }
