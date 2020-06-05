@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             xmlns:sf="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
-             xmlns:custom="clr-namespace:ProgressBar;assembly=ProgressBar"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              Shell.NavBarIsVisible="False"
              Title="Details"
              Shell.FlyoutBehavior="Disabled"
@@ -61,13 +60,14 @@
                         <StackLayout Orientation="Horizontal"
                                      HorizontalOptions="CenterAndExpand"
                                      Grid.Column="1"
+                                     Margin="-30,0,0,0"
                                      >
                             <Image Source="{Binding CountryInfo.Flag}"
                                 WidthRequest="30"
                                 Aspect="AspectFit"
                                 VerticalOptions="CenterAndExpand"/>
                             <Label VerticalOptions="EndAndExpand"
-                                   HorizontalOptions="CenterAndExpand"
+                                   HorizontalOptions="FillAndExpand"
                                    Text="{Binding CountryCases.Country}"
                                    TextColor="White"
                                    FontAttributes="Bold"
@@ -80,7 +80,7 @@
             </pancakeView:PancakeView>
             <!--#endregion-->
 
-            <StackLayout VerticalOptions="FillAndExpand"
+            <pancakeView:PancakeView CornerRadius="30,30,0,0" VerticalOptions="FillAndExpand"
                          Grid.Row="1"
                          >
                 <ScrollView x:Name="scrollview"
@@ -90,31 +90,118 @@
                     <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Margin="16,0">
                         
                         <!--#region Today Card -->
-                        <pancakeView:PancakeView CornerRadius="20" Padding="10" BackgroundColor="White">
-                            <StackLayout>
-                                <Label Text="Last day" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
-                                <Label Text="New cases at " TextColor="Black" FontAttributes="Bold" FontSize="Micro"/>
-                                <Label Text="{Binding CountryCases.TodayCases, StringFormat='+{0:# ### ###}'}" FontAttributes="Bold" FontSize="40"/>
-                            </StackLayout>
+                        <pancakeView:PancakeView CornerRadius="20" Padding="10" BackgroundColor="White" Elevation="1" Margin="0,20">
+                            <Grid HorizontalOptions="FillAndExpand" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,0,0,15">
+
+                                    <Label VerticalOptions="FillAndExpand"
+                                           Text="Last day"
+                                           TextColor="Black"
+                                           FontAttributes="Bold"
+                                           FontSize="20"
+                                           Grid.Row="0"
+                                           Grid.Column="0"/>
+                                    <Label VerticalOptions="CenterAndExpand"
+                                           Text="{Binding TodayDate}"
+                                           TextColor="Gray"
+                                           FontAttributes="Bold"
+                                           FontSize="20"
+                                           Grid.Row="0"
+                                           Grid.Column="1"/>
+                                </StackLayout>
+
+                                <!--#region Coluna Confirmados -->
+                                <StackLayout 
+                                                VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="FillAndExpand"
+                                                Grid.Column="0" Grid.Row="1">
+                                    <Image Source="icon_confirmed.png"
+                                            HorizontalOptions="CenterAndExpand"
+                                            Aspect="AspectFit"
+                                            HeightRequest="20"
+                                            WidthRequest="20"/>
+                                    <Label Text="{Binding CountryCases.TodayCasesSpacing, StringFormat='+{0}'}"
+                                            TextColor="{StaticResource ConfirmedColor}"
+                                            FontAttributes="Bold"
+                                            VerticalOptions="CenterAndExpand"
+                                            HorizontalOptions="CenterAndExpand"
+                                            FontSize="25"/>
+                                                
+                                </StackLayout>
+                                <!--#endregion-->
+
+                                <!--#region Coluna Recuperados -->
+                                <StackLayout 
+                                                VerticalOptions="FillAndExpand"
+                                                HorizontalOptions="FillAndExpand"
+                                                Grid.Column="1" Grid.Row="1">
+                                    <Image Source="icon_recovered.png"
+                                            HorizontalOptions="CenterAndExpand"
+                                            Aspect="AspectFit"
+                                            HeightRequest="20"
+                                            WidthRequest="20"/>
+
+                                    <Label Text="{Binding CountryCases.TodayRecoveredSpacing, StringFormat='+{0}'}"
+                                            TextColor="{StaticResource RecoveredColor}"
+                                            FontAttributes="Bold"
+                                            VerticalOptions="EndAndExpand"
+                                            HorizontalOptions="CenterAndExpand"
+                                            FontSize="25"/>
+                                                
+                                </StackLayout>
+                                <!--#endregion-->
+
+                                <!--#region Coluna Mortes -->
+                                <StackLayout 
+                                                VerticalOptions="FillAndExpand"
+                                                HorizontalOptions="FillAndExpand"
+                                                Grid.Column="2" Grid.Row="1">
+                                                
+                                    <Image Source="icon_death.png"
+                                            HorizontalOptions="CenterAndExpand"
+                                            Aspect="AspectFit"
+                                            HeightRequest="20"
+                                            WidthRequest="20"/>
+
+                                    <Label Text="{Binding CountryCases.TodayDeathsSpacing, StringFormat='+{0}'}"
+                                            TextColor="{StaticResource DeathsColor}"
+                                            FontAttributes="Bold"
+                                            VerticalOptions="CenterAndExpand"
+                                            HorizontalOptions="CenterAndExpand"
+                                            FontSize="25"/>
+                                                
+                                </StackLayout>
+                                <!--#endregion-->
+                            </Grid>
                         </pancakeView:PancakeView>
                         <!--#endregion-->
 
                         <!--#region Stats Card -->
-                        <pancakeView:PancakeView CornerRadius="20" Padding="10" BackgroundColor="White">
+                        <pancakeView:PancakeView CornerRadius="20" Padding="10" BackgroundColor="White" Elevation="1">
                             <StackLayout>
                                 <Label Text="Total Stats" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
-                                <Label Text="Total Cases" TextColor="Black" FontAttributes="Bold" FontSize="Micro"/>
-                                <StackLayout Orientation="Horizontal" Margin="-10,0">
-                                    <Label Text="{Binding CountryCases.Cases, StringFormat='{0:# ### ###}'}" FontAttributes="Bold" FontSize="40"/>
+                                <Label Text="Total Cases" TextColor="Black" FontAttributes="Bold" FontSize="15"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding CountryCases.CasesStringSpacing}" FontAttributes="Bold" FontSize="40"/>
                                     <Label Text="{Binding CountryCases.ConfirmedRankingPosition, StringFormat='#{0} in the world'}" FontSize="Micro" TextColor="Black"/>
                                 </StackLayout>
 
                                 <!--#region Progress Bar-->
                                 <Grid ColumnSpacing="0" HeightRequest="10" HorizontalOptions="FillAndExpand">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="{Binding CountryCases.RecoveredPercentage}"/>
-                                        <ColumnDefinition Width="{Binding CountryCases.ActivePercentage}"/>
-                                        <ColumnDefinition Width="{Binding CountryCases.DeathsPercentage}"/>
+                                        <ColumnDefinition Width="{Binding CountryCases.RecoveredWidht}"/>
+                                        <ColumnDefinition Width="{Binding CountryCases.ActiveWidht}"/>
+                                        <ColumnDefinition Width="{Binding CountryCases.DeathsWidht}"/>
                                     </Grid.ColumnDefinitions>
                                     <BoxView BackgroundColor="{StaticResource RecoveredColor}" HorizontalOptions="FillAndExpand" CornerRadius="5,0,5,0" Grid.Column="0"/>
                                     <BoxView BackgroundColor="{StaticResource ActiveColor}" HorizontalOptions="FillAndExpand" Grid.Column="1"/>
@@ -135,25 +222,25 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <!--#region Coluna 1 -->
-                                    <Label Text="Recuperados" Grid.Row="1" Grid.Column="0" FontSize="15" FontAttributes="Bold" TextColor="Black"/>
-                                    <Label Text="{Binding CountryCases.Recovered, StringFormat='{0:# ### ###}'}"
-                                           Grid.Row="2" Grid.Column="0" FontSize="20" FontAttributes="Bold" TextColor="Black"/>
+                                    <Label Text="Recuperados" Grid.Row="1" Grid.Column="0" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource RecoveredColor}"/>
+                                    <Label Text="{Binding CountryCases.RecoveredStringSpacing}"
+                                           Grid.Row="2" Grid.Column="0" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource RecoveredColor}"/>
                                     <Label Text="{Binding CountryCases.RecoveredRankingPosition, StringFormat='#{0}'}" Grid.Row="3" Grid.Column="0" FontSize="Micro" TextColor="Black"/>
                                     
                                     <!--#endregion-->
 
                                     <!--#region Coluna 2-->
-                                    <Label Text="Activos" Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" FontSize="15" FontAttributes="Bold" TextColor="Black"/>
-                                    <Label Text="{Binding CountryCases.Active, StringFormat='{0:# ### ###}'}"
-                                           Grid.Row="2" Grid.Column="1" HorizontalOptions="CenterAndExpand" FontSize="20" FontAttributes="Bold" TextColor="Black"/>
+                                    <Label Text="Activos" Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource ActiveColor}"/>
+                                    <Label Text="{Binding CountryCases.ActiveStringSpacing}"
+                                           Grid.Row="2" Grid.Column="1" HorizontalOptions="CenterAndExpand" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource ActiveColor}"/>
                                     <Label Text="{Binding CountryCases.ActiveRankingPosition, StringFormat='#{0}'}"
                                            Grid.Row="3" Grid.Column="1" HorizontalOptions="CenterAndExpand" FontSize="Micro" TextColor="Black"/>
                                     <!--#endregion-->
 
                                     <!--#region Coluna 3-->
-                                    <Label Text="Mortes" Grid.Row="1" Grid.Column="2" HorizontalOptions="EndAndExpand" FontSize="15" FontAttributes="Bold" TextColor="Black"/>
-                                    <Label Text="{Binding CountryCases.Deaths, StringFormat='{0:# ### ### ###}'}"
-                                           Grid.Row="2" Grid.Column="2" HorizontalOptions="EndAndExpand" FontSize="20" FontAttributes="Bold" TextColor="Black"/>
+                                    <Label Text="Mortes" Grid.Row="1" Grid.Column="2" HorizontalOptions="EndAndExpand" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource DeathsColor}"/>
+                                    <Label Text="{Binding CountryCases.DeathsStringSpacing}"
+                                           Grid.Row="2" Grid.Column="2" HorizontalOptions="EndAndExpand" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource DeathsColor}"/>
                                     <Label Text="{Binding CountryCases.DeathsRankingPosition, StringFormat='#{0}'}"
                                            Grid.Row="3" Grid.Column="2" HorizontalOptions="EndAndExpand" FontSize="Micro" TextColor="Black"/>
                                     <!--#endregion-->
@@ -173,13 +260,13 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <!--#region Coluna 1 -->
-                                    <Image Source="icon_confirmed.png"
+                                    <Image Source="{Binding CountryInfo.Flag}"
                                            HeightRequest="25"
                                            WidthRequest="25"
                                            Aspect="AspectFit" Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand"/>
                                     <Label Text="{Binding CountryCases.Country}" Grid.Row="1" Grid.Column="0" FontSize="Medium" FontAttributes="Bold" TextColor="Black"/>
-                                    <Label Text="60.40%" Grid.Row="2" Grid.Column="0" FontSize="Medium" FontAttributes="Bold" TextColor="Black"/>
-                                    <Label Text="4.37%" Grid.Row="3" Grid.Column="0" FontSize="Medium" FontAttributes="Bold" TextColor="Black"/>
+                                    <Label Text="{Binding CountryCases.RecoveredPercentage}" Grid.Row="2" Grid.Column="0" FontSize="Medium" FontAttributes="Bold" TextColor="Black"/>
+                                    <Label Text="{Binding CountryCases.DeathsPercentage}" Grid.Row="3" Grid.Column="0" FontSize="Medium" FontAttributes="Bold" TextColor="Black"/>
                                     <!--#endregion-->
 
                                     <!--#region Coluna 2-->
@@ -193,8 +280,8 @@
                                            WidthRequest="25"
                                            Aspect="AspectFit" Grid.Row="0" Grid.Column="2" VerticalOptions="FillAndExpand" HorizontalOptions="EndAndExpand"/>
                                     <Label Text="World" Grid.Row="1" Grid.Column="2" HorizontalOptions="EndAndExpand" FontSize="Medium" FontAttributes="Bold" TextColor="Black"/>
-                                    <Label Text="47.53%" Grid.Row="2" Grid.Column="2" HorizontalOptions="EndAndExpand" FontSize="Medium" FontAttributes="Bold" TextColor="Black"/>
-                                    <Label Text="5.93%" Grid.Row="3" Grid.Column="2" HorizontalOptions="EndAndExpand" FontSize="Medium" FontAttributes="Bold" TextColor="Black"/>
+                                    <Label Text="{Binding GlobalCases.GlobalRecoveredPercentage}" Grid.Row="2" Grid.Column="2" HorizontalOptions="EndAndExpand" FontSize="Medium" FontAttributes="Bold" TextColor="Black"/>
+                                    <Label Text="{Binding GlobalCases.GlobalDeathsPercentage}" Grid.Row="3" Grid.Column="2" HorizontalOptions="EndAndExpand" FontSize="Medium" FontAttributes="Bold" TextColor="Black"/>
                                     <!--#endregion-->
                                 </Grid>
                             </StackLayout>
@@ -206,61 +293,62 @@
 
 
                         <!--#region SF Chart -->
-                        <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White"  IsVisible="True">
+                        <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Elevation="1" Margin="0,20">
                             
-                        <sf:SfChart x:Name="chartView" HeightRequest="400"
+                        <chart:SfChart x:Name="chartView" HeightRequest="400"
                                     HorizontalOptions="FillAndExpand"
                                     BackgroundColor="Transparent"
                                     TrackballCreated="chartView_TrackballCreated"
+                                    Unfocused="chartView_Unfocused"
                                     >
-                            <sf:SfChart.Legend>
-                                <sf:ChartLegend Margin="0,10" ToggleSeriesVisibility="True" DockPosition="Top"/>
-                            </sf:SfChart.Legend>
+                            <chart:SfChart.Legend>
+                                <chart:ChartLegend Margin="0,10" ToggleSeriesVisibility="True" DockPosition="Top"/>
+                            </chart:SfChart.Legend>
 
-                            <sf:SfChart.ChartBehaviors>
-                                <sf:ChartTrackballBehavior LabelDisplayMode="GroupAllPoints" ActivationMode="TouchMove" ShowLine="True">
-                                    <sf:ChartTrackballBehavior.LineStyle>
-                                        <sf:ChartLineStyle StrokeColor="#4499A6C0"/>
-                                    </sf:ChartTrackballBehavior.LineStyle>
-                                </sf:ChartTrackballBehavior>
-                            </sf:SfChart.ChartBehaviors>
+                            <chart:SfChart.ChartBehaviors>
+                                <chart:ChartTrackballBehavior LabelDisplayMode="GroupAllPoints" ActivationMode="LongPress" ShowLine="True">
+                                    <chart:ChartTrackballBehavior.LineStyle>
+                                        <chart:ChartLineStyle StrokeColor="#4499A6C0"/>
+                                    </chart:ChartTrackballBehavior.LineStyle>
+                                </chart:ChartTrackballBehavior>
+                            </chart:SfChart.ChartBehaviors>
 
-                            <sf:SfChart.PrimaryAxis>
-                                <sf:DateTimeAxis ShowMajorGridLines="False" LabelRotationAngle="-45" Interval="15" IntervalType="Days">
-                                    <sf:DateTimeAxis.AxisLineStyle>
-                                        <sf:ChartLineStyle StrokeColor="Transparent"/>
-                                        </sf:DateTimeAxis.AxisLineStyle>
-                                </sf:DateTimeAxis>
-                            </sf:SfChart.PrimaryAxis>
+                            <chart:SfChart.PrimaryAxis>
+                                <chart:DateTimeAxis ShowMajorGridLines="False" LabelRotationAngle="-45" Interval="15" IntervalType="Days">
+                                    <chart:DateTimeAxis.AxisLineStyle>
+                                        <chart:ChartLineStyle StrokeColor="Transparent"/>
+                                        </chart:DateTimeAxis.AxisLineStyle>
+                                </chart:DateTimeAxis>
+                            </chart:SfChart.PrimaryAxis>
  
-                            <sf:SfChart.SecondaryAxis>
-                                <sf:NumericalAxis RangePadding="Auto" Minimum="0" ShowMajorGridLines="True" LabelCreated="NumericalAxis_LabelCreated">
-                                    <sf:NumericalAxis.AxisLineStyle>
-                                        <sf:ChartLineStyle StrokeColor="Transparent"/>
-                                        </sf:NumericalAxis.AxisLineStyle>
-                                        <sf:NumericalAxis.LabelStyle>
-                                            <sf:ChartAxisLabelStyle/>
-                                        </sf:NumericalAxis.LabelStyle>
-                                    </sf:NumericalAxis>
+                            <chart:SfChart.SecondaryAxis>
+                                <chart:NumericalAxis RangePadding="Auto" Minimum="0" ShowMajorGridLines="True" LabelCreated="NumericalAxis_LabelCreated">
+                                    <chart:NumericalAxis.AxisLineStyle>
+                                        <chart:ChartLineStyle StrokeColor="Transparent"/>
+                                        </chart:NumericalAxis.AxisLineStyle>
+                                        <chart:NumericalAxis.LabelStyle>
+                                            <chart:ChartAxisLabelStyle/>
+                                        </chart:NumericalAxis.LabelStyle>
+                                    </chart:NumericalAxis>
 
                                 
-                            </sf:SfChart.SecondaryAxis>
+                            </chart:SfChart.SecondaryAxis>
 
-                            <sf:SplineAreaSeries Label="Confirmados" ItemsSource="{Binding CountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="confirmed" StrokeWidth="3"
+                            <chart:SplineAreaSeries Label="Confirmados" ItemsSource="{Binding CountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="confirmed" StrokeWidth="3"
                                                 EnableAnimation="True" StrokeColor="{StaticResource ConfirmedColor}" Opacity=".2" Color="{StaticResource ConfirmedColor}" IsVisibleOnLegend="True"/>
-                            <sf:SplineAreaSeries Label="Recuperados" ItemsSource="{Binding CountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="recovered" StrokeWidth="3"
+                            <chart:SplineAreaSeries Label="Recuperados" ItemsSource="{Binding CountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="recovered" StrokeWidth="3"
                                                 EnableAnimation="True" StrokeColor="{StaticResource RecoveredColor}" Opacity=".2" Color="{StaticResource RecoveredColor}"/>
-                            <sf:SplineAreaSeries Label="Mortes" ItemsSource="{Binding CountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="deaths" StrokeWidth="3"
+                            <chart:SplineAreaSeries Label="Mortes" ItemsSource="{Binding CountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="deaths" StrokeWidth="3"
                                                 EnableAnimation="True" StrokeColor="{StaticResource DeathsColor}" Opacity=".2" Color="{StaticResource DeathsColor}"/>
                             
-                        </sf:SfChart>
+                        </chart:SfChart>
                            
                         </pancakeView:PancakeView>
                          <!--#endregion-->
                     </StackLayout>
 
                 </ScrollView>
-            </StackLayout>
+            </pancakeView:PancakeView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

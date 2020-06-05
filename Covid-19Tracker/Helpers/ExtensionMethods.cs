@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+
 namespace Covid19Tracker.Helpers
 {
     public static class ExtensionMethods
@@ -20,6 +22,13 @@ namespace Covid19Tracker.Helpers
                 default:
                     return $"{number.ToString().Insert(1, ",").Substring(0, 3)}M";
             }
+        }
+
+        public static string TransformNumberToSpacing(this int number)
+        {
+            var nfi = new NumberFormatInfo();
+            nfi.NumberGroupSeparator = " ";
+            return number.ToString("N0", nfi);
         }
 
         public static string TransformNumericString(this string number)

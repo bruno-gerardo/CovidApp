@@ -267,13 +267,13 @@
                                                                                HeightRequest="20"
                                                                                WidthRequest="20"/>
                                                                         <Label Text="{Binding CasesFormatted}"
-                                                                               TextColor="#0790BA"
+                                                                               TextColor="{StaticResource ConfirmedColor}"
                                                                                FontAttributes="Bold"/>
                                                                     </StackLayout>
 
                                                                     <StackLayout Orientation="Horizontal"
                                                                                  VerticalOptions="CenterAndExpand">
-                                                                        <Image Source="icon_confirmed.png"
+                                                                        <Image Source="icon_active.png"
                                                                                Aspect="AspectFit"
                                                                                HeightRequest="20"
                                                                                WidthRequest="20"/>

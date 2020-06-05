@@ -15,5 +15,7 @@ namespace Covid19Tracker.Model
         public int CasesPerOneMillion { get; set; }
         public double DeathsPerOneMillion { get; set; }
 
+        public string GlobalRecoveredPercentage { get => string.Format("{0:0.00}%", (double)Recovered * 100 / Cases); }
+        public string GlobalDeathsPercentage { get => string.Format("{0:0.00}%", (double)Deaths * 100 / Cases); }
     }
 }

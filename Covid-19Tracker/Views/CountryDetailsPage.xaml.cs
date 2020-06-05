@@ -35,6 +35,7 @@ namespace Covid19Tracker.Views
 
         private void chartView_TrackballCreated(object sender, ChartTrackballCreatedEventArgs e)
         {
+            scrollview.IsEnabled = false;
             
             foreach (var item in e.ChartPointsInfo)
             { 
@@ -52,8 +53,16 @@ namespace Covid19Tracker.Views
                     item.LabelStyle.BackgroundColor = Color.WhiteSmoke;
                 }
             }
+            scrollview.IsEnabled = true;
         }
 
+        void chartView_SelectionChanged(System.Object sender, Syncfusion.SfChart.XForms.ChartSelectionEventArgs e)
+        {
+        }
+
+        void chartView_Unfocused(System.Object sender, Xamarin.Forms.FocusEventArgs e)
+        {
+        }
 
     }
 }

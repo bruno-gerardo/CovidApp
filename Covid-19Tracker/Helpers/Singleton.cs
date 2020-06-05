@@ -10,6 +10,8 @@ namespace Covid19Tracker.Helpers
         
         public ObservableCollection<CountryCasesInfo> CountryCases { get; set; }
 
+        public GlobalCasesInfo GlobalCases { get; set; }
+
         static Singleton()
         {
         }

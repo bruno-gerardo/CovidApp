@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Covid19Tracker.Helpers;
 using Covid19Tracker.Model;
 using Covid19Tracker.Services;
 using Newtonsoft.Json;
@@ -36,18 +37,35 @@ namespace Covid19Tracker.ViewModels
         
         public CountryCasesInfo CountryCases { get; set; }
 
+        public GlobalCasesInfo GlobalCases { get; set; }
+
 
         public CountryInfo CountryInfo { get; private  set; }
 
         public ICommand BackCommand => new Command(async () => await Shell.Current.Navigation.PopAsync());
 
+        private string todayDate;
+
+        public string TodayDate
+        {
+            get => todayDate;
+
+            set
+            {
+                todayDate = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("TodayDate"));
+            }
+        }
 
         public async Task GetData()
         {
+            GlobalCases = Singleton.Instance.GlobalCases;
+            TodayDate = DateTime.UtcNow.ToString("d/M/yyyy");
             var timeSeries = await Api.GetCountryTimeSeriesAsync(CountryInfo.Iso3);
             if(timeSeries != null)
                 CountryCases.TimeSeries = new List<TimeSeriesData>(timeSeries.result);
             PropertyChanged(this, new PropertyChangedEventArgs("CountryCases"));
+            PropertyChanged(this, new PropertyChangedEventArgs("GlobalCases"));
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

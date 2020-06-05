@@ -167,6 +167,7 @@ namespace Covid19Tracker.ViewModels
             var globalCasesInfo = await Api.GetGlobalInfoAsync();
             var mostAffectedInfo = await Api.GetCountriesAsync();
             Singleton.Instance.CountryCases = new ObservableCollection<CountryCasesInfo>(mostAffectedInfo);
+            Singleton.Instance.GlobalCases = globalCasesInfo;
 
             var sortedList = mostAffectedInfo.OrderByDescending(c => c.Cases).ToList();
             MostAffectedCountriesList = new ObservableCollection<CountryCasesInfo>(sortedList.Take(5));

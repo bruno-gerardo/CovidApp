@@ -28,6 +28,7 @@ namespace Covid19Tracker.Model
         public int Deaths { get; set; }
         public int TodayDeaths { get; set; }
         public int Recovered { get; set; }
+        public int TodayRecovered { get; set; }
         public int Active { get; set; }
         public int Critical { get; set; }
         public double CasesPerOneMillion { get; set; }
@@ -44,10 +45,12 @@ namespace Covid19Tracker.Model
         public string RecoveredRankingPosition { get; set; }
         public string ActiveRankingPosition { get; set; }
 
+        public string RecoveredPercentage { get => string.Format("{0:0.00}%", (double)Recovered *100 / Cases); }
+        public string DeathsPercentage { get => string.Format("{0:0.00}%", (double)Deaths *100 / Cases); }
        
-        public GridLength RecoveredPercentage { get => new GridLength((Recovered*100) / Cases, GridUnitType.Star); }
-        public GridLength ActivePercentage { get => new GridLength((Active*100) / Cases, GridUnitType.Star); }
-        public GridLength DeathsPercentage { get => new GridLength((Deaths*100) / Cases, GridUnitType.Star); }
+        public GridLength RecoveredWidht { get => new GridLength((double)Recovered / Cases, GridUnitType.Star); }
+        public GridLength ActiveWidht { get => new GridLength((double)Active / Cases, GridUnitType.Star); }
+        public GridLength DeathsWidht { get => new GridLength((double)Deaths / Cases, GridUnitType.Star); }
         
         public List<TimeSeriesData> TimeSeries { get; set; }
 
@@ -69,6 +72,41 @@ namespace Covid19Tracker.Model
         public string ActiveFormatted
         {
             get => Active.TransformNumberToString();
+        }
+
+        public string CasesStringSpacing
+        {
+            get => Cases.TransformNumberToSpacing();
+        }
+
+        public string ActiveStringSpacing
+        {
+            get => Active.TransformNumberToSpacing();
+        }
+
+        public string DeathsStringSpacing
+        {
+            get => Deaths.TransformNumberToSpacing();
+        }
+
+        public string RecoveredStringSpacing
+        {
+            get => Recovered.TransformNumberToSpacing();
+        }
+
+        public string TodayCasesSpacing
+        {
+            get => TodayCases.TransformNumberToString();
+        }
+
+        public string TodayRecoveredSpacing
+        {
+            get => TodayRecovered.TransformNumberToString();
+        }
+
+        public string TodayDeathsSpacing
+        {
+            get => TodayDeaths.TransformNumberToString();
         }
 
     }
