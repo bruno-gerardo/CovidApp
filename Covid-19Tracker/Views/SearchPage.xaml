@@ -62,18 +62,15 @@
             <pancakeView:PancakeView VerticalOptions="FillAndExpand"
                                      CornerRadius="30,30,0,0"
                                      Grid.Row="1"
-
+                                     BackgroundColor="WhiteSmoke"
+                                     Padding="0,0,0,80"
                                      >
-                <ScrollView VerticalOptions="FillAndExpand"
-                            BackgroundColor="WhiteSmoke"
-                            >
 
                     <CollectionView x:Name="CountriesList" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                     ItemSizingStrategy="MeasureAllItems"
                                     ItemsSource="{Binding MostAffectedCountriesList}"
                                     SelectionMode="Single"
                                     SelectionChanged="CountriesList_SelectionChanged"
-                                    HeightRequest="500"
                                     Margin="0,10,0,0">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical" />
@@ -214,8 +211,6 @@
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
-
-                </ScrollView>
             </pancakeView:PancakeView>
         </Grid>
     </ContentPage.Content>
