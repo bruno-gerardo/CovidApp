@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="Covid19Tracker.Views.FAQ.PreventionPage">
+    <ContentPage.Content>
+        <CollectionView x:Name="CountriesList"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        ItemSizingStrategy="MeasureAllItems"
+                        ItemsSource="{Binding Preventions}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Padding="16,10"
+                                    BackgroundColor="Transparent">
+                        <pancakeView:PancakeView VerticalOptions="FillAndExpand"
+                                                    BackgroundColor="White"
+                                                    Elevation="1"
+                                                    Padding="15"
+                                                    CornerRadius="20"
+                                                    >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width=".65*"/>
+                                    <ColumnDefinition Width=".35*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding Prevention}"  VerticalOptions="CenterAndExpand" Grid.Row="0" Margin="0,10"/>
+                                <Label Text="{Binding Description}" TextColor="#99A6C0" FontSize="Small" VerticalOptions="FillAndExpand" Grid.Row="1"/>
+                                <Image Source="{Binding Image}" HeightRequest="100" Aspect="AspectFit" VerticalOptions="CenterAndExpand" Grid.Column="1" Grid.RowSpan="2"/>
+                            </Grid>
+                        </pancakeView:PancakeView>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentPage.Content>
+</ContentPage>
