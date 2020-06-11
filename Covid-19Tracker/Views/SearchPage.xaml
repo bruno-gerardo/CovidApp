@@ -20,7 +20,7 @@
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
                                 <Setter Property="BackgroundColor"
-                                        Value="WhiteSmoke" />
+                                        Value="#e3e5ee" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -62,7 +62,7 @@
             <pancakeView:PancakeView VerticalOptions="FillAndExpand"
                                      CornerRadius="30,30,0,0"
                                      Grid.Row="1"
-                                     BackgroundColor="WhiteSmoke"
+                                     BackgroundColor="#e3e5ee"
                                      Padding="0,0,0,80"
                                      >
 
@@ -87,7 +87,7 @@
                                 <StackLayout VerticalOptions="FillAndExpand"
                                              HorizontalOptions="CenterAndExpand"
                                              Padding="16,10"
-                                             BackgroundColor="WhiteSmoke">
+                                             BackgroundColor="#e3e5ee">
 
                                     <pancakeView:PancakeView BackgroundColor="White"
                                                              VerticalOptions="FillAndExpand"

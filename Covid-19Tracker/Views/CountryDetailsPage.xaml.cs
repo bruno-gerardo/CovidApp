@@ -50,7 +50,7 @@ namespace Covid19Tracker.Views
                     if (Device.RuntimePlatform != Device.UWP)
                         item.LabelStyle.TextColor = item.Series.Color;
                     item.LabelStyle.FontAttributes = FontAttributes.Bold;
-                    item.LabelStyle.BackgroundColor = Color.WhiteSmoke;
+                    item.LabelStyle.BackgroundColor = Color.FromHex("#e3e5ee");
                 }
             }
             scrollview.IsEnabled = true;

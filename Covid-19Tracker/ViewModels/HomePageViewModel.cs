@@ -202,7 +202,7 @@ namespace Covid19Tracker.ViewModels
 
 
 
-            UpdatedTime = string.Format("Last Updated: {0}", globalCasesInfo.Updated.TransformLongToDateTime());
+            UpdatedTime = string.Format("Última actualização: {0}", globalCasesInfo.Updated.TransformLongToDateTime());
             Confirmed = globalCasesInfo.Cases.TransformNumberToString();
             Active = globalCasesInfo.Active.TransformNumberToString();
             TodayCases = string.Format("+{0}", globalCasesInfo.TodayCases.TransformNumberToString());

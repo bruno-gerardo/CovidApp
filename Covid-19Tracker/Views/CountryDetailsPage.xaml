@@ -85,7 +85,7 @@
                          >
                 <ScrollView x:Name="scrollview"
                             VerticalOptions="FillAndExpand"
-                            BackgroundColor="WhiteSmoke"
+                            BackgroundColor="#e3e5ee"
                             >
                     <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Margin="16,0">
                         
@@ -105,7 +105,7 @@
                                 <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,0,0,15">
 
                                     <Label VerticalOptions="FillAndExpand"
-                                           Text="Last day"
+                                           Text="Hoje"
                                            TextColor="Black"
                                            FontAttributes="Bold"
                                            FontSize="20"
@@ -189,11 +189,11 @@
                         <!--#region Stats Card -->
                         <pancakeView:PancakeView CornerRadius="20" Padding="10" BackgroundColor="White" Elevation="1">
                             <StackLayout>
-                                <Label Text="Total Stats" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
-                                <Label Text="Total Cases" TextColor="Black" FontAttributes="Bold" FontSize="15"/>
+                                <Label Text="Estatísitcas Totais" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
+                                <Label Text="Casos Totais" TextColor="Black" FontAttributes="Bold" FontSize="15"/>
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding CountryCases.CasesStringSpacing}" FontAttributes="Bold" FontSize="40"/>
-                                    <Label Text="{Binding CountryCases.ConfirmedRankingPosition, StringFormat='#{0} in the world'}" FontSize="Micro" TextColor="Black"/>
+                                    <Label Text="{Binding CountryCases.ConfirmedRankingPosition, StringFormat='#{0} mundialmente'}" FontSize="Micro" TextColor="Black"/>
                                 </StackLayout>
 
                                 <!--#region Progress Bar-->
@@ -270,8 +270,8 @@
                                     <!--#endregion-->
 
                                     <!--#region Coluna 2-->
-                                    <Label Text="Recovered Rate" Grid.Row="2" Grid.Column="1" HorizontalOptions="CenterAndExpand" FontSize="Small" FontAttributes="Bold" TextColor="Black"/>
-                                    <Label Text="Death Rate" Grid.Row="3" Grid.Column="1" HorizontalOptions="CenterAndExpand" FontSize="Small" FontAttributes="Bold" TextColor="Black"/>
+                                    <Label Text="Tx. Recuperados" Grid.Row="2" Grid.Column="1" HorizontalOptions="CenterAndExpand" FontSize="Small" FontAttributes="Bold" TextColor="Black"/>
+                                    <Label Text="Tx. Mortes" Grid.Row="3" Grid.Column="1" HorizontalOptions="CenterAndExpand" FontSize="Small" FontAttributes="Bold" TextColor="Black"/>
                                     <!--#endregion-->
 
                                     <!--#region Coluna 3-->

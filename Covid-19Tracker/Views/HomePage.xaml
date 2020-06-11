@@ -6,6 +6,7 @@
              Title="Home"
              NavigationPage.HasNavigationBar="False"
              Shell.NavBarIsVisible="False"
+             BackgroundColor="Transparent"
              ios:Page.UseSafeArea="False"
              x:Class="Covid19Tracker.Views.HomePage">
 
@@ -18,7 +19,7 @@
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
                                 <Setter Property="BackgroundColor"
-                                        Value="WhiteSmoke" />
+                                        Value="#e3e5ee" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -50,15 +51,16 @@
 
                 </pancakeView:PancakeView>
                 <pancakeView:PancakeView CornerRadius="30,30,0,0"
-                                         BackgroundColor="WhiteSmoke"
+                                         BackgroundColor="#e3e5ee"
+                                         Padding="16,0"
                                          Grid.Row="1">
                     <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
                         <ScrollView VerticalScrollBarVisibility="Never">
-                            <StackLayout Orientation="Vertical" Padding="16,30,16,0">
+                            <StackLayout Orientation="Vertical" Padding="0,30,0,0">
                                 <StackLayout>
                                     <StackLayout x:Name="WorldwideInfoStack" Margin="16,0" Orientation="Horizontal">
                                         <StackLayout>
-                                            <Label Text="Worlwide Cases"
+                                            <Label Text="Mundialmente"
                                                    FontAttributes="Bold"
                                                    FontSize="Large"
                                                    TextColor="Black"/>
@@ -218,7 +220,7 @@
 
                                 <!--#region Most Affected Countries -->
                                 <StackLayout Orientation="Vertical" Margin="0,35,0,0" >
-                                    <Label  Text="Most Affected Countries"
+                                    <Label  Text="Países mais afectados"
                                             FontAttributes="Bold"
                                             FontSize="Large"
                                             TextColor="Black"
@@ -236,12 +238,12 @@
                                                 <!--#region Card Country Info -->
                                                 <StackLayout VerticalOptions="FillAndExpand"
                                                              Padding="7,0,7,0"
-                                                             BackgroundColor="#ccf5f5f5">
+                                                             BackgroundColor="#dde3e5ee">
 
                                                     <pancakeView:PancakeView BackgroundColor="White"
                                                                              VerticalOptions="CenterAndExpand"
                                                                              WidthRequest="135"
-                                                                             HeightRequest="200"
+                                                                             HeightRequest="220"
                                                                              Elevation="1"
                                                                              CornerRadius="20">
                                                             <StackLayout HorizontalOptions="CenterAndExpand" Margin="0,10">

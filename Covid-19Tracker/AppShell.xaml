@@ -5,6 +5,7 @@
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        mc:Ignorable="d"
        xmlns:views="clr-namespace:Covid19Tracker.Views"
+       xmlns:faq="clr-namespace:Covid19Tracker.Views.FAQ"
        Title="Covid_19Tracker"
        x:Class="Covid_19Tracker.AppShell"
        Shell.NavBarIsVisible="False">
@@ -41,10 +42,10 @@
             <ShellContent ContentTemplate="{DataTemplate views:NewsPage}" />
         </Tab>
         <Tab Title="About" Icon="tab_about.png">
-            <ShellContent ContentTemplate="{DataTemplate views:NewsPage}" />
+            <ShellContent ContentTemplate="{DataTemplate views:PortugalPage}" />
         </Tab>
-        <Tab Title="About" Icon="tab_about.png">
-            <ShellContent ContentTemplate="{DataTemplate views:NewsPage}" />
+        <Tab Title="FAQ" Icon="tab_about.png">
+            <ShellContent ContentTemplate="{DataTemplate faq:FaqPage}" />
         </Tab>
     </TabBar>
     <!-- Optional Templates 
