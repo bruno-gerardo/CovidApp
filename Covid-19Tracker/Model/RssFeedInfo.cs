@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Covid19Tracker.Helpers;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 
@@ -15,6 +16,7 @@ namespace Covid19Tracker.Model
         public string thumbnail { get; set; }
         public string description { get; set; }
         public string content { get; set; }
+        public string pubDateFormatted { get => ExtensionMethods.TimeAgo(DateTime.Parse(pubDate)); }
     }
 
     public class RssFeedInfo

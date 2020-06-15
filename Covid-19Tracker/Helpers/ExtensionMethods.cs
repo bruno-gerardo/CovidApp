@@ -55,6 +55,27 @@ namespace Covid19Tracker.Helpers
             return new DateTime(1970, 1, 1).AddMilliseconds(value).ToLocalTime();
         }
 
-        
+        public static string TimeAgo(this DateTime dateTime)
+        {
+            string result = string.Empty;
+            var timeSpan = DateTime.Now.Subtract(dateTime);
+
+            if (timeSpan <= TimeSpan.FromMinutes(60))
+            {
+                result = timeSpan.Minutes > 1 ?
+                    String.Format("Há {0} minutos", timeSpan.Minutes) :
+                    "Há 1 minuto";
+            }
+            else if (timeSpan <= TimeSpan.FromHours(24))
+            {
+                result = timeSpan.Hours > 1 ?
+                    String.Format("Há {0} horas", timeSpan.Hours) :
+                    "Há 1 hora";
+            }
+            else
+                result = string.Format("{0:d MMMM yyyy}", dateTime);
+
+            return result;
+        }
     }
 }

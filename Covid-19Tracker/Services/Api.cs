@@ -29,7 +29,6 @@ namespace Covid19Tracker.Services
         private static string TimeSeries = "/timeseries/2020-02-20/2020-06-20";
 
         private static string PortugalLastUpdate = "/get_last_update";
-        private static string rssFeedUrl = "http://rss.app/feeds/0GLLEOWbGvg4Z4w5";
 
 
         public static async Task<GlobalCasesInfo> GetGlobalInfoAsync()

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Title="Home"
              NavigationPage.HasNavigationBar="False"
              Shell.NavBarIsVisible="False"
@@ -30,20 +31,20 @@
     <ContentPage.Content>
             <Grid >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height=".25*"/>
+                    <RowDefinition Height=".15*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <!--#region Pancake View-->
-                <pancakeView:PancakeView 
-                                            
-                                            BackgroundGradientAngle="255"
-                                            BackgroundGradientStartColor="#3F94B5"
-                                            BackgroundGradientEndColor="#1373A1"
-                                            Grid.Row="0"
-                                            Grid.RowSpan="2">
+                <pancakeView:PancakeView                                             
+                        BackgroundGradientAngle="255"
+                        BackgroundGradientStartColor="#3F94B5"
+                        BackgroundGradientEndColor="#1373A1"
+                        Grid.Row="0"
+                        Grid.RowSpan="2">
 
-                    <Image Source="logo.png"
+                    <ffimage:CachedImage Source="logo.png"
                            Aspect="AspectFit"
+                           HeightRequest="90"
                            VerticalOptions="StartAndExpand"
                            HorizontalOptions="CenterAndExpand"
                            Grid.Row="0"
@@ -250,7 +251,7 @@
                                                                     <StackLayout Orientation="Horizontal"
                                                                                  HorizontalOptions="CenterAndExpand"
                                                                                  Margin="0,10">
-                                                                        <Image Source="{Binding CountryInfo.Flag}"
+                                                                        <ffimage:CachedImage Source="{Binding CountryInfo.Flag}"
                                                                                WidthRequest="30"
                                                                                Aspect="AspectFit"
                                                                                VerticalOptions="CenterAndExpand"
@@ -264,7 +265,7 @@
 
                                                                     <StackLayout Orientation="Horizontal"
                                                                                  VerticalOptions="CenterAndExpand">
-                                                                        <Image Source="icon_confirmed.png"
+                                                                        <ffimage:CachedImage Source="icon_confirmed.png"
                                                                                Aspect="AspectFit"
                                                                                HeightRequest="20"
                                                                                WidthRequest="20"/>
@@ -275,7 +276,7 @@
 
                                                                     <StackLayout Orientation="Horizontal"
                                                                                  VerticalOptions="CenterAndExpand">
-                                                                        <Image Source="icon_active.png"
+                                                                        <ffimage:CachedImage Source="icon_active.png"
                                                                                Aspect="AspectFit"
                                                                                HeightRequest="20"
                                                                                WidthRequest="20"/>
@@ -286,7 +287,7 @@
 
                                                                     <StackLayout Orientation="Horizontal"
                                                                                  VerticalOptions="CenterAndExpand">
-                                                                        <Image Source="icon_recovered.png"
+                                                                        <ffimage:CachedImage Source="icon_recovered.png"
                                                                                Aspect="AspectFit"
                                                                                HeightRequest="20"
                                                                                WidthRequest="20"/>
@@ -298,7 +299,7 @@
 
                                                                     <StackLayout Orientation="Horizontal"
                                                                                  VerticalOptions="CenterAndExpand">
-                                                                        <Image Source="icon_death.png"
+                                                                        <ffimage:CachedImage Source="icon_death.png"
                                                                                Aspect="AspectFit"
                                                                                WidthRequest="20"/>
 
@@ -321,6 +322,27 @@
                         </ScrollView>
                     </RefreshView>
                     
+                </pancakeView:PancakeView>
+
+                <pancakeView:PancakeView Grid.Row="1"
+                                         HorizontalOptions="FillAndExpand"
+                                         BackgroundColor="#e3e5ee"
+                                         CornerRadius="30,0"
+                                         IsVisible="{Binding IsBusy}">
+                    <StackLayout VerticalOptions="CenterAndExpand">
+                        <ActivityIndicator
+                            HeightRequest="36"
+                            IsRunning="{Binding IsBusy}"
+                            IsVisible="True"
+                            WidthRequest="36" />
+                        <Label
+                            FontSize="Small"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Center"
+                            Text="Carregando..."
+                            TextColor="Black" />
+                    </StackLayout>
+
                 </pancakeView:PancakeView>
             </Grid>
     </ContentPage.Content>

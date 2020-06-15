@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:views="clr-namespace:Covid19Tracker.Views"
              Title="Search Page"
              ios:Page.UseSafeArea="False"
@@ -63,7 +64,6 @@
                                      CornerRadius="30,30,0,0"
                                      Grid.Row="1"
                                      BackgroundColor="#e3e5ee"
-                                     Padding="0,0,0,80"
                                      >
 
                     <CollectionView x:Name="CountriesList" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
@@ -111,7 +111,7 @@
                                             <StackLayout Orientation="Horizontal"
                                                             HorizontalOptions="CenterAndExpand"
                                                             Margin="0,20" Grid.Row="0" Grid.ColumnSpan="5">
-                                                <Image Source="{Binding CountryInfo.Flag}"
+                                                <ffimage:CachedImage Source="{Binding CountryInfo.Flag}"
                                                        HeightRequest="20"
                                                         WidthRequest="30"
                                                         Aspect="AspectFit"
@@ -128,7 +128,7 @@
                                                          HorizontalOptions="CenterAndExpand"
                                                          Grid.Row="1"
                                                          Grid.Column="0">
-                                                <Image Source="icon_confirmed.png"
+                                                <ffimage:CachedImage Source="icon_confirmed.png"
                                                        HorizontalOptions="CenterAndExpand"
                                                         Aspect="AspectFit"
                                                         HeightRequest="20"
@@ -146,7 +146,7 @@
                                                          HorizontalOptions="CenterAndExpand"
                                                          Grid.Row="1"
                                                          Grid.Column="1">
-                                                <Image Source="icon_active.png"
+                                                <ffimage:CachedImage Source="icon_active.png"
                                                         Aspect="AspectFit"
                                                        HorizontalOptions="CenterAndExpand"
                                                         HeightRequest="20"
@@ -163,7 +163,7 @@
                                                          HorizontalOptions="CenterAndExpand"
                                                          Grid.Row="1"
                                                          Grid.Column="3">
-                                                <Image Source="icon_recovered.png"
+                                                <ffimage:CachedImage Source="icon_recovered.png"
                                                         Aspect="AspectFit"
                                                        HorizontalOptions="CenterAndExpand"
                                                         HeightRequest="20"
@@ -180,7 +180,7 @@
                                                          HorizontalOptions="CenterAndExpand"
                                                          Grid.Row="1"
                                                          Grid.Column="2">
-                                                <Image Source="icon_death.png"
+                                                <ffimage:CachedImage Source="icon_death.png"
                                                         Aspect="AspectFit"
                                                        HorizontalOptions="CenterAndExpand"
                                                         HeightRequest="20"

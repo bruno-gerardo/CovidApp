@@ -13,10 +13,9 @@ using Xamarin.Forms;
 
 namespace Covid19Tracker.ViewModels
 {
-    public class SearchPageViewModel : INotifyPropertyChanged
+    public class SearchPageViewModel : BaseViewModel
     {
         public ICommand BackCommand => new Command(async () => await Shell.Current.GoToAsync(AppShell.HomePage, true));
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private ObservableCollection<CountryCasesInfo> mostAffectedCountriesList;
 
@@ -26,18 +25,13 @@ namespace Covid19Tracker.ViewModels
             set
             {
                 mostAffectedCountriesList = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("MostAffectedCountriesList"));
+                OnPropertyChanged("MostAffectedCountriesList");
             }
         }
 
         public SearchPageViewModel()
         {
             mostAffectedCountriesList = Singleton.Instance.CountryCases;
-        }
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+<custom:CustomShell xmlns="http://xamarin.com/schemas/2014/forms"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -8,6 +8,7 @@
        xmlns:faq="clr-namespace:Covid19Tracker.Views.FAQ"
        Title="Covid_19Tracker"
        x:Class="Covid_19Tracker.AppShell"
+       xmlns:custom="clr-namespace:Covid19Tracker.CustomRenderers"
        Shell.NavBarIsVisible="False">
     <!-- 
         Styles and Resources 
@@ -30,13 +31,13 @@
         </ResourceDictionary>
     </Shell.Resources>
     <!-- Your Pages -->
-    <TabBar Route="mainPage">
-        <Tab Route="homePage" Title="Browse" Icon="tab_feed.png" IsTabStop="True" 
+    <TabBar x:Name="ShellTabBar" Route="mainPage">
+        <Tab Route="homePage" Title="Browse" Icon="tab_feed.png" IsTabStop="True"
              Shell.NavBarIsVisible="False">
             <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
         </Tab>
         <Tab Route="searchPage" Title="Search" Icon="tab_about.png" IsTabStop="True">
-            <ShellContent ContentTemplate="{DataTemplate views:SearchPage}" />
+            <ShellContent ContentTemplate="{DataTemplate views:SearchPage}"/>
         </Tab>
         <Tab Route="newsPage" Title="About" Icon="tab_about.png">
             <ShellContent ContentTemplate="{DataTemplate views:NewsPage}" />
@@ -77,4 +78,4 @@
     </Shell.MenuItemTemplate>
 
     -->
-</Shell>
+</custom:CustomShell>

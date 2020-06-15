@@ -8,10 +8,8 @@ using Covid19Tracker.Services;
 
 namespace Covid19Tracker.ViewModels
 {
-    public class NewsPageViewModel : INotifyPropertyChanged
+    public class NewsPageViewModel : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private ObservableCollection<RssFeedItem> newsList;
 
         public ObservableCollection<RssFeedItem> NewsList
@@ -20,7 +18,7 @@ namespace Covid19Tracker.ViewModels
             set
             {
                 newsList = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("NewsList"));
+                OnPropertyChanged("NewsList");
             }
         }
 
@@ -30,13 +28,17 @@ namespace Covid19Tracker.ViewModels
 
         public async Task GetData()
         {
-            var news = await Api.GetTeste();
-            NewsList = new ObservableCollection<RssFeedItem>(news.items);
-        }
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            IsBusy = true;
+            try
+            {
+                var news = await Api.GetTeste();
+                NewsList = new ObservableCollection<RssFeedItem>(news.items);
+            }
+            catch { }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }

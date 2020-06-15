@@ -14,9 +14,8 @@ using Xamarin.Forms;
 namespace Covid19Tracker.ViewModels
 {
     [QueryProperty("Country","CountryName")]
-    public class CountryDetailsPageViewModel : INotifyPropertyChanged
+    public class CountryDetailsPageViewModel : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
 
 
         public string CountryName { get; set; }
@@ -29,8 +28,8 @@ namespace Covid19Tracker.ViewModels
                 if(CountryCases != null)
                 {
                     CountryInfo = CountryCases.CountryInfo;
-                    PropertyChanged(this, new PropertyChangedEventArgs("CountryCases"));
-                    PropertyChanged(this, new PropertyChangedEventArgs("CountryInfo"));
+                    OnPropertyChanged("CountryCases");
+                    OnPropertyChanged("CountryInfo");
                 }
             }
         }
@@ -53,7 +52,7 @@ namespace Covid19Tracker.ViewModels
             set
             {
                 todayDate = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("TodayDate"));
+                OnPropertyChanged("TodayDate");
             }
         }
 
@@ -64,14 +63,8 @@ namespace Covid19Tracker.ViewModels
             var timeSeries = await Api.GetCountryTimeSeriesAsync(CountryInfo.Iso3);
             if(timeSeries != null)
                 CountryCases.TimeSeries = new List<TimeSeriesData>(timeSeries.result);
-            PropertyChanged(this, new PropertyChangedEventArgs("CountryCases"));
-            PropertyChanged(this, new PropertyChangedEventArgs("GlobalCases"));
+            OnPropertyChanged("CountryCases");
+            OnPropertyChanged("GlobalCases");
         }
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
     }
 }

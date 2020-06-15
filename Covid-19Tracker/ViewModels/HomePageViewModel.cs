@@ -15,14 +15,12 @@ using Xamarin.Forms;
 namespace Covid19Tracker.ViewModels
 {
     
-    public class HomePageViewModel : INotifyPropertyChanged
+    public class HomePageViewModel : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand RefreshCommand => new Command(async () => await RefreshItemsAsync());
 
         private bool isRefreshing;
-        private bool isBusy;
         private string confirmed;
         private string todayCases;
         private string active;
@@ -39,7 +37,7 @@ namespace Covid19Tracker.ViewModels
             set
             {
                 deaths = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Deaths"));
+                OnPropertyChanged("Deaths");
             }
         }
 
@@ -49,7 +47,7 @@ namespace Covid19Tracker.ViewModels
             set
             {
                 recovered = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Recovered"));
+                OnPropertyChanged("Recovered");
             }
         }
 
@@ -59,7 +57,7 @@ namespace Covid19Tracker.ViewModels
             set
             {
                 confirmed = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Confirmed"));
+                OnPropertyChanged("Confirmed");
             }
         }
 
@@ -69,7 +67,7 @@ namespace Covid19Tracker.ViewModels
             set
             {
                 active = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Active"));
+                OnPropertyChanged("Active");
             }
         }
 
@@ -79,7 +77,7 @@ namespace Covid19Tracker.ViewModels
             set
             {
                 todayCases = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("TodayCases"));
+                OnPropertyChanged("TodayCases");
             }
         }
 
@@ -89,7 +87,7 @@ namespace Covid19Tracker.ViewModels
             set
             {
                 todayDeaths = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("TodayDeaths"));
+                OnPropertyChanged("TodayDeaths");
             }
         }
 
@@ -99,7 +97,7 @@ namespace Covid19Tracker.ViewModels
             set
             {
                 todayRecoverd = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("TodayRecovered"));
+                OnPropertyChanged("TodayRecovered");
             }
         }
 
@@ -109,7 +107,7 @@ namespace Covid19Tracker.ViewModels
             set
             {
                 updatedTime = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("UpdatedTime"));
+                OnPropertyChanged("UpdatedTime");
             }
         }
 
@@ -119,7 +117,7 @@ namespace Covid19Tracker.ViewModels
             set
             {
                 mostAffectedCountriesList = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("MostAffectedCountriesList"));
+                OnPropertyChanged("MostAffectedCountriesList");
             }
         }
 
@@ -129,17 +127,7 @@ namespace Covid19Tracker.ViewModels
             set
             {
                 isRefreshing = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("IsRefreshing"));
-            }
-        }
-
-        public bool IsBusy
-        {
-            get => isBusy;
-            set
-            {
-                isBusy = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("IsBusy"));
+                OnPropertyChanged("IsRefreshing");
             }
         }
 
@@ -164,6 +152,7 @@ namespace Covid19Tracker.ViewModels
 
         public async Task GetData()
         {
+            IsBusy = true;
             var globalCasesInfo = await Api.GetGlobalInfoAsync();
             var mostAffectedInfo = await Api.GetCountriesAsync();
             Singleton.Instance.CountryCases = new ObservableCollection<CountryCasesInfo>(mostAffectedInfo);
@@ -210,11 +199,8 @@ namespace Covid19Tracker.ViewModels
             Recovered = globalCasesInfo.Recovered.TransformNumberToString();
             Deaths = globalCasesInfo.Deaths.TransformNumberToString();
             TodayDeaths = string.Format("+{0}", globalCasesInfo.TodayDeaths.TransformNumberToString());
+            IsBusy = false;
         }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }
