@@ -27,6 +27,7 @@
     <Folder Include="Views\FAQ\" />
     <Folder Include="ViewModels\FAQ\" />
     <Folder Include="CustomRenderers\" />
+    <Folder Include="Effects\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\FabMDL2.ttf" />

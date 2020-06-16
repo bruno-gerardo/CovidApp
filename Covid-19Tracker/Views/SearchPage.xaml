@@ -4,10 +4,8 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:views="clr-namespace:Covid19Tracker.Views"
+             xmlns:effects="clr-namespace:Covid19Tracker.Effects"
              Title="Search Page"
-             ios:Page.UseSafeArea="False"
-             NavigationPage.BackButtonTitle=""
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled"
              x:Class="Covid19Tracker.Views.SearchPage">
@@ -33,16 +31,17 @@
 
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height=".15*"/>
+                <RowDefinition Height=".17*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!--#region Fake NavBar -->
-            <pancakeView:PancakeView BackgroundGradientAngle="255"
-                                    BackgroundGradientStartColor="#3F94B5"
-                                    BackgroundGradientEndColor="#1373A1"
+            <pancakeView:PancakeView effects:SafeAreaInsetEffect.Insets="Top"
+                                     BackgroundGradientAngle="255"
+                                     BackgroundGradientStartColor="#3F94B5"
+                                     BackgroundGradientEndColor="#1373A1"
                                      Grid.Row="0"
                                      Grid.RowSpan="2">
-                <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand" Margin="0,40">
+                <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand" Margin="0,10">
                     
                     <SearchBar BackgroundColor="Transparent"
                                VerticalOptions="CenterAndExpand"

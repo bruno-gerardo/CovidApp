@@ -4,11 +4,11 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:effects="clr-namespace:Covid19Tracker.Effects"
              Title="Home"
              NavigationPage.HasNavigationBar="False"
              Shell.NavBarIsVisible="False"
              BackgroundColor="Transparent"
-             ios:Page.UseSafeArea="False"
              x:Class="Covid19Tracker.Views.HomePage">
 
     <ContentPage.Resources>
@@ -29,13 +29,13 @@
         </Style>
     </ContentPage.Resources>
     <ContentPage.Content>
-            <Grid >
+            <Grid RowSpacing="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height=".15*"/>
+                    <RowDefinition Height=".17*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <!--#region Pancake View-->
-                <pancakeView:PancakeView                                             
+                <pancakeView:PancakeView    effects:SafeAreaInsetEffect.Insets="Top"                                         
                         BackgroundGradientAngle="255"
                         BackgroundGradientStartColor="#3F94B5"
                         BackgroundGradientEndColor="#1373A1"
@@ -43,12 +43,12 @@
                         Grid.RowSpan="2">
 
                     <ffimage:CachedImage Source="logo.png"
-                           Aspect="AspectFit"
-                           HeightRequest="90"
-                           VerticalOptions="StartAndExpand"
-                           HorizontalOptions="CenterAndExpand"
-                           Grid.Row="0"
-                           Margin="30"/>
+                                         Aspect="AspectFit"
+                                         HeightRequest="70"
+                                         VerticalOptions="StartAndExpand"
+                                         HorizontalOptions="CenterAndExpand"
+                                         Grid.Row="0"
+                                         Margin="0,20"/>
 
                 </pancakeView:PancakeView>
                 <pancakeView:PancakeView CornerRadius="30,30,0,0"
@@ -334,13 +334,14 @@
                             HeightRequest="36"
                             IsRunning="{Binding IsBusy}"
                             IsVisible="True"
+                            Color="{StaticResource ConfirmedColor}"
                             WidthRequest="36" />
                         <Label
                             FontSize="Small"
                             HorizontalOptions="FillAndExpand"
                             HorizontalTextAlignment="Center"
                             Text="Carregando..."
-                            TextColor="Black" />
+                            TextColor="{StaticResource ConfirmedColor}" />
                     </StackLayout>
 
                 </pancakeView:PancakeView>

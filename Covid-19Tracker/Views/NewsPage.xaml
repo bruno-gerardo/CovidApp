@@ -3,22 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:effects="clr-namespace:Covid19Tracker.Effects"
              x:Class="Covid19Tracker.Views.NewsPage"
              BackgroundColor="Black">
     <ContentPage.Content>
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height=".15*"/>
+                <RowDefinition Height=".17*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <pancakeView:PancakeView
+                        effects:SafeAreaInsetEffect.Insets="Top"
                         VerticalOptions="FillAndExpand"
                         BackgroundGradientAngle="255"
                         BackgroundGradientStartColor="#3F94B5"
                         BackgroundGradientEndColor="#1373A1"
                         Grid.Row="0"
                         Grid.RowSpan="2">
+                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand" Padding="0,20"
+                                     >
+                            <Label 
+                                   HorizontalOptions="FillAndExpand"
+                                   Text="Notícias"
+                                   TextColor="White"
+                                   FontAttributes="Bold"
+                                   FontSize="20">
 
+                            </Label>
+                        </StackLayout>
             </pancakeView:PancakeView>
             <pancakeView:PancakeView VerticalOptions="FillAndExpand"
                                      CornerRadius="30,30,0,0"
@@ -127,6 +139,7 @@
                     <ActivityIndicator
                         HeightRequest="36"
                         IsRunning="{Binding IsBusy}"
+                        Color="Black"
                         IsVisible="True"
                         WidthRequest="36" />
                     <Label
