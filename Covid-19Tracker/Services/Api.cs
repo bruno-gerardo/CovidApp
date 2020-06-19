@@ -10,13 +10,14 @@ using System.Net;
 using Newtonsoft.Json;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
+using System.Text;
 
 namespace Covid19Tracker.Services
 {
     public class Api
     {
-        //private static RestClient _restClient = new RestClient("https://disease.sh/v2/"); // API Corona
-        private static RestClient _restClient = new RestClient("https://api.caw.sh/v2/"); // API Corona
+        private static RestClient _restClient = new RestClient("https://disease.sh/v2/"); // API Corona
+        //private static RestClient _restClient = new RestClient("https://api.caw.sh/v2/"); // API Corona
 
         private static RestClient _restClientPortugal = new RestClient("https://covid19-api.vost.pt/Requests"); // API DSSG
 
@@ -58,7 +59,6 @@ namespace Covid19Tracker.Services
         public static async Task<List<CountryCasesInfo>> GetMostAffectedInfoAsync()
         {
             var request = new RestRequest(string.Format(MostAffected), Method.GET);
-            request.RequestFormat = DataFormat.Json;
 
             var response = await _restClient.ExecuteAsync<List<CountryCasesInfo>>(request);
 
@@ -75,7 +75,6 @@ namespace Covid19Tracker.Services
         public static async Task<List<CountryCasesInfo>> GetCountriesAsync()
         {
             var request = new RestRequest(string.Format(GetCountries), Method.GET);
-            request.RequestFormat = DataFormat.Json;
 
             var response = await _restClient.ExecuteAsync<List<CountryCasesInfo>>(request);
 
@@ -85,7 +84,6 @@ namespace Covid19Tracker.Services
         public static async Task<TimeSeries> GetCountryTimeSeriesAsync(string countryISO3)
         {
             var request = new RestRequest(string.Format(string.Concat(countryISO3, TimeSeries)), Method.GET);
-            request.RequestFormat = DataFormat.Json;
 
             var response = await _restClientTimeSeries.ExecuteAsync<TimeSeries>(request);
 
@@ -95,53 +93,19 @@ namespace Covid19Tracker.Services
         public static async Task<PortugalCasesInfo> GetPortugalCasesInfoAsync()
         {
             var request = new RestRequest(string.Format(PortugalLastUpdate), Method.GET);
-            request.RequestFormat = DataFormat.Json;
 
             var response = await _restClientPortugal.ExecuteAsync<PortugalCasesInfo>(request);
 
             return response.Data;
         }
 
-        //public static async Task<RssFeedInfo> GetRSSFeedItemAsync()
-        //{
-        //    var webClient = new WebClient();
-
-        //    string result = webClient.DownloadString(rssFeedUrl);
-
-        //    XDocument document = XDocument.Parse(result);
-
-
-        //    string mediaNamespace = "http://search.yahoo.com/mrss/";
-        //    string dcNamespace = "http://purl.org/dc/elements/1.1/";
-
-        //    var rssInfo = new RssFeedInfo()
-        //    {
-        //        items = new List<RssFeedItem>()
-        //        {
-                    
-        //        }
-        //    };
-
-        //    rssInfo.items = (from descendant in document.Descendants("item")
-        //                 select new RssFeedItem()
-        //                 {
-        //                     description = descendant.Element("description").Value,
-        //                     title = descendant.Element("title").Value,
-        //                     pubDate = descendant.Element("pubDate").Value,
-        //                     thumbnail = descendant.Element(XName.Get("content", mediaNamespace)).Attribute("url").Value,
-        //                     link = descendant.Element("link").Value,
-        //                     author = descendant.Element(XName.Get("creator", dcNamespace)).Value
-        //                 }).ToList();
-            
-        //    return rssInfo;
-        //}
-
-        public static async Task<RssFeedInfo> GetTeste()
+        public static async Task<RssFeedInfo> GetNewsData()
         {
 
             var link = "https://news.google.com/news?q=covid-19&hl=pt-PT&sort=date&gl=PT&num=100&ceid=PT:pt-150";
 
             var web = new HtmlWeb();
+
 
             var doc = await web.LoadFromWebAsync(link);
 
@@ -162,14 +126,19 @@ namespace Covid19Tracker.Services
             {
 
                 //TODO Order by pubdate
-                var titulo = item.ChildNodes.FindFirst("h3").InnerText.Replace("&quot;","\"");
+                var titulo = item.ChildNodes.FindFirst("h3").InnerText.Replace("&quot;","\"")
+                                                                      .Replace("&amp;","&")
+                                                                      .Replace("&#39;","'");
                 var imagem = item.ParentNode.PreviousSibling.FirstChild.ChildNodes.FindFirst("img").ChildAttributes("src").First().Value;
                 var srcImage = imagem.Replace("h100-w100", "h200-w200");
-                var descri = item.ChildNodes.FindFirst("div").FirstChild.InnerText.Replace("&quot;", "\"");
+                var descri = item.ChildNodes.FindFirst("div").FirstChild.InnerText.Replace("&quot;", "\"")
+                                                                                  .Replace("&amp;", "&")
+                                                                                  .Replace("&#39;", "'");
                 var author = item.ChildNodes.Last().FirstChild.ChildNodes.FindFirst("a").InnerText;
                 var pubDate = item.ChildNodes.Last().FirstChild.ChildNodes.FindFirst("time").ChildAttributes("datetime").First().Value;
-                string url = item.FirstChild.ChildAttributes("jslog").First().DeEntitizeValue;
-                url = Regex.Match(url, @"(https?):\/\/(www\.)?[a-z0 - 9\.:].*?(?=[;\s])").ToString();
+                string url = item.FirstChild.ChildAttributes("href").First().Value;
+                //url = Regex.Match(url, @"(https?):\/\/(www\.)?[a-z0 - 9\.:].*?(?=[;\s])").ToString();
+                url = string.Concat("https://news.google.pt",url.Substring(1));
 
                 RssFeedItem rssitem = new RssFeedItem()
                 {

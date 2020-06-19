@@ -27,7 +27,7 @@ namespace Covid19Tracker.Views
                 CountriesList.ItemsSource = vm.MostAffectedCountriesList.Where(i => i.Country.ToLower().Contains(e.NewTextValue.ToLower()));
         }
 
-        async void CountriesList_SelectionChanged(System.Object sender, Xamarin.Forms.SelectionChangedEventArgs e)
+        async void CountriesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.CurrentSelection.FirstOrDefault() is CountryCasesInfo selectedCountry)
             {

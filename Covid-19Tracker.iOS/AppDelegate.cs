@@ -23,6 +23,7 @@ namespace Covid_19Tracker.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             //global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
+            Xamarin.Forms.Forms.SetFlags("SwipeView_Experimental");
             global::Xamarin.Forms.Forms.Init();
             Syncfusion.SfChart.XForms.iOS.Renderers.SfChartRenderer.Init();
             Syncfusion.XForms.iOS.TabView.SfTabViewRenderer.Init();

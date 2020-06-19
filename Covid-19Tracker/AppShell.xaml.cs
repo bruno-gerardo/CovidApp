@@ -21,7 +21,6 @@ namespace Covid_19Tracker
         {
             InitializeComponent();
             RegisterRoutes();
-            var cenas = ShellTabBar;
         }
 
         void RegisterRoutes()

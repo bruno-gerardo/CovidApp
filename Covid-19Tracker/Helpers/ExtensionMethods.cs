@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
+using System.Text;
 
 namespace Covid19Tracker.Helpers
 {
@@ -76,6 +78,14 @@ namespace Covid19Tracker.Helpers
                 result = string.Format("{0:d MMMM yyyy}", dateTime);
 
             return result;
+        }
+
+        public static string RemoveDiacriticalMarks(this string text)
+        {
+            return new string(text
+                .Normalize(NormalizationForm.FormD)
+                .Where(ch => char.GetUnicodeCategory(ch) != UnicodeCategory.NonSpacingMark)
+                .ToArray());
         }
     }
 }

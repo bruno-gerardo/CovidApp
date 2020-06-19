@@ -17,6 +17,25 @@ namespace Covid19Tracker.Model
         public string description { get; set; }
         public string content { get; set; }
         public string pubDateFormatted { get => ExtensionMethods.TimeAgo(DateTime.Parse(pubDate)); }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as RssFeedItem);
+        }
+
+        public bool Equals(RssFeedItem obj)
+        {
+            return obj != null && obj.title == this.title && obj.author == this.author && obj.description == this.description; 
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1067488440;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(title);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(author);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(description);
+            return hashCode;
+        }
     }
 
     public class RssFeedInfo

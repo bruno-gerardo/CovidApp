@@ -138,7 +138,6 @@ namespace Covid19Tracker.ViewModels
 
         public async Task GlobalCasesInfoAsync()
         {
-            //IsBusy = true;
             await GetData();
         }
 
@@ -155,6 +154,12 @@ namespace Covid19Tracker.ViewModels
             IsBusy = true;
             var globalCasesInfo = await Api.GetGlobalInfoAsync();
             var mostAffectedInfo = await Api.GetCountriesAsync();
+
+            // Remove this items, they're ships not countries
+            mostAffectedInfo.RemoveAll(c => c.Country.ToLower().Contains("zaandam") ||
+                                   c.Country.ToLower().Contains("diamond princess"));
+
+            
             Singleton.Instance.CountryCases = new ObservableCollection<CountryCasesInfo>(mostAffectedInfo);
             Singleton.Instance.GlobalCases = globalCasesInfo;
 

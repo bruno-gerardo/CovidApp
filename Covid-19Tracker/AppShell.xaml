@@ -25,24 +25,30 @@
                 <Setter Property="Shell.TabBarBackgroundColor" Value="White" />
                 <Setter Property="Shell.TabBarForegroundColor" Value="White" />
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95999999" />
-                <Setter Property="Shell.TabBarTitleColor" Value="Purple" />
+                <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource ConfirmedColor}" />
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
         </ResourceDictionary>
     </Shell.Resources>
     <!-- Your Pages -->
     <TabBar x:Name="ShellTabBar" Route="mainPage">
-        <Tab Route="homePage" Title="Browse" Icon="tab_feed.png" IsTabStop="True"
+        <Tab Route="homePage" Title="Início" IsTabStop="True"
              Shell.NavBarIsVisible="False">
+            <Tab.Icon>
+                <FontImageSource FontFamily="FabMDL2" Glyph="&#xE80F;"/>
+            </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
         </Tab>
-        <Tab Route="searchPage" Title="Search" Icon="tab_about.png" IsTabStop="True">
+        <Tab Route="searchPage" Title="Países" IsTabStop="True">
+            <Tab.Icon>
+                <FontImageSource FontFamily="FabMDL2" Glyph="&#xE721;" Size="25"/>
+            </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate views:SearchPage}"/>
         </Tab>
-        <Tab Route="newsPage" Title="About" Icon="tab_about.png">
+        <Tab Route="newsPage" Title="Notícias" Icon="tab_feed.png">
             <ShellContent ContentTemplate="{DataTemplate views:NewsPage}" />
         </Tab>
-        <Tab Title="About" Icon="tab_about.png">
+        <Tab Title="Portugal" Icon="tab_about.png">
             <ShellContent ContentTemplate="{DataTemplate views:PortugalPage}" />
         </Tab>
         <Tab Title="FAQ" Icon="tab_about.png">
