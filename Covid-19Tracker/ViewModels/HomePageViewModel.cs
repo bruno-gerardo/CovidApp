@@ -134,6 +134,7 @@ namespace Covid19Tracker.ViewModels
 
         public HomePageViewModel()
         {
+            GlobalCasesInfoAsync();
         }
 
         public async Task GlobalCasesInfoAsync()

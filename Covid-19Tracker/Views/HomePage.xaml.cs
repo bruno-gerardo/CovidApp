@@ -36,11 +36,11 @@ namespace Covid19Tracker.Views
 
         }
 
-        protected async override void OnAppearing()
-        {
-            base.OnAppearing();
-            await vm.GlobalCasesInfoAsync();
-        }
+        //protected async override void OnAppearing()
+        //{
+        //    base.OnAppearing();
+        //    await vm.GlobalCasesInfoAsync();
+        //}
 
         async void CollectionView_SelectionChanged(System.Object sender, Xamarin.Forms.SelectionChangedEventArgs e)
         {

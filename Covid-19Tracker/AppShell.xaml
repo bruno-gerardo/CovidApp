@@ -41,14 +41,14 @@
         </Tab>
         <Tab Route="searchPage" Title="Países" IsTabStop="True">
             <Tab.Icon>
-                <FontImageSource FontFamily="FabMDL2" Glyph="&#xE721;" Size="25"/>
+                <FontImageSource FontFamily="FabMDL2" Glyph="&#xE909;" Size="25"/>
             </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate views:SearchPage}"/>
         </Tab>
         <Tab Route="newsPage" Title="Notícias" Icon="tab_feed.png">
             <ShellContent ContentTemplate="{DataTemplate views:NewsPage}" />
         </Tab>
-        <Tab Title="Portugal" Icon="tab_about.png">
+        <Tab Title="Portugal" Icon="portugal-map.png">
             <ShellContent ContentTemplate="{DataTemplate views:PortugalPage}" />
         </Tab>
         <Tab Title="FAQ" Icon="tab_about.png">

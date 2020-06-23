@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Covid19Tracker.Model;
 using Covid19Tracker.Services;
+using static Covid19Tracker.Model.PortugalCasesInfo;
 
 namespace Covid19Tracker.ViewModels
 {

@@ -44,6 +44,7 @@ namespace Covid19Tracker.Model
         public string DeathsRankingPosition { get; set; }
         public string RecoveredRankingPosition { get; set; }
         public string ActiveRankingPosition { get; set; }
+        public bool IsSelectedToCompare { get; set; }
 
         public string RecoveredPercentage { get => string.Format("{0:0.00}%", (double)Recovered *100 / Cases); }
         public string DeathsPercentage { get => string.Format("{0:0.00}%", (double)Deaths *100 / Cases); }

@@ -4,6 +4,7 @@
              xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:maps="clr-namespace:Syncfusion.SfMaps.XForms;assembly=Syncfusion.SfMaps.XForms"
              xmlns:effects="clr-namespace:Covid19Tracker.Effects"
              Shell.NavBarIsVisible="False"
              x:Class="Covid19Tracker.Views.PortugalPage">
@@ -225,6 +226,21 @@
                            
                         </pancakeView:PancakeView>
                          <!--#endregion-->
+
+                        <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Elevation="1" Margin="0,20">
+                            
+                            <maps:SfMaps VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HeightRequest="400">
+                                <maps:SfMaps.Layers>
+                                    <!--<maps:ImageryLayer LayerType="OSM" GeoCoordinates="39.349490, -8.190410" Radius="150"
+                                                       ResetOnDoubleTap="False">
+                                        
+                                        </maps:ImageryLayer>-->
+                                    <maps:ShapeFileLayer Uri="map.shp"/>
+                                </maps:SfMaps.Layers>
+                            </maps:SfMaps>
+                           
+                        </pancakeView:PancakeView>
+
                     </StackLayout>
 
                 </ScrollView>

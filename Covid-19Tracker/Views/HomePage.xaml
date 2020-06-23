@@ -87,17 +87,10 @@
                                                              HorizontalOptions="FillAndExpand"
                                                              Elevation="1"
                                                              CornerRadius="20">
-                                        <Grid HorizontalOptions="FillAndExpand" Margin="0,15" >
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="*"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
+                                        <Grid RowDefinitions="Auto, *"
+                                              ColumnDefinitions="*, *, *, *"
+                                              HorizontalOptions="FillAndExpand"
+                                              Margin="0,15" >
 
                                             <!--#region Coluna Confirmados -->
                                             

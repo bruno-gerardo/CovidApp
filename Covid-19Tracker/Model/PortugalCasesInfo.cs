@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+
 namespace Covid19Tracker.Model
 {
     public class PortugalCasesInfo
@@ -17,6 +19,7 @@ namespace Covid19Tracker.Model
         public int n_confirmados { get; set; }
         public int cadeias_transmissao { get; set; }
         public int transmissao_importada { get; set; }
+        
 
         #region Sintomas
         public double sintomas_tosse { get; set; }
@@ -134,5 +137,88 @@ namespace Covid19Tracker.Model
         public int confirmados_80_plus_total { get => confirmados_80_plus_f + confirmados_80_plus_m; }
         #endregion
 
+        public class Regiao
+        {
+            public string regiao { get; set; }
+            public double latitude { get; set; }
+            public double longitude { get; set; }
+            public int confirmados { get; set; }
+            public int recuperados { get; set; }
+            public int obitos { get; set; }
+        }
+
+        public ObservableCollection<Regiao> Regioes => new ObservableCollection<Regiao>()
+        {
+            new Regiao
+                {
+                    regiao = "Norte",
+                    latitude = 41.45756,
+                    longitude = -7.67865,
+                    confirmados = confirmados_arsnorte,
+                    recuperados = recuperados_arsnorte,
+                    obitos = obitos_arsnorte
+
+                },
+                new Regiao
+                {
+                    regiao = "Centro",
+                    latitude = 41.45756,
+                    longitude = -7.67865,
+                    confirmados = confirmados_arscentro,
+                    recuperados = recuperados_arscentro,
+                    obitos = obitos_arscentro
+
+                },
+                new Regiao
+                {
+                    regiao = "Lisboa e Vale do Tejo",
+                    latitude = 39.16054,
+                    longitude = -8.74521,
+                    confirmados = confirmados_arslvt,
+                    recuperados = recuperados_arslvt,
+                    obitos = obitos_arslvt
+
+                },
+                new Regiao
+                {
+                    regiao = "Alentejo",
+                    latitude = 38.39168,
+                    longitude = -7.92234,
+                    confirmados = confirmados_arsalentejo,
+                    recuperados = recuperados_arsalentejo,
+                    obitos = obitos_arsalentejo
+
+                },
+                new Regiao
+                {
+                    regiao = "Algarve",
+                    latitude = 37.24368,
+                    longitude = -8.13171,
+                    confirmados = confirmados_arsalgarve,
+                    recuperados = recuperados_arsalgarve,
+                    obitos = obitos_arsalgarve
+
+                },
+                new Regiao
+                {
+                    regiao = "Açores",
+                    latitude = 38.58323,
+                    longitude = -28.196631,
+                    confirmados = confirmados_acores,
+                    recuperados = recuperados_acores,
+                    obitos = obitos_acores
+
+                },
+                new Regiao
+                {
+                    regiao = "Madeira",
+                    latitude = 32.75078,
+                    longitude = -16.95118,
+                    confirmados = confirmados_madeira,
+                    recuperados = recuperados_madeira,
+                    obitos = obitos_madeira
+
+                }
+        };
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -59,10 +60,13 @@ namespace Covid19Tracker.ViewModels
         public async Task GetData()
         {
             GlobalCases = Singleton.Instance.GlobalCases;
-            TodayDate = DateTime.UtcNow.ToString("d/M/yyyy");
+            TodayDate = DateTime.UtcNow.ToString("d/MM/yyyy");
             var timeSeries = await Api.GetCountryTimeSeriesAsync(CountryInfo.Iso3);
             if(timeSeries != null)
+            {
+                timeSeries.result = timeSeries.result.Where(t => t.confirmed >= 100).ToList();
                 CountryCases.TimeSeries = new List<TimeSeriesData>(timeSeries.result);
+            }
             OnPropertyChanged("CountryCases");
             OnPropertyChanged("GlobalCases");
         }

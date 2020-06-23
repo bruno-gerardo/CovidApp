@@ -139,6 +139,9 @@
     <BundleResource Include="Resources\CovidIcons\Symptoms\tiredness.png" />
     <BundleResource Include="Resources\CovidIcons\Symptoms\difficulty_breathing.png" />
     <BundleResource Include="Resources\CovidIcons\Prevention\mask.png" />
+    <BundleResource Include="Resources\portugal-map.png" />
+    <BundleResource Include="Resources\portugal_regions.shp" />
+    <BundleResource Include="Resources\map.shp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -149,7 +152,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.6.0.847" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.968" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView">
       <Version>18.1.0.54</Version>
@@ -162,6 +165,9 @@
     </PackageReference>
     <PackageReference Include="Xamarin.FFImageLoading.Forms">
       <Version>2.4.11.982</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfMaps">
+      <Version>18.1.0.54</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

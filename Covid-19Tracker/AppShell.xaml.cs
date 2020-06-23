@@ -26,6 +26,7 @@ namespace Covid_19Tracker
         void RegisterRoutes()
         {
             Routing.RegisterRoute("countryDetailsPage", typeof(CountryDetailsPage));
+            Routing.RegisterRoute("compareCountriesPage", typeof(CompareCountriesPage));
         }
     }
 }

@@ -17,6 +17,21 @@ namespace Covid19Tracker.Views
             InitializeComponent();
             vm = new SearchPageViewModel();
             BindingContext = vm;
+
+            var lblTap = new TapGestureRecognizer();
+            lblTap.Tapped += LblTap_Tapped;
+            lblCompare.GestureRecognizers.Add(lblTap);
+        }
+
+        async void LblTap_Tapped(object sender, EventArgs e)
+        {
+            var lista = vm.MostAffectedCountriesList.Where(c => c.IsSelectedToCompare).ToList();
+
+            var obj1 = JsonConvert.SerializeObject(lista[0]);
+            var obj2 = JsonConvert.SerializeObject(lista[1]);
+
+            await Shell.Current.GoToAsync($"compareCountriesPage?FirstCountryName={obj1}&SecondCountryName={obj2}");
+
         }
 
         void SearchBar_TextChanged(System.Object sender, Xamarin.Forms.TextChangedEventArgs e)
