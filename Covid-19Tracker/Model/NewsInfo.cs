@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace Covid19Tracker.Model
 {
-    public class RssFeedItem
+    public class NewsItem
     {
         public string title { get; set; }
         public string pubDate { get; set; }
@@ -20,10 +20,10 @@ namespace Covid19Tracker.Model
 
         public override bool Equals(object obj)
         {
-            return Equals(obj as RssFeedItem);
+            return Equals(obj as NewsItem);
         }
 
-        public bool Equals(RssFeedItem obj)
+        public bool Equals(NewsItem obj)
         {
             return obj != null && obj.title == this.title && obj.author == this.author && obj.description == this.description; 
         }
@@ -38,9 +38,9 @@ namespace Covid19Tracker.Model
         }
     }
 
-    public class RssFeedInfo
+    public class NewsInfo
     {
         [JsonProperty("items")]
-        public List<RssFeedItem> items = new List<RssFeedItem>(); //{ get; set; }
+        public List<NewsItem> items = new List<NewsItem>(); //{ get; set; }
     }
 }
