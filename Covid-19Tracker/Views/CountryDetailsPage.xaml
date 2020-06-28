@@ -299,7 +299,6 @@
                                     HorizontalOptions="FillAndExpand"
                                     BackgroundColor="Transparent"
                                     TrackballCreated="chartView_TrackballCreated"
-                                    Unfocused="chartView_Unfocused"
                                     >
                             <chart:SfChart.Legend>
                                 <chart:ChartLegend Margin="0,10" ToggleSeriesVisibility="True" DockPosition="Top"/>

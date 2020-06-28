@@ -140,8 +140,10 @@
     <BundleResource Include="Resources\CovidIcons\Symptoms\difficulty_breathing.png" />
     <BundleResource Include="Resources\CovidIcons\Prevention\mask.png" />
     <BundleResource Include="Resources\portugal-map.png" />
-    <BundleResource Include="Resources\portugal_regions.shp" />
-    <BundleResource Include="Resources\map.shp" />
+    <BundleResource Include="Resources\icon_compare.png" />
+    <BundleResource Include="Resources\icon_compare%402x.png" />
+    <BundleResource Include="Resources\icon_compare%403x.png" />
+    <BundleResource Include="Resources\map_simplify.shp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -155,10 +157,10 @@
     <PackageReference Include="Xamarin.Forms" Version="4.7.0.968" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView">
-      <Version>18.1.0.54</Version>
+      <Version>18.1.0.59</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfChart">
-      <Version>18.1.0.54</Version>
+      <Version>18.1.0.59</Version>
     </PackageReference>
     <PackageReference Include="HtmlAgilityPack">
       <Version>1.11.24</Version>
@@ -167,7 +169,10 @@
       <Version>2.4.11.982</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfMaps">
-      <Version>18.1.0.54</Version>
+      <Version>18.1.0.59</Version>
+    </PackageReference>
+    <PackageReference Include="Esri.ArcGISRuntime.Xamarin.Forms">
+      <Version>100.8.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

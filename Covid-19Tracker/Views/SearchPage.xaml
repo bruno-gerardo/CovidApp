@@ -41,23 +41,33 @@
                                      BackgroundGradientEndColor="#1373A1"
                                      Grid.Row="0"
                                      Grid.RowSpan="2">
-                <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand" Margin="0,10">
+                <Grid ColumnDefinitions="*"
+                      RowDefinitions="Auto, Auto"
+                      VerticalOptions="StartAndExpand"
+                      HorizontalOptions="FillAndExpand"
+                      Margin="0,10">
                     
-                    <SearchBar BackgroundColor="Transparent"
-                               VerticalOptions="CenterAndExpand"
-                               HorizontalOptions="FillAndExpand"
-                               WidthRequest="100"
-                               TextColor="White"
-                               Placeholder="Nome do País"
-                               PlaceholderColor="Black"
-                               CancelButtonColor="White"
-                               Margin="10,0"
-                               TextChanged="SearchBar_TextChanged"
-                               />
-                    <Label x:Name="lblCompare" Text="compare">
-                    </Label>
+                    <Label HorizontalOptions="CenterAndExpand"
+                            Text="Países"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                           Grid.Row="0"
+                           Grid.Column="0"/>
+                    <ffimage:CachedImage Source="icon_compare.png"
+                                         VerticalOptions="FillAndExpand"
+                                         HorizontalOptions="EndAndExpand"
+                                         WidthRequest="25"
+                                         Margin="20,0"
+                                         Grid.Row="0"
+                                         Grid.Column="0">
+                        <ffimage:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ChangeVisibilityCommand}"/>
+                        </ffimage:CachedImage.GestureRecognizers>
+                    </ffimage:CachedImage>
 
-                </StackLayout>
+
+                </Grid>
             </pancakeView:PancakeView>
             <!--#endregion-->
 
@@ -66,13 +76,27 @@
                                      Grid.Row="1"
                                      BackgroundColor="#e3e5ee"
                                      >
+                <Grid RowDefinitions="Auto, *">
+
+                    <SearchBar BackgroundColor="Transparent"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="FillAndExpand"
+                               WidthRequest="100"
+                               TextColor="White"
+                               Placeholder="Nome do País"
+                               PlaceholderColor="Black" 
+                               CancelButtonColor="White"
+                               Margin="10,10,10,0"
+                               TextChanged="SearchBar_TextChanged"
+                               Grid.Row="0"/>
 
                     <CollectionView x:Name="CountriesList" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                     ItemSizingStrategy="MeasureAllItems"
                                     ItemsSource="{Binding MostAffectedCountriesList}"
                                     SelectionMode="Single"
                                     SelectionChanged="CountriesList_SelectionChanged"
-                                    Margin="0,10,0,0">
+                                    IsVisible="{Binding CountriesListIsVisible}"
+                                    Grid.Row="1">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical" />
                         </CollectionView.ItemsLayout>
@@ -201,6 +225,72 @@
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
+                    <CollectionView x:Name="CountriesToCompareList" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                    ItemSizingStrategy="MeasureAllItems"
+                                    ItemsSource="{Binding MostAffectedCountriesList}"
+                                    SelectionMode="Multiple"
+                                    SelectionChanged="CountriesToCompareList_SelectionChanged"
+                                IsVisible="{Binding CountriesToCompareIsVisible}"
+                                Grid.Row="1">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                <Label Text="No results found!" TextColor="Black" FontAttributes="Bold" FontSize="Large" VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <!--#region Card Country Info -->
+                                <StackLayout VerticalOptions="FillAndExpand"
+                                             HorizontalOptions="CenterAndExpand"
+                                             Padding="16,10"
+                                             BackgroundColor="#e3e5ee">
+                                    
+                                    <Grid RowDefinitions="*" ColumnDefinitions=".2*, .8*">
+                                        <ffimage:CachedImage Source="{Binding CountryInfo.Flag}"
+                                                    HeightRequest="30"
+                                                    WidthRequest="30"
+                                                    Aspect="AspectFit"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    HorizontalOptions="FillAndExpand" Grid.Column="0"/>
+                                            <Label Text="{Binding Country}"
+                                                    TextColor="Black"
+                                                    FontAttributes="Bold"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    HorizontalOptions="FillAndExpand" Grid.Column="1"/>
+                                        <Image  IsVisible="{Binding IsSelectedToCompare}"
+                                                HeightRequest="30"
+                                                WidthRequest="30"
+                                                Aspect="AspectFit"
+                                                VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="EndAndExpand" Grid.Column="1">
+                                            <Image.Source>
+                                                <FontImageSource FontFamily="FabMDL2" Glyph="&#xE73E;" Color="{StaticResource ConfirmedColor}" Size="25"/>
+                                            </Image.Source>
+                                        </Image>
+                                    </Grid>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                </CollectionView>
+                    <pancakeView:PancakeView x:Name="compareButton"
+                                             CornerRadius="20"
+                                             BackgroundColor="DeepSkyBlue"
+                                             VerticalOptions="EndAndExpand"
+                                             HeightRequest="50"
+                                             Margin="50,20"
+                                             HasShadow="True"
+                                             IsVisible="{Binding GoToCompareIsVisible}"
+                                             Grid.Row="1"
+                                             >
+                        <Label Text="Comparar" TextColor="White" FontSize="20"
+                                VerticalOptions="CenterAndExpand"
+                                HorizontalOptions="CenterAndExpand"/>
+                    </pancakeView:PancakeView>
+                </Grid>
             </pancakeView:PancakeView>
         </Grid>
     </ContentPage.Content>

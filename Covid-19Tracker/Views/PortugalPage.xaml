@@ -5,6 +5,7 @@
              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:maps="clr-namespace:Syncfusion.SfMaps.XForms;assembly=Syncfusion.SfMaps.XForms"
+             xmlns:esriUI="clr-namespace:Esri.ArcGISRuntime.Xamarin.Forms;assembly=Esri.ArcGISRuntime.Xamarin.Forms"
              xmlns:effects="clr-namespace:Covid19Tracker.Effects"
              Shell.NavBarIsVisible="False"
              x:Class="Covid19Tracker.Views.PortugalPage">
@@ -229,16 +230,26 @@
 
                         <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Elevation="1" Margin="0,20">
                             
-                            <maps:SfMaps VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HeightRequest="400">
+                            <maps:SfMaps VerticalOptions="FillAndExpand"
+                                         HorizontalOptions="FillAndExpand"
+                                         HeightRequest="400" BackgroundColor="SlateGray">
                                 <maps:SfMaps.Layers>
-                                    <!--<maps:ImageryLayer LayerType="OSM" GeoCoordinates="39.349490, -8.190410" Radius="150"
-                                                       ResetOnDoubleTap="False">
-                                        
-                                        </maps:ImageryLayer>-->
-                                    <maps:ShapeFileLayer Uri="map.shp"/>
+                                    <maps:ShapeFileLayer Uri="map_simplify.shp" ItemsSource="{Binding PortugalInfo.Regioes}" ShapeIDPath="confirmados" ShapeIDTableField="STATE_NAME">
+                                        <maps:ShapeFileLayer.ShapeSettings>
+                                            <maps:ShapeSetting ShapeFill="AliceBlue" ShapeStroke="Black" ShapeStrokeThickness="1"/>
+                                            
+                                        </maps:ShapeFileLayer.ShapeSettings>
+                                            <maps:ShapeFileLayer.BubbleMarkerSettings>
+
+                                            <maps:BubbleMarkerSetting ShowBubbles="True" ValuePath="confirmados" Fill="Orange"
+                                                                    MaxSize="25" MinSize="20" Opacity="0.8" />
+
+                                            </maps:ShapeFileLayer.BubbleMarkerSettings>
+                                    </maps:ShapeFileLayer>
+
                                 </maps:SfMaps.Layers>
                             </maps:SfMaps>
-                           
+
                         </pancakeView:PancakeView>
 
                     </StackLayout>

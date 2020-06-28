@@ -13,7 +13,7 @@ namespace Covid_19Tracker
         public App()
         {
             //Register Syncfusion license
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjY1Nzc1QDMxMzgyZTMxMmUzMGtVUWlSL3dpc1RTQTZyT21xNEY5RVE1UlhMUEcvdnhqTzZBYnNoMmZybms9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mjc1NTg0QDMxMzgyZTMxMmUzMElkR2tQV3BwTFhJMjN0TVdteEtLWXgxajdHb3JxZFZGY0h1aHgvc3ovb1E9");
 
 
             InitializeComponent();

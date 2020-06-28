@@ -76,12 +76,21 @@ namespace Covid19Tracker.ViewModels
         public async Task GetData()
         {
             TodayDate = DateTime.UtcNow.ToString("d/MM/yyyy");
-            //var timeSeries = await Api.GetCountryTimeSeriesAsync(CountryInfo.Iso3);
-            //if (timeSeries != null)
-            //    CountryCases.TimeSeries = new List<TimeSeriesData>(timeSeries.result);
-            OnPropertyChanged("FirstCountryCasesInfo");
+            var timeSeriesFirst = await Api.GetCountryTimeSeriesAsync(FirstCountryInfo.Iso3);
+            if (timeSeriesFirst != null)
+            {
+                //timeSeriesFirst.result = timeSeriesFirst.result.Where(t => t.confirmed >= 100).ToList();
+                FirstCountryCases.TimeSeries = new List<TimeSeriesData>(timeSeriesFirst.result);
+            }
+            var timeSeriesSecond = await Api.GetCountryTimeSeriesAsync(SecondCountryInfo.Iso3);
+            if (timeSeriesSecond != null)
+            {
+                //timeSeriesSecond.result = timeSeriesSecond.result.Where(t => t.confirmed >= 100).ToList();
+                SecondCountryCases.TimeSeries = new List<TimeSeriesData>(timeSeriesSecond.result);
+            }
+            OnPropertyChanged("FirstCountryCases");
             OnPropertyChanged("FirstCountryInfo");
-            OnPropertyChanged("SecondCountryCasesInfo");
+            OnPropertyChanged("SecondCountryCases");
             OnPropertyChanged("SecondCountryInfo");
         }
 

@@ -23,9 +23,18 @@ namespace Covid19Tracker.Views
         //protected async override void OnAppearing()
         //{
         //    base.OnAppearing();
-        //    //var cenas = await Api.GetRSSFeedItemAsync();
+        //    //var cenas = await Api.GetNewsItemAsync();
         //    await vm.GetData();
         //}
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            vm.PostSavedNews();
+        }
+
+        
 
         void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -40,7 +49,7 @@ namespace Covid19Tracker.Views
         void SwipeItem_Invoked(object sender, EventArgs e)
         {
 
-            var selectedItem = ((SwipeItem)sender).BindingContext as RssFeedItem;
+            var selectedItem = ((SwipeItem)sender).BindingContext as NewsItem;
 
             if (!vm.ToReadLaterList.Any(n => n.Equals(selectedItem)))
                 vm.ToReadLaterList.Add(selectedItem);
@@ -50,7 +59,7 @@ namespace Covid19Tracker.Views
 
         void NewsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.CurrentSelection.FirstOrDefault() is RssFeedItem selectedNews)
+            if (e.CurrentSelection.FirstOrDefault() is NewsItem selectedNews)
             {
                 Browser.OpenAsync(selectedNews.link, BrowserLaunchMode.SystemPreferred);
             }

@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Covid19Tracker.Model;
 using Covid19Tracker.Services;
+using Esri.ArcGISRuntime.Mapping;
+using Xamarin.Forms;
 using static Covid19Tracker.Model.PortugalCasesInfo;
 
 namespace Covid19Tracker.ViewModels
@@ -21,6 +23,8 @@ namespace Covid19Tracker.ViewModels
                 OnPropertyChanged("PortugalInfo");
             }
         }
+
+        
 
         public PortugalPageViewModel()
         {

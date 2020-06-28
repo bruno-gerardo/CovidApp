@@ -18,3 +18,4 @@ namespace Covid_19Tracker.iOS
         }
     }
 }
+

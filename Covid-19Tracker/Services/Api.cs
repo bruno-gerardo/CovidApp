@@ -99,7 +99,7 @@ namespace Covid19Tracker.Services
             return response.Data;
         }
 
-        public static async Task<RssFeedInfo> GetNewsData()
+        public static async Task<NewsInfo> GetNewsData()
         {
 
             var link = "https://news.google.com/news?q=covid-19&hl=pt-PT&sort=date&gl=PT&num=100&ceid=PT:pt-150";
@@ -113,9 +113,9 @@ namespace Covid19Tracker.Services
 
             var child = cenas.SelectNodes("//div[@class='NiLAwe y6IFtc R7GTQ keNKEd j7vNaf nID9nc']//article").ToList();
 
-            var rssInfo = new RssFeedInfo()
+            var rssInfo = new NewsInfo()
             {
-                items = new List<RssFeedItem>()
+                items = new List<NewsItem>()
                 {
 
                 }
@@ -140,7 +140,7 @@ namespace Covid19Tracker.Services
                 //url = Regex.Match(url, @"(https?):\/\/(www\.)?[a-z0 - 9\.:].*?(?=[;\s])").ToString();
                 url = string.Concat("https://news.google.pt",url.Substring(1));
 
-                RssFeedItem rssitem = new RssFeedItem()
+                NewsItem rssitem = new NewsItem()
                 {
                     title = titulo,
                     author = author,

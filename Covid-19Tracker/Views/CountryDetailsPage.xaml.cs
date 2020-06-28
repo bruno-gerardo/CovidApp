@@ -56,13 +56,5 @@ namespace Covid19Tracker.Views
             scrollview.IsEnabled = true;
         }
 
-        void chartView_SelectionChanged(System.Object sender, Syncfusion.SfChart.XForms.ChartSelectionEventArgs e)
-        {
-        }
-
-        void chartView_Unfocused(System.Object sender, Xamarin.Forms.FocusEventArgs e)
-        {
-        }
-
     }
 }

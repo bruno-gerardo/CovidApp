@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Covid19Tracker.Model;
 using Covid19Tracker.Services;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace Covid19Tracker.ViewModels
@@ -14,11 +16,11 @@ namespace Covid19Tracker.ViewModels
     public class NewsPageViewModel : BaseViewModel
     {
         public ICommand RefreshCommand => new Command(async () => await RefreshItemsAsync());
-        private ObservableCollection<RssFeedItem> newsList;
-        private ObservableCollection<RssFeedItem> toReadLaterList = new ObservableCollection<RssFeedItem>();
+        private ObservableCollection<NewsItem> newsList;
+        private ObservableCollection<NewsItem> toReadLaterList = new ObservableCollection<NewsItem>();
         private bool isRefreshing;
 
-        public ObservableCollection<RssFeedItem> NewsList
+        public ObservableCollection<NewsItem> NewsList
         {
             get => newsList;
             set
@@ -28,7 +30,7 @@ namespace Covid19Tracker.ViewModels
             }
         }
 
-        public ObservableCollection<RssFeedItem> ToReadLaterList
+        public ObservableCollection<NewsItem> ToReadLaterList
         {
             get => toReadLaterList;
             set
@@ -51,6 +53,7 @@ namespace Covid19Tracker.ViewModels
         public NewsPageViewModel()
         {
             GetData();
+            GetSavedNews();
         }
 
         async Task RefreshItemsAsync()
@@ -60,7 +63,7 @@ namespace Covid19Tracker.ViewModels
 
 
 
-            NewsList = new ObservableCollection<RssFeedItem>(NewsList.Select(c => c).Concat(news.items.Select(x => x)).Distinct().OrderByDescending(x => x.pubDate
+            NewsList = new ObservableCollection<NewsItem>(NewsList.Select(c => c).Concat(news.items.Select(x => x)).Distinct().OrderByDescending(x => x.pubDate
             ).ToList());
 
 
@@ -73,7 +76,7 @@ namespace Covid19Tracker.ViewModels
             try
             {
                 var news = await Api.GetNewsData();
-                NewsList = new ObservableCollection<RssFeedItem>(news.items);
+                NewsList = new ObservableCollection<NewsItem>(news.items);
             }
             catch { }
             finally
@@ -81,5 +84,39 @@ namespace Covid19Tracker.ViewModels
                 IsBusy = false;
             }
         }
+
+        public void GetSavedNews()
+        {
+            var properties = Application.Current.Properties;
+
+            if (properties.ContainsKey("savedNews"))
+            {
+                var savedNews = properties["savedNews"].ToString();
+                var obj = JsonConvert.DeserializeObject<List<NewsItem>>(savedNews);
+
+                ToReadLaterList = new ObservableCollection<NewsItem>(obj);
+            }
+        }
+
+        public async void PostSavedNews()
+        {
+            var properties = Application.Current.Properties;
+            var obj = JsonConvert.SerializeObject(ToReadLaterList);
+
+            if (!properties.ContainsKey("savedNews"))
+            {
+                
+                properties.Add("savedNews", obj);
+                await Application.Current.SavePropertiesAsync();
+            }
+            else
+            {
+                properties.Remove("savedNews");
+                properties.Add("savedNews", obj);
+                await Application.Current.SavePropertiesAsync();
+            }
+        }
+
+
     }
 }
