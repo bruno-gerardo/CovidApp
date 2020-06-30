@@ -5,6 +5,8 @@ using Covid19Tracker.Helpers;
 using Covid19Tracker.Model;
 using Covid19Tracker.Services;
 using Covid19Tracker.ViewModels;
+using Covid19Tracker.Views.Popups;
+using Rg.Plugins.Popup.Extensions;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -46,13 +48,16 @@ namespace Covid19Tracker.Views
                                                               i.author.RemoveDiacriticalMarks().ToLower().Contains(e.NewTextValue.RemoveDiacriticalMarks().ToLower()));
         }
 
-        void SwipeItem_Invoked(object sender, EventArgs e)
+        async void SwipeItem_Invoked(object sender, EventArgs e)
         {
 
             var selectedItem = ((SwipeItem)sender).BindingContext as NewsItem;
 
             if (!vm.ToReadLaterList.Any(n => n.Equals(selectedItem)))
+            {
                 vm.ToReadLaterList.Add(selectedItem);
+                await Navigation.PushPopupAsync(new SavedToReadPopupPage());
+            }
             else
                 vm.ToReadLaterList.Remove(selectedItem);
         }

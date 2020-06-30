@@ -5,7 +5,6 @@
              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:maps="clr-namespace:Syncfusion.SfMaps.XForms;assembly=Syncfusion.SfMaps.XForms"
-             xmlns:esriUI="clr-namespace:Esri.ArcGISRuntime.Xamarin.Forms;assembly=Esri.ArcGISRuntime.Xamarin.Forms"
              xmlns:effects="clr-namespace:Covid19Tracker.Effects"
              Shell.NavBarIsVisible="False"
              x:Class="Covid19Tracker.Views.PortugalPage">
@@ -223,32 +222,191 @@
                             <chart:SplineAreaSeries Label="Mortes" ItemsSource="{Binding CountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="deaths" StrokeWidth="3"
                                                 EnableAnimation="True" StrokeColor="{StaticResource DeathsColor}" Opacity=".2" Color="{StaticResource DeathsColor}"/>
                             
+                            
                         </chart:SfChart>
                            
                         </pancakeView:PancakeView>
                          <!--#endregion-->
 
-                        <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Elevation="1" Margin="0,20">
+                        <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Elevation="1" Margin="0">
                             
                             <maps:SfMaps VerticalOptions="FillAndExpand"
                                          HorizontalOptions="FillAndExpand"
-                                         HeightRequest="400" BackgroundColor="SlateGray">
+                                         HeightRequest="400" BackgroundColor="#222327">
                                 <maps:SfMaps.Layers>
-                                    <maps:ShapeFileLayer Uri="map_simplify.shp" ItemsSource="{Binding PortugalInfo.Regioes}" ShapeIDPath="confirmados" ShapeIDTableField="STATE_NAME">
+                                    <maps:ShapeFileLayer Uri="portugal_continental.shp" ItemsSource="{Binding PortugalInfo.Regioes}" ShowMapItems="True" ShapeIDPath="name" ShapeIDTableField="name">
                                         <maps:ShapeFileLayer.ShapeSettings>
-                                            <maps:ShapeSetting ShapeFill="AliceBlue" ShapeStroke="Black" ShapeStrokeThickness="1"/>
+                                            <maps:ShapeSetting ShapeFill="#3F3F41" ShapeStroke="White" ShapeStrokeThickness="1" ShapeValuePath="confirmados"/>
                                             
                                         </maps:ShapeFileLayer.ShapeSettings>
+                                            <maps:ShapeFileLayer.DataLabelSettings>
+                                                <maps:DataLabelSetting TextColor="White" FontAttributes="Bold" FontFamily="Arial" FontSize="15" />
+                                            </maps:ShapeFileLayer.DataLabelSettings>
                                             <maps:ShapeFileLayer.BubbleMarkerSettings>
 
-                                            <maps:BubbleMarkerSetting ShowBubbles="True" ValuePath="confirmados" Fill="Orange"
-                                                                    MaxSize="25" MinSize="20" Opacity="0.8" />
+                                                <maps:BubbleMarkerSetting ShowBubbles="True" ValuePath="confirmados" Fill="#00C5FF"
+                                                                    MinSize="30" MaxSize="80" Opacity=".7"/>
 
                                             </maps:ShapeFileLayer.BubbleMarkerSettings>
+                                        <maps:ShapeFileLayer.TooltipSettings>
+                                            <maps:TooltipSetting  ShowTooltip="True" EnableAnimation="False" StrokeColor="Transparent" PointerLength="20">
+                                                <maps:TooltipSetting.TooltipTemplate>
+                                                    <DataTemplate>
+                                                        <StackLayout>
+                                                            <Label Text="{Binding regiao}"
+                                                                   VerticalTextAlignment="Center"
+                                                                   HorizontalOptions="CenterAndExpand"
+                                                                   TextColor="#FFFFFF"
+                                                                   FontAttributes="Bold"
+                                                                   FontFamily="Helvetica"
+                                                                   FontSize="12" />
+                                                            <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                                            <Label Text="{Binding confirmados, StringFormat='Confirmados: {0}'}"
+                                                                   VerticalTextAlignment="Center"
+                                                                   HorizontalOptions="FillAndExpand"
+                                                                   TextColor="#FFFFFF"
+                                                                   FontAttributes="Bold"
+                                                                   FontFamily="Helvetica"
+                                                                   FontSize="12" />
+                                                            <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                                            <Label Text="{Binding obitos, StringFormat='Óbitos: {0}'}"
+                                                                   VerticalTextAlignment="Center"
+                                                                   HorizontalOptions="FillAndExpand"
+                                                                   TextColor="#FFFFFF"
+                                                                   FontAttributes="Bold"
+                                                                   FontFamily="Helvetica"
+                                                                   FontSize="12" />
+                                                        </StackLayout>
+                                                    </DataTemplate>
+                                                </maps:TooltipSetting.TooltipTemplate>
+                                            </maps:TooltipSetting>
+                                        </maps:ShapeFileLayer.TooltipSettings>
+                                    </maps:ShapeFileLayer>
+                                     
+                                </maps:SfMaps.Layers>
+                            </maps:SfMaps>
+
+                        </pancakeView:PancakeView>
+
+                        <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Elevation="1" Margin="0,20">
+                            <Grid RowDefinitions="*,*">
+                                <maps:SfMaps VerticalOptions="FillAndExpand"
+                                         HorizontalOptions="FillAndExpand"
+                                         HeightRequest="200" BackgroundColor="#1A161B" Grid.Row="0">
+                                <maps:SfMaps.Layers>
+                                    <maps:ShapeFileLayer Uri="acores.shp" ItemsSource="{Binding PortugalInfo.Regioes}" ShowMapItems="True" ShapeIDPath="name" ShapeIDTableField="name">
+                                        <maps:ShapeFileLayer.ShapeSettings>
+                                            <maps:ShapeSetting ShapeFill="#292A2A" ShapeStroke="Gray" ShapeStrokeThickness="1" ShapeValuePath="confirmados"/>
+                                            
+                                        </maps:ShapeFileLayer.ShapeSettings>
+                                            <maps:ShapeFileLayer.DataLabelSettings>
+                                                <maps:DataLabelSetting TextColor="White" FontAttributes="Bold" FontFamily="Arial" FontSize="15" />
+                                            </maps:ShapeFileLayer.DataLabelSettings>
+                                            <maps:ShapeFileLayer.BubbleMarkerSettings>
+
+                                                <maps:BubbleMarkerSetting ShowBubbles="True" ValuePath="confirmados" Fill="#00C5FF"
+                                                                    MinSize="30" MaxSize="80" Opacity=".7"/>
+
+                                            </maps:ShapeFileLayer.BubbleMarkerSettings>
+                                        <maps:ShapeFileLayer.TooltipSettings>
+                                            <maps:TooltipSetting  ShowTooltip="True" EnableAnimation="False" StrokeColor="Transparent" PointerLength="20">
+                                                <maps:TooltipSetting.TooltipTemplate>
+                                                    <DataTemplate>
+                                                        <StackLayout>
+                                                            <Label Text="{Binding regiao}"
+                                                                   VerticalTextAlignment="Center"
+                                                                   HorizontalOptions="CenterAndExpand"
+                                                                   TextColor="#FFFFFF"
+                                                                   FontAttributes="Bold"
+                                                                   FontFamily="Helvetica"
+                                                                   FontSize="12" />
+                                                            <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                                            <Label Text="{Binding confirmados, StringFormat='Confirmados: {0}'}"
+                                                                   VerticalTextAlignment="Center"
+                                                                   HorizontalOptions="FillAndExpand"
+                                                                   TextColor="#FFFFFF"
+                                                                   FontAttributes="Bold"
+                                                                   FontFamily="Helvetica"
+                                                                   FontSize="12" />
+                                                            <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                                            <Label Text="{Binding obitos, StringFormat='Óbitos: {0}'}"
+                                                                   VerticalTextAlignment="Center"
+                                                                   HorizontalOptions="FillAndExpand"
+                                                                   TextColor="#FFFFFF"
+                                                                   FontAttributes="Bold"
+                                                                   FontFamily="Helvetica"
+                                                                   FontSize="12" />
+                                                        </StackLayout>
+                                                    </DataTemplate>
+                                                </maps:TooltipSetting.TooltipTemplate>
+                                            </maps:TooltipSetting>
+                                        </maps:ShapeFileLayer.TooltipSettings>
                                     </maps:ShapeFileLayer>
 
                                 </maps:SfMaps.Layers>
                             </maps:SfMaps>
+
+                            <maps:SfMaps VerticalOptions="FillAndExpand"
+                                         HorizontalOptions="FillAndExpand"
+                                         HeightRequest="200" BackgroundColor="#1A161B" Grid.Row="1">
+                                <maps:SfMaps.Layers>
+                                    <maps:ShapeFileLayer Uri="madeira.shp" ItemsSource="{Binding PortugalInfo.Regioes}" ShowMapItems="True" ShapeIDPath="name" ShapeIDTableField="name">
+                                        <maps:ShapeFileLayer.ShapeSettings>
+                                            <maps:ShapeSetting ShapeFill="#292A2A" ShapeStroke="Gray" ShapeStrokeThickness="1" ShapeValuePath="confirmados"/>
+                                            
+                                        </maps:ShapeFileLayer.ShapeSettings>
+                                        <maps:ShapeFileLayer.DataLabelSettings>
+                                                <maps:DataLabelSetting TextColor="White" FontAttributes="Bold" FontFamily="Arial" FontSize="15" />
+                                            </maps:ShapeFileLayer.DataLabelSettings>
+                                            <maps:ShapeFileLayer.BubbleMarkerSettings>
+
+                                                <maps:BubbleMarkerSetting ShowBubbles="True" ValuePath="confirmados" Fill="#00C5FF"
+                                                                    MinSize="30" MaxSize="80" Opacity=".7"/>
+
+                                            </maps:ShapeFileLayer.BubbleMarkerSettings>
+                                        <maps:ShapeFileLayer.TooltipSettings>
+                                            <maps:TooltipSetting  ShowTooltip="True" EnableAnimation="False" StrokeColor="Transparent" PointerLength="20">
+                                                <maps:TooltipSetting.TooltipTemplate>
+                                                    <DataTemplate>
+                                                        <StackLayout>
+                                                            <Label Text="{Binding regiao}"
+                                                                   VerticalTextAlignment="Center"
+                                                                   HorizontalOptions="CenterAndExpand"
+                                                                   TextColor="#FFFFFF"
+                                                                   FontAttributes="Bold"
+                                                                   FontFamily="Helvetica"
+                                                                   FontSize="12" />
+                                                            <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                                            <Label Text="{Binding confirmados, StringFormat='Confirmados: {0}'}"
+                                                                   VerticalTextAlignment="Center"
+                                                                   HorizontalOptions="FillAndExpand"
+                                                                   TextColor="#FFFFFF"
+                                                                   FontAttributes="Bold"
+                                                                   FontFamily="Helvetica"
+                                                                   FontSize="12" />
+                                                            <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                                            <Label Text="{Binding obitos, StringFormat='Óbitos: {0}'}"
+                                                                   VerticalTextAlignment="Center"
+                                                                   HorizontalOptions="FillAndExpand"
+                                                                   TextColor="#FFFFFF"
+                                                                   FontAttributes="Bold"
+                                                                   FontFamily="Helvetica"
+                                                                   FontSize="12" />
+                                                        </StackLayout>
+                                                    </DataTemplate>
+                                                </maps:TooltipSetting.TooltipTemplate>
+                                            </maps:TooltipSetting>
+                                        </maps:ShapeFileLayer.TooltipSettings>
+                                    </maps:ShapeFileLayer>
+
+                                </maps:SfMaps.Layers>
+                            </maps:SfMaps>
+                            </Grid>
+                            
+                        </pancakeView:PancakeView>
+                        <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Elevation="1" Margin="0,20">
+                            
+                            
 
                         </pancakeView:PancakeView>
 
