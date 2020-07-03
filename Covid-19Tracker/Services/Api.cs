@@ -26,7 +26,7 @@ namespace Covid19Tracker.Services
         private static string GetAll = "all";
         private static string GetCountries = "countries";
         private static string MostAffected = "countries?sort=cases";
-        private static string TimeSeries = "/timeseries/2020-02-20/2020-06-20";
+        private static string TimeSeries = "/timeseries/2020-01-01/2021-01-01";
 
         private static string PortugalLastUpdate = "/get_last_update";
 

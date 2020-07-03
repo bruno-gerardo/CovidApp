@@ -32,7 +32,7 @@ namespace Covid19Tracker.Views
             e.LabelContent = e.LabelContent.TransformNumericString();
         }
 
-        private void chartView_TrackballCreated(object sender, ChartTrackballCreatedEventArgs e)
+        private void ChartView_TrackballCreated(object sender, ChartTrackballCreatedEventArgs e)
         {
             scrollview.IsEnabled = false;
 
