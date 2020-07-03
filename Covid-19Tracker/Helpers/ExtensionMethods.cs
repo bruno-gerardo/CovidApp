@@ -11,18 +11,20 @@ namespace Covid19Tracker.Helpers
         {
             switch (number.ToString().Length)
             {
-                case 1:
-                case 2:
-                case 3:
-                    return number.ToString();
                 case 4:
                     return $"{number.ToString().Insert(1, ",").Substring(0, 3)}k";
                 case 5:
                     return $"{number.ToString().Insert(2, ",").Substring(0, 4)}k";
                 case 6:
                     return $"{number.ToString().Insert(3, ",").Substring(0, 5)}k";
-                default:
+                case 7:
                     return $"{number.ToString().Insert(1, ",").Substring(0, 3)}M";
+                case 8:
+                    return $"{number.ToString().Insert(2, ",").Substring(0, 4)}M";
+                case 9:
+                    return $"{number.ToString().Insert(3, ",").Substring(0, 5)}M";
+                default:
+                    return number.ToString();
             }
         }
 
@@ -37,18 +39,20 @@ namespace Covid19Tracker.Helpers
         {
             switch (number.Length)
             {
-                case 1:
-                case 2:
-                case 3:
-                    return number.ToString();
                 case 4:
-                    return $"{number.Insert(1, ",").Substring(0, 3)}k";
+                    return $"{number.ToString().Insert(1, ",").Substring(0, 3)}k";
                 case 5:
-                    return $"{number.Insert(2, ",").Substring(0, 4)}k";
+                    return $"{number.ToString().Insert(2, ",").Substring(0, 4)}k";
                 case 6:
-                    return $"{number.Insert(3, ",").Substring(0, 5)}k";
+                    return $"{number.ToString().Insert(3, ",").Substring(0, 5)}k";
+                case 7:
+                    return $"{number.ToString().Insert(1, ",").Substring(0, 3)}M";
+                case 8:
+                    return $"{number.ToString().Insert(2, ",").Substring(0, 4)}M";
+                case 9:
+                    return $"{number.ToString().Insert(3, ",").Substring(0, 5)}M";
                 default:
-                    return $"{number.Insert(1, ",").Substring(0, 3)}M";
+                    return number.ToString();
             }
         }
 

@@ -42,12 +42,118 @@
                     <tb:SfTabView.SelectionIndicatorSettings>
                         <tb:SelectionIndicatorSettings Color="#3F94B5"/>
                     </tb:SfTabView.SelectionIndicatorSettings>
-                        <tb:SfTabItem Title="Últimas" TitleFontColor="#99A6C0" SelectionColor="#3F94B5" TitleFontSize="20">
-                            <tb:SfTabItem.Content>
-                                <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
-                    <StackLayout>
+                    <tb:SfTabItem Title="Últimas" TitleFontColor="#99A6C0" SelectionColor="#3F94B5" TitleFontSize="20">
+                        <tb:SfTabItem.Content>
+                            <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
+                                <StackLayout>
 
-                        <SearchBar BackgroundColor="Transparent"
+                                    <SearchBar BackgroundColor="Transparent"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        WidthRequest="100"
+                                                        TextColor="White"
+                                                        Placeholder="Pesquisa por palavras-chave"
+                                                        PlaceholderColor="Black"
+                                                        CancelButtonColor="White"
+                                                        Margin="10,10,10,0"
+                                                        TextChanged="SearchBar_TextChanged"
+                                                />
+                                    <CollectionView x:Name="NewsList"
+                                                    VerticalOptions="FillAndExpand"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    ItemSizingStrategy="MeasureAllItems"
+                                                    ItemsSource="{Binding NewsList}"
+                                                    SelectionMode="Single"
+                                                SelectionChanged="NewsList_SelectionChanged">
+                                        <CollectionView.ItemsLayout>
+                                            <LinearItemsLayout Orientation="Vertical" />
+                                        </CollectionView.ItemsLayout>
+                                        <CollectionView.EmptyView>
+                                            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                                <Label Text="Ups..Sem resultados!" TextColor="#99A6C0" FontAttributes="Bold" FontSize="Large" VerticalOptions="CenterAndExpand"
+                                                    HorizontalOptions="CenterAndExpand"/>
+                                            </StackLayout>
+                                        </CollectionView.EmptyView>
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <!--#region News Card -->
+                                                <StackLayout VerticalOptions="FillAndExpand"
+                                                                HorizontalOptions="CenterAndExpand"
+                                                                Padding="16,10"
+                                                                BackgroundColor="#e3e5ee">
+                                                    <pancakeView:PancakeView BackgroundColor="White"
+                                                                                VerticalOptions="FillAndExpand"
+                                                                                WidthRequest="135"
+                                                                                HeightRequest="160"
+                                                                                Elevation="1"
+                                                                                CornerRadius="20">
+                                                        <SwipeView BackgroundColor="White">
+                                                            <SwipeView.LeftItems>
+                                                                <SwipeItems>
+                                                                    <SwipeItem IconImageSource="tab_feed.png"
+                                                                                BackgroundColor="{StaticResource ActiveColor}"
+                                                                                Invoked="SwipeItem_Invoked"/>
+                                                                </SwipeItems>
+                                                            </SwipeView.LeftItems>
+                                                            <Grid Padding="10,10"
+                                                                    RowDefinitions="Auto, .8*, .2*"
+                                                                    ColumnDefinitions=".4*, *">
+                                            
+                                                                <ffimage:CachedImage Source="{Binding thumbnail}"
+                                                                            VerticalOptions="CenterAndExpand"
+                                                                            HorizontalOptions="CenterAndExpand"
+                                                                            Aspect="AspectFill"
+                                                                            HeightRequest="120"
+                                                                            WidthRequest="75" Grid.RowSpan="3" Grid.Column="0"/>
+                                                                <Label Text="{Binding title}"
+                                                                        TextColor="Black"
+                                                                        LineBreakMode="TailTruncation"
+                                                                        MaxLines="2"
+                                                                        FontAttributes="Bold"
+                                                                        FontSize="Medium" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand"/>
+                                                                <Label Text="{Binding description}"
+                                                                        TextColor="Black"
+                                                                        FontSize="Small"
+                                                                        HorizontalOptions="FillAndExpand"
+                                                                        MaxLines="4"
+                                                                        LineBreakMode="TailTruncation"
+                                                                        Grid.Row="1" Grid.Column="1"/>
+                                                                <Grid RowDefinitions="Auto, *"
+                                                                        ColumnDefinitions="*, Auto"
+                                                                        Grid.Row="2"
+                                                                        Grid.Column="1"
+                                                                        VerticalOptions="FillAndExpand"
+                                                                        RowSpacing="2">
+                                                                    <BoxView HeightRequest="1" BackgroundColor="Gray" VerticalOptions="Start" Grid.Row="0" Grid.ColumnSpan="2"/>
+                                                                    <Label Text="{Binding author}"
+                                                                            TextColor="Black"
+                                                                            FontSize="Small"
+                                                                            HorizontalOptions="Start"
+                                                                            LineBreakMode="TailTruncation"
+                                                                            Grid.Row="1"
+                                                                            Grid.Column="0"/>
+                                                                    <Label Text="{Binding pubDateFormatted}"
+                                                                            TextColor="Black"
+                                                                            FontSize="Small"
+                                                                            HorizontalOptions="EndAndExpand"
+                                                                            Grid.Row="1"
+                                                                            Grid.Column="1"/>
+                                                                </Grid>
+                                                            </Grid>
+                                                        </SwipeView>
+                                                    </pancakeView:PancakeView>
+                                                </StackLayout>
+                                                <!--#endregion-->
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </StackLayout>
+                            </RefreshView>
+                        </tb:SfTabItem.Content>
+                    </tb:SfTabItem>
+                    <tb:SfTabItem Title="Ler mais tarde" TitleFontColor="#99A6C0" SelectionColor="#3F94B5" TitleFontSize="20">
+                        <tb:SfTabItem.Content>
+                            <StackLayout>
+                                <SearchBar BackgroundColor="Transparent"
                                            HorizontalOptions="FillAndExpand"
                                            WidthRequest="100"
                                            TextColor="White"
@@ -56,212 +162,101 @@
                                            CancelButtonColor="White"
                                            Margin="10,10,10,0"
                                            TextChanged="SearchBar_TextChanged"
-                                   />
-                            <CollectionView x:Name="NewsList"
-                                        VerticalOptions="FillAndExpand"
-                                        HorizontalOptions="FillAndExpand"
-                                        ItemSizingStrategy="MeasureAllItems"
-                                        ItemsSource="{Binding NewsList}"
-                                        SelectionMode="Single"
-                                            SelectionChanged="NewsList_SelectionChanged">
-                                <CollectionView.ItemsLayout>
-                                    <LinearItemsLayout Orientation="Vertical" />
-                                </CollectionView.ItemsLayout>
-                                <CollectionView.EmptyView>
-                                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                        <Label Text="Ups..Sem resultados!" TextColor="#99A6C0" FontAttributes="Bold" FontSize="Large" VerticalOptions="CenterAndExpand"
-                                            HorizontalOptions="CenterAndExpand"/>
-                                    </StackLayout>
-                                </CollectionView.EmptyView>
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <!--#region Card Country Info -->
-                                        <StackLayout VerticalOptions="FillAndExpand"
-                                                        HorizontalOptions="CenterAndExpand"
-                                                        Padding="16,10"
-                                                        BackgroundColor="#e3e5ee">
-
-                                            <pancakeView:PancakeView BackgroundColor="White"
-                                                                        VerticalOptions="FillAndExpand"
-                                                                        WidthRequest="135"
-                                                                        HeightRequest="160"
-                                                                        Elevation="1"
-                                                                        CornerRadius="20">
-                                                <SwipeView>
-                                                    <SwipeView.LeftItems>
-                                                        <SwipeItems>
-                                                            <SwipeItem IconImageSource="tab_feed.png"
-                                                                       BackgroundColor="{StaticResource ActiveColor}"
-                                                                       Invoked="SwipeItem_Invoked"/>
-                                                        </SwipeItems>
-                                                    </SwipeView.LeftItems>
-                                                    <Grid Padding="10,10"
-                                                          RowDefinitions="Auto, .8*, .2*"
-                                                          ColumnDefinitions=".4*, *">
-                                            
-                                                        <ffimage:CachedImage Source="{Binding thumbnail}"
-                                                                    VerticalOptions="CenterAndExpand"
-                                                                    HorizontalOptions="CenterAndExpand"
-                                                                    Aspect="AspectFill"
-                                                                    HeightRequest="120"
-                                                                    WidthRequest="75" Grid.RowSpan="3" Grid.Column="0"/>
-                                                        <Label Text="{Binding title}"
-                                                                TextColor="Black"
-                                                                LineBreakMode="TailTruncation"
-                                                                MaxLines="2"
-                                                                FontAttributes="Bold"
-                                                                FontSize="Medium" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand"/>
-                                                        <Label Text="{Binding description}"
-                                                                TextColor="Black"
-                                                                FontSize="Small"
-                                                                HorizontalOptions="FillAndExpand"
-                                                                MaxLines="4"
-                                                                LineBreakMode="TailTruncation"
-                                                                Grid.Row="1" Grid.Column="1"/>
-                                                        <Grid RowDefinitions="Auto, *"
-                                                              ColumnDefinitions="*, Auto"
-                                                              Grid.Row="2"
-                                                              Grid.Column="1"
-                                                              VerticalOptions="FillAndExpand"
-                                                              RowSpacing="2">
-                                                            <BoxView HeightRequest="1" BackgroundColor="Gray" VerticalOptions="Start" Grid.Row="0" Grid.ColumnSpan="2"/>
-                                                            <Label Text="{Binding author}"
-                                                                    TextColor="Black"
-                                                                    FontSize="Small"
-                                                                    HorizontalOptions="Start"
-                                                                    LineBreakMode="TailTruncation"
-                                                                    Grid.Row="1"
-                                                                    Grid.Column="0"/>
-                                                            <Label Text="{Binding pubDateFormatted}"
-                                                                    TextColor="Black"
-                                                                    FontSize="Small"
-                                                                    HorizontalOptions="EndAndExpand"
-                                                                    Grid.Row="1"
-                                                                    Grid.Column="1"/>
-                                                        </Grid>
-                                                    </Grid>
-                                                </SwipeView>
-                                            </pancakeView:PancakeView>
+                                           />
+                                <CollectionView x:Name="ReadLaterList"
+                                                VerticalOptions="FillAndExpand"
+                                                HorizontalOptions="FillAndExpand"
+                                                ItemSizingStrategy="MeasureAllItems"
+                                                ItemsSource="{Binding ToReadLaterList}"
+                                                SelectionMode="Single"
+                                                SelectionChanged="NewsList_SelectionChanged">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                            <Label Text="Sem notícias para ler.." TextColor="#99A6C0" FontAttributes="Bold" FontSize="Large" VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="CenterAndExpand"/>
                                         </StackLayout>
-                                        <!--#endregion-->
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                    </StackLayout>
-                </RefreshView>
-                            </tb:SfTabItem.Content>
-                        </tb:SfTabItem>
-                        <tb:SfTabItem Title="Ler mais tarde" TitleFontColor="#99A6C0" SelectionColor="#3F94B5" TitleFontSize="20">
-                            <tb:SfTabItem.Content>
-                                <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
-                    <StackLayout>
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <!--#region Card Country Info -->
+                                            <StackLayout VerticalOptions="FillAndExpand"
+                                                            HorizontalOptions="CenterAndExpand"
+                                                            Padding="16,10"
+                                                            BackgroundColor="#e3e5ee">
 
-                        <SearchBar BackgroundColor="Transparent"
-                                           HorizontalOptions="FillAndExpand"
-                                           WidthRequest="100"
-                                           TextColor="White"
-                                           Placeholder="Pesquisa por palavras-chave"
-                                           PlaceholderColor="Black"
-                                           CancelButtonColor="White"
-                                           Margin="10,10,10,0"
-                                           TextChanged="SearchBar_TextChanged"
-                                   />
-                            <CollectionView x:Name="ReadLaterList"
-                                        VerticalOptions="FillAndExpand"
-                                        HorizontalOptions="FillAndExpand"
-                                        ItemSizingStrategy="MeasureAllItems"
-                                        ItemsSource="{Binding ToReadLaterList}"
-                                        SelectionMode="Single">
-                                <CollectionView.ItemsLayout>
-                                    <LinearItemsLayout Orientation="Vertical" />
-                                </CollectionView.ItemsLayout>
-                                <CollectionView.EmptyView>
-                                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                        <Label Text="Sem notícias para ler.." TextColor="#99A6C0" FontAttributes="Bold" FontSize="Large" VerticalOptions="CenterAndExpand"
-                                            HorizontalOptions="CenterAndExpand"/>
-                                    </StackLayout>
-                                </CollectionView.EmptyView>
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <!--#region Card Country Info -->
-                                        <StackLayout VerticalOptions="FillAndExpand"
-                                                        HorizontalOptions="CenterAndExpand"
-                                                        Padding="16,10"
-                                                        BackgroundColor="#e3e5ee">
-
-                                            <pancakeView:PancakeView BackgroundColor="White"
-                                                                        VerticalOptions="FillAndExpand"
-                                                                        WidthRequest="135"
-                                                                        HeightRequest="160"
-                                                                        Elevation="1"
-                                                                        CornerRadius="20">
-                                                <SwipeView>
-                                                    <SwipeView.LeftItems>
-                                                        <SwipeItems>
-                                                            <SwipeItem IconImageSource="tab_feed.png"
-                                                                       BackgroundColor="{StaticResource DeathsColor}"
-                                                                       Invoked="SwipeItem_Invoked"/>
-                                                        </SwipeItems>
-                                                    </SwipeView.LeftItems>
-                                                    <Grid Padding="10,10"
-                                                          RowDefinitions="Auto, .8*, .2*"
-                                                          ColumnDefinitions=".4*, *">
+                                                <pancakeView:PancakeView BackgroundColor="White"
+                                                                            VerticalOptions="FillAndExpand"
+                                                                            WidthRequest="135"
+                                                                            HeightRequest="160"
+                                                                            Elevation="1"
+                                                                            CornerRadius="20">
+                                                    <SwipeView BackgroundColor="White">
+                                                        <SwipeView.LeftItems>
+                                                            <SwipeItems>
+                                                                <SwipeItem IconImageSource="tab_feed.png"
+                                                                            BackgroundColor="{StaticResource DeathsColor}"
+                                                                            Invoked="SwipeItem_Invoked"/>
+                                                            </SwipeItems>
+                                                        </SwipeView.LeftItems>
+                                                        <Grid Padding="10,10"
+                                                                RowDefinitions="Auto, .8*, .2*"
+                                                                ColumnDefinitions=".4*, *">
                                             
-                                                        <ffimage:CachedImage Source="{Binding thumbnail}"
-                                                                    VerticalOptions="CenterAndExpand"
-                                                                    HorizontalOptions="CenterAndExpand"
-                                                                    Aspect="AspectFill"
-                                                                    HeightRequest="120"
-                                                                    WidthRequest="75" Grid.RowSpan="3" Grid.Column="0"/>
-                                                        <Label Text="{Binding title}"
-                                                                TextColor="Black"
-                                                                LineBreakMode="TailTruncation"
-                                                                MaxLines="2"
-                                                                FontAttributes="Bold"
-                                                                FontSize="Medium" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand"/>
-                                                        <Label Text="{Binding description}"
-                                                                TextColor="Black"
-                                                                FontSize="Small"
-                                                                HorizontalOptions="FillAndExpand"
-                                                                MaxLines="4"
-                                                                LineBreakMode="TailTruncation"
-                                                                Grid.Row="1" Grid.Column="1"/>
-                                                        <Grid RowDefinitions="Auto, *"
-                                                              ColumnDefinitions="*, Auto"
-                                                              Grid.Row="2"
-                                                              Grid.Column="1"
-                                                              VerticalOptions="FillAndExpand"
-                                                              RowSpacing="2">
-                                                            <BoxView HeightRequest="1" BackgroundColor="Gray" VerticalOptions="Start" Grid.Row="0" Grid.ColumnSpan="2"/>
-                                                            <Label Text="{Binding author}"
+                                                            <ffimage:CachedImage Source="{Binding thumbnail}"
+                                                                        VerticalOptions="CenterAndExpand"
+                                                                        HorizontalOptions="CenterAndExpand"
+                                                                        Aspect="AspectFill"
+                                                                        HeightRequest="120"
+                                                                        WidthRequest="75" Grid.RowSpan="3" Grid.Column="0"/>
+                                                            <Label Text="{Binding title}"
                                                                     TextColor="Black"
-                                                                    FontSize="Small"
-                                                                    HorizontalOptions="Start"
                                                                     LineBreakMode="TailTruncation"
-                                                                    Grid.Row="1"
-                                                                    Grid.Column="0"/>
-                                                            <Label Text="{Binding pubDateFormatted}"
+                                                                    MaxLines="2"
+                                                                    FontAttributes="Bold"
+                                                                    FontSize="Medium" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand"/>
+                                                            <Label Text="{Binding description}"
                                                                     TextColor="Black"
                                                                     FontSize="Small"
-                                                                    HorizontalOptions="EndAndExpand"
-                                                                    Grid.Row="1"
-                                                                    Grid.Column="1"/>
+                                                                    HorizontalOptions="FillAndExpand"
+                                                                    MaxLines="4"
+                                                                    LineBreakMode="TailTruncation"
+                                                                    Grid.Row="1" Grid.Column="1"/>
+                                                            <Grid RowDefinitions="Auto, *"
+                                                                    ColumnDefinitions="*, Auto"
+                                                                    Grid.Row="2"
+                                                                    Grid.Column="1"
+                                                                    VerticalOptions="FillAndExpand"
+                                                                    RowSpacing="2">
+                                                                <BoxView HeightRequest="1" BackgroundColor="Gray" VerticalOptions="Start" Grid.Row="0" Grid.ColumnSpan="2"/>
+                                                                <Label Text="{Binding author}"
+                                                                        TextColor="Black"
+                                                                        FontSize="Small"
+                                                                        HorizontalOptions="Start"
+                                                                        LineBreakMode="TailTruncation"
+                                                                        Grid.Row="1"
+                                                                        Grid.Column="0"/>
+                                                                <Label Text="{Binding pubDateFormatted}"
+                                                                        TextColor="Black"
+                                                                        FontSize="Small"
+                                                                        HorizontalOptions="EndAndExpand"
+                                                                        Grid.Row="1"
+                                                                        Grid.Column="1"/>
+                                                            </Grid>
                                                         </Grid>
-                                                    </Grid>
-                                                </SwipeView>
-                                            </pancakeView:PancakeView>
-                                        </StackLayout>
-                                        <!--#endregion-->
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                    </StackLayout>
-                </RefreshView>
-                            </tb:SfTabItem.Content>
-                        </tb:SfTabItem>
+                                                    </SwipeView>
+                                                </pancakeView:PancakeView>
+                                            </StackLayout>
+                                            <!--#endregion-->
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </StackLayout>
+                        </tb:SfTabItem.Content>
+                    </tb:SfTabItem>
                 </tb:SfTabView>
-
-                
             </pancakeView:PancakeView>
             <pancakeView:PancakeView Grid.Row="1"
                                      HorizontalOptions="FillAndExpand"

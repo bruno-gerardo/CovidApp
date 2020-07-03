@@ -29,6 +29,7 @@ namespace Covid_19Tracker.iOS
             Syncfusion.XForms.iOS.TabView.SfTabViewRenderer.Init();
             Syncfusion.SfMaps.XForms.iOS.SfMapsRenderer.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            Rg.Plugins.Popup.Popup.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

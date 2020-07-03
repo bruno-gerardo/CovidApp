@@ -35,7 +35,7 @@ namespace Covid19Tracker.Views
 
         private void chartView_TrackballCreated(object sender, ChartTrackballCreatedEventArgs e)
         {
-            scrollview.IsEnabled = false;
+            //scrollview.IsEnabled = false;
             
             foreach (var item in e.ChartPointsInfo)
             { 
@@ -53,7 +53,7 @@ namespace Covid19Tracker.Views
                     item.LabelStyle.BackgroundColor = Color.FromHex("#e3e5ee");
                 }
             }
-            scrollview.IsEnabled = true;
+            //scrollview.IsEnabled = true;
         }
 
     }

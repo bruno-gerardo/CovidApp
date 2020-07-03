@@ -249,13 +249,15 @@
                                              Padding="16,10"
                                              BackgroundColor="#e3e5ee">
                                     
-                                    <Grid RowDefinitions="*" ColumnDefinitions=".2*, .8*">
+                                    <Grid RowDefinitions="*" ColumnDefinitions="Auto, .8*">
                                         <ffimage:CachedImage Source="{Binding CountryInfo.Flag}"
-                                                    HeightRequest="30"
-                                                    WidthRequest="30"
+                                                    HeightRequest="50"
+                                                    WidthRequest="50"
                                                     Aspect="AspectFit"
                                                     VerticalOptions="CenterAndExpand"
-                                                    HorizontalOptions="FillAndExpand" Grid.Column="0"/>
+                                                    HorizontalOptions="FillAndExpand" Grid.Column="0">
+
+                                            </ffimage:CachedImage>
                                             <Label Text="{Binding Country}"
                                                     TextColor="Black"
                                                     FontAttributes="Bold"

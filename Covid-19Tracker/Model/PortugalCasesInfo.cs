@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using Xamarin.Forms;
 
 namespace Covid19Tracker.Model
 {
@@ -13,13 +16,17 @@ namespace Covid19Tracker.Model
         public int obitos { get; set; }
         public int internados { get; set; }
         public int internados_uci { get; set; }
+        #region To add?
+        //TODO ADD
         public int lab { get; set; }
         public int suspeitos { get; set; }
         public int vigilancia { get; set; }
         public int n_confirmados { get; set; }
-        public int cadeias_transmissao { get; set; }
+        #endregion
+        public int cadeias_transmissao { get => confirmados - transmissao_importada; }
         public int transmissao_importada { get; set; }
-        
+
+        public List<TimeSeriesData> TimeSeries { get; set; }
 
         #region Sintomas
         public double sintomas_tosse { get; set; }
@@ -28,6 +35,13 @@ namespace Covid19Tracker.Model
         public double sintomas_cefaleia { get; set; }
         public double sintomas_dores_musculares { get; set; }
         public double sintomas_fraqueza_generalizada { get; set; }
+
+        public double sintomas_tosse_per { get => sintomas_tosse * 100; }
+        public double sintomas_febre_per { get => sintomas_febre * 100; }
+        public double sintomas_dificuldade_respiratoria_per { get => sintomas_dificuldade_respiratoria * 100; }
+        public double sintomas_cefaleia_per { get => sintomas_cefaleia * 100; }
+        public double sintomas_dores_musculares_per { get => sintomas_dores_musculares * 100; }
+        public double sintomas_fraqueza_generalizada_per { get => sintomas_fraqueza_generalizada * 100; }
         #endregion
 
         #region Dados Regiao
@@ -137,6 +151,156 @@ namespace Covid19Tracker.Model
         public int confirmados_80_plus_total { get => confirmados_80_plus_f + confirmados_80_plus_m; }
         #endregion
 
+        public class ConfirmadosIdade
+        {
+            public string idade { get; set; }
+            public int confirmados { get; set; }
+        }
+
+        public class ObitosIdade
+        {
+            public string idade { get; set; }
+            public int obitos { get; set; }
+        }
+
+        public ObservableCollection<ConfirmadosIdade> ConfirmadosFaixaEtaria => new ObservableCollection<ConfirmadosIdade>()
+        {
+            new ConfirmadosIdade
+            {
+                idade = "0-9",
+                confirmados = confirmados_0_9_total
+            },
+            new ConfirmadosIdade
+            {
+                idade = "10-19",
+                confirmados = confirmados_10_19_total
+            },
+            new ConfirmadosIdade
+            {
+                idade = "20-29",
+                confirmados = confirmados_20_29_total
+            },
+            new ConfirmadosIdade
+            {
+                idade = "30-39",
+                confirmados = confirmados_30_39_total
+            },
+            new ConfirmadosIdade
+            {
+                idade = "40-49",
+                confirmados = confirmados_40_49_total
+            },
+            new ConfirmadosIdade
+            {
+                idade = "50-59",
+                confirmados = confirmados_50_59_total
+            },
+            new ConfirmadosIdade
+            {
+                idade = "60-69",
+                confirmados = confirmados_60_69_total
+            },
+            new ConfirmadosIdade
+            {
+                idade = "70-79",
+                confirmados = confirmados_70_79_total
+            },
+            new ConfirmadosIdade
+            {
+                idade = "80+",
+                confirmados = confirmados_80_plus_total
+            },
+        };
+
+        public ObservableCollection<ObitosIdade> ObitosFaixaEtaria => new ObservableCollection<ObitosIdade>()
+        {
+            new ObitosIdade
+            {
+                idade = "0-9",
+                obitos = obitos_0_9_total
+            },
+            new ObitosIdade
+            {
+                idade = "10-19",
+                obitos = obitos_10_19_total
+            },
+            new ObitosIdade
+            {
+                idade = "20-29",
+                obitos = obitos_20_29_total
+            },
+            new ObitosIdade
+            {
+                idade = "30-39",
+                obitos = obitos_30_39_total
+            },
+            new ObitosIdade
+            {
+                idade = "40-49",
+                obitos = obitos_40_49_total
+            },
+            new ObitosIdade
+            {
+                idade = "50-59",
+                obitos = obitos_50_59_total
+            },
+            new ObitosIdade
+            {
+                idade = "60-69",
+                obitos = obitos_60_69_total
+            },
+            new ObitosIdade
+            {
+                idade = "70-79",
+                obitos = obitos_70_79_total
+            },
+            new ObitosIdade
+            {
+                idade = "80+",
+                obitos = obitos_80_plus_total
+            },
+        };
+
+        public class Sintoma
+        {
+            public string sintoma { get; set; }
+            public double percentagem { get; set; }
+        }
+
+        public ObservableCollection<Sintoma> Sintomas => new ObservableCollection<Sintoma>()
+        {
+            new Sintoma
+            {
+                sintoma = "Tosse",
+                percentagem = sintomas_tosse_per
+            },
+            new Sintoma
+            {
+                sintoma = "Febre",
+                percentagem = sintomas_febre_per
+            },
+            new Sintoma
+            {
+                sintoma = "Dificuldade Respiratória",
+                percentagem = sintomas_dificuldade_respiratoria_per
+            },
+            new Sintoma
+            {
+                sintoma = "Cefaleia",
+                percentagem = sintomas_cefaleia_per
+            },
+            new Sintoma
+            {
+                sintoma = "Dores Musculares",
+                percentagem = sintomas_dores_musculares_per
+            },
+            new Sintoma
+            {
+                sintoma = "Fraqueza Generalizada",
+                percentagem = sintomas_fraqueza_generalizada_per
+            },
+        };
+
         public class Regiao
         {
             public string regiao { get; set; }
@@ -145,6 +309,8 @@ namespace Covid19Tracker.Model
             public int confirmados { get; set; }
             public int recuperados { get; set; }
             public int obitos { get; set; }
+            public string CCDR { get; set; }
+            public string name { get; set; }
         }
 
         public ObservableCollection<Regiao> Regioes => new ObservableCollection<Regiao>()
@@ -156,7 +322,8 @@ namespace Covid19Tracker.Model
                     longitude = -7.67865,
                     confirmados = confirmados_arsnorte,
                     recuperados = recuperados_arsnorte,
-                    obitos = obitos_arsnorte
+                    obitos = obitos_arsnorte,
+                    name = "Norte"
 
                 },
                 new Regiao
@@ -166,7 +333,8 @@ namespace Covid19Tracker.Model
                     longitude = -7.67865,
                     confirmados = confirmados_arscentro,
                     recuperados = recuperados_arscentro,
-                    obitos = obitos_arscentro
+                    obitos = obitos_arscentro,
+                    name = "Centro"
 
                 },
                 new Regiao
@@ -176,7 +344,8 @@ namespace Covid19Tracker.Model
                     longitude = -8.74521,
                     confirmados = confirmados_arslvt,
                     recuperados = recuperados_arslvt,
-                    obitos = obitos_arslvt
+                    obitos = obitos_arslvt,
+                    name = "RLVT"
 
                 },
                 new Regiao
@@ -186,7 +355,8 @@ namespace Covid19Tracker.Model
                     longitude = -7.92234,
                     confirmados = confirmados_arsalentejo,
                     recuperados = recuperados_arsalentejo,
-                    obitos = obitos_arsalentejo
+                    obitos = obitos_arsalentejo,
+                    name = "Alentejo"
 
                 },
                 new Regiao
@@ -196,7 +366,8 @@ namespace Covid19Tracker.Model
                     longitude = -8.13171,
                     confirmados = confirmados_arsalgarve,
                     recuperados = recuperados_arsalgarve,
-                    obitos = obitos_arsalgarve
+                    obitos = obitos_arsalgarve,
+                    name = "Algarve"
 
                 },
                 new Regiao
@@ -206,7 +377,8 @@ namespace Covid19Tracker.Model
                     longitude = -28.196631,
                     confirmados = confirmados_acores,
                     recuperados = recuperados_acores,
-                    obitos = obitos_acores
+                    obitos = obitos_acores,
+                    name = "Acores"
 
                 },
                 new Regiao
@@ -216,7 +388,8 @@ namespace Covid19Tracker.Model
                     longitude = -16.95118,
                     confirmados = confirmados_madeira,
                     recuperados = recuperados_madeira,
-                    obitos = obitos_madeira
+                    obitos = obitos_madeira,
+                    name = "Madeira"
 
                 }
         };

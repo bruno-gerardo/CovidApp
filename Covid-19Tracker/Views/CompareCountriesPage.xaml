@@ -9,6 +9,7 @@
              Shell.FlyoutBehavior="Disabled"
              x:Class="Covid19Tracker.Views.CompareCountriesPage">
     <ContentPage.Content>
+
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height=".17*"/>
@@ -81,7 +82,7 @@
                         <pancakeView:PancakeView CornerRadius="20" Padding="10" BackgroundColor="White" Elevation="1" Margin="0,20">
                             <Grid HorizontalOptions="FillAndExpand"
                                   RowDefinitions="Auto, *, *, *"
-                                  ColumnDefinitions="*, *">
+                                  ColumnDefinitions="*, *" ColumnSpacing="50">
 
                                 <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,15">
 
@@ -105,8 +106,14 @@
                                 <!--#region Linha Confirmados -->
                                 <StackLayout Orientation="Horizontal" 
                                              VerticalOptions="CenterAndExpand"
-                                             HorizontalOptions="CenterAndExpand"
+                                             HorizontalOptions="EndAndExpand"
                                              Grid.Column="0" Grid.Row="1">
+                                    <Label Text="{Binding FirstCountryCases.TodayCasesSpacing, StringFormat='+{0}'}"
+                                            TextColor="{StaticResource ConfirmedColor}"
+                                            FontAttributes="Bold"
+                                            VerticalOptions="FillAndExpand"
+                                            HorizontalOptions="FillAndExpand"
+                                            FontSize="25" />
                                     <ffimage:CachedImage
                                             Source="icon_confirmed.png"
                                             VerticalOptions="CenterAndExpand"
@@ -114,12 +121,6 @@
                                             Aspect="AspectFit"
                                             HeightRequest="20"
                                             WidthRequest="20"/>
-                                    <Label Text="{Binding FirstCountryCases.Cases}"
-                                            TextColor="{StaticResource ConfirmedColor}"
-                                            FontAttributes="Bold"
-                                            VerticalOptions="FillAndExpand"
-                                            HorizontalOptions="FillAndExpand"
-                                            FontSize="25" />
                                                 
                                 </StackLayout>
                                 <!--#endregion-->
@@ -127,8 +128,14 @@
                                 <!--#region Linha Recuperados -->
                                 <StackLayout Orientation="Horizontal"
                                              VerticalOptions="FillAndExpand"
-                                             HorizontalOptions="CenterAndExpand"
+                                             HorizontalOptions="EndAndExpand"
                                              Grid.Column="0" Grid.Row="2">
+                                    <Label Text="{Binding FirstCountryCases.TodayRecoveredSpacing, StringFormat='+{0}'}"
+                                           TextColor="{StaticResource RecoveredColor}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="FillAndExpand"
+                                           HorizontalOptions="FillAndExpand"
+                                           FontSize="25"/>
                                     <ffimage:CachedImage
                                             Source="icon_recovered.png"
                                             VerticalOptions="CenterAndExpand"
@@ -136,13 +143,6 @@
                                             Aspect="AspectFit"
                                             HeightRequest="20"
                                             WidthRequest="20"/>
-
-                                    <Label Text="234"
-                                           TextColor="{StaticResource RecoveredColor}"
-                                           FontAttributes="Bold"
-                                           VerticalOptions="FillAndExpand"
-                                           HorizontalOptions="FillAndExpand"
-                                           FontSize="25"/>
                                                 
                                 </StackLayout>
                                 <!--#endregion-->
@@ -150,8 +150,14 @@
                                 <!--#region Linha Mortes -->
                                 <StackLayout Orientation="Horizontal"
                                              VerticalOptions="FillAndExpand"
-                                             HorizontalOptions="CenterAndExpand"
+                                             HorizontalOptions="EndAndExpand"
                                              Grid.Column="0" Grid.Row="3">
+                                    <Label Text="{Binding FirstCountryCases.TodayDeathsSpacing, StringFormat='+{0}'}"
+                                           TextColor="{StaticResource DeathsColor}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="FillAndExpand"
+                                           HorizontalOptions="FillAndExpand"
+                                           FontSize="25"/>
                                     <ffimage:CachedImage
                                             Source="icon_death.png"
                                             VerticalOptions="CenterAndExpand"
@@ -159,14 +165,7 @@
                                             Aspect="AspectFit"
                                             HeightRequest="20"
                                             WidthRequest="20"/>
-
-                                    <Label Text="345"
-                                           TextColor="{StaticResource DeathsColor}"
-                                           FontAttributes="Bold"
-                                           VerticalOptions="FillAndExpand"
-                                           HorizontalOptions="FillAndExpand"
-                                           FontSize="25"/>
-                                                
+           
                                 </StackLayout>
                                 <!--#endregion-->
                             <!--#endregion-->
@@ -175,15 +174,9 @@
                                 <!--#region Linha Confirmados -->
                                 <StackLayout Orientation="Horizontal" 
                                              VerticalOptions="CenterAndExpand"
-                                             HorizontalOptions="CenterAndExpand"
+                                             HorizontalOptions="StartAndExpand"
                                              Grid.Column="1" Grid.Row="1">
-                                    
-                                    <Label Text="123"
-                                            TextColor="{StaticResource ConfirmedColor}"
-                                            FontAttributes="Bold"
-                                            VerticalOptions="FillAndExpand"
-                                            HorizontalOptions="FillAndExpand"
-                                            FontSize="25" />
+
                                     <ffimage:CachedImage
                                             Source="icon_confirmed.png"
                                             VerticalOptions="CenterAndExpand"
@@ -191,22 +184,23 @@
                                             Aspect="AspectFit"
                                             HeightRequest="20"
                                             WidthRequest="20"/>
-                                                
+                                    <Label Text="{Binding SecondCountryCases.TodayCasesSpacing, StringFormat='+{0}'}"
+                                            TextColor="{StaticResource ConfirmedColor}"
+                                            FontAttributes="Bold"
+                                            VerticalOptions="FillAndExpand"
+                                            HorizontalOptions="FillAndExpand"
+                                            FontSize="25" />
+                                    
                                 </StackLayout>
                                 <!--#endregion-->
 
                                 <!--#region Linha Recuperados -->
                                 <StackLayout Orientation="Horizontal"
                                              VerticalOptions="FillAndExpand"
-                                             HorizontalOptions="CenterAndExpand"
+                                             HorizontalOptions="StartAndExpand"
                                              Grid.Column="1" Grid.Row="2">
 
-                                    <Label Text="234"
-                                           TextColor="{StaticResource RecoveredColor}"
-                                           FontAttributes="Bold"
-                                           VerticalOptions="FillAndExpand"
-                                           HorizontalOptions="FillAndExpand"
-                                           FontSize="25"/>
+                                    
                                     <ffimage:CachedImage
                                             Source="icon_recovered.png"
                                             VerticalOptions="CenterAndExpand"
@@ -214,22 +208,21 @@
                                             Aspect="AspectFit"
                                             HeightRequest="20"
                                             WidthRequest="20"/>
-                                                
+                                    <Label Text="{Binding SecondCountryCases.TodayRecoveredSpacing, StringFormat='+{0}'}"
+                                           TextColor="{StaticResource RecoveredColor}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="FillAndExpand"
+                                           HorizontalOptions="FillAndExpand"
+                                           FontSize="25"/>
                                 </StackLayout>
                                 <!--#endregion-->
 
                                 <!--#region Linha Mortes -->
                                 <StackLayout Orientation="Horizontal"
                                              VerticalOptions="FillAndExpand"
-                                             HorizontalOptions="CenterAndExpand"
+                                             HorizontalOptions="StartAndExpand"
                                              Grid.Column="1" Grid.Row="3">
-                                    
-                                    <Label Text="345"
-                                           TextColor="{StaticResource DeathsColor}"
-                                           FontAttributes="Bold"
-                                           VerticalOptions="FillAndExpand"
-                                           HorizontalOptions="FillAndExpand"
-                                           FontSize="25"/>
+
                                     <ffimage:CachedImage
                                             Source="icon_death.png"
                                             VerticalOptions="CenterAndExpand"
@@ -237,7 +230,13 @@
                                             Aspect="AspectFit"
                                             HeightRequest="20"
                                             WidthRequest="20"/>
-                                                
+                                    <Label Text="{Binding SecondCountryCases.TodayDeathsSpacing, StringFormat='+{0}'}"
+                                           TextColor="{StaticResource DeathsColor}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="FillAndExpand"
+                                           HorizontalOptions="FillAndExpand"
+                                           FontSize="25"/>
+                                    
                                 </StackLayout>
                                 <!--#endregion-->
                             <!--#endregion-->
@@ -393,6 +392,7 @@
                                 <chart:ChartLegend Margin="20,10" ToggleSeriesVisibility="True" DockPosition="Top" MaxWidth="300" OverflowMode="Wrap"/>
                             </chart:SfChart.Legend>
 
+
                             <chart:SfChart.ChartBehaviors>
                                 <chart:ChartTrackballBehavior LabelDisplayMode="GroupAllPoints" ActivationMode="LongPress" ShowLine="True" >
                                     <chart:ChartTrackballBehavior.LineStyle>
@@ -421,19 +421,19 @@
                             </chart:SfChart.SecondaryAxis>
 
                             <chart:SplineAreaSeries Label="Confirmados" ItemsSource="{Binding FirstCountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="confirmed" StrokeWidth="3"
-                                                EnableAnimation="True" StrokeColor="{StaticResource ConfirmedColor}" Opacity=".2" Color="{StaticResource ConfirmedColor}" IsVisibleOnLegend="True"/>
+                                                EnableAnimation="True" StrokeColor="#53d2f9" Opacity=".2" Color="#53d2f9" IsVisibleOnLegend="True"/>
                             <chart:SplineAreaSeries Label="Recuperados" ItemsSource="{Binding FirstCountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="recovered" StrokeWidth="3"
-                                                EnableAnimation="True" StrokeColor="{StaticResource RecoveredColor}" Opacity=".2" Color="{StaticResource RecoveredColor}"/>
+                                                EnableAnimation="True" StrokeColor="#88c48c" Opacity=".2" Color="#88c48c"/>
                             <chart:SplineAreaSeries Label="Mortes" ItemsSource="{Binding FirstCountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="deaths" StrokeWidth="3"
-                                                EnableAnimation="True" StrokeColor="{StaticResource DeathsColor}" Opacity=".2" Color="{StaticResource DeathsColor}"/>
+                                                EnableAnimation="True" StrokeColor="#ff8080" Opacity=".2" Color="#ff8080"/>
                             
 
                             <chart:SplineAreaSeries Label="Confirmados" ItemsSource="{Binding SecondCountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="confirmed" StrokeWidth="3"
-                                                EnableAnimation="True" StrokeColor="{StaticResource ConfirmedColor}" Opacity=".2" Color="{StaticResource ConfirmedColor}" IsVisibleOnLegend="True"/>
+                                                EnableAnimation="True" StrokeColor="#0685ac" Opacity=".2" Color="#0685ac" IsVisibleOnLegend="True"/>
                             <chart:SplineAreaSeries Label="Recuperados" ItemsSource="{Binding SecondCountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="recovered" StrokeWidth="3"
-                                                EnableAnimation="True" StrokeColor="{StaticResource RecoveredColor}" Opacity=".2" Color="{StaticResource RecoveredColor}"/>
+                                                EnableAnimation="True" StrokeColor="#3b773f" Opacity=".2" Color="#3b773f"/>
                             <chart:SplineAreaSeries Label="Mortes" ItemsSource="{Binding SecondCountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="deaths" StrokeWidth="3"
-                                                EnableAnimation="True" StrokeColor="{StaticResource DeathsColor}" Opacity=".2" Color="{StaticResource DeathsColor}"/>
+                                                EnableAnimation="True" StrokeColor="#e60000" Opacity=".2" Color="#e60000"/>
                             
                         </chart:SfChart>
                            

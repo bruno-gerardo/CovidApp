@@ -5,9 +5,21 @@
              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:maps="clr-namespace:Syncfusion.SfMaps.XForms;assembly=Syncfusion.SfMaps.XForms"
+             xmlns:converter="clr-namespace:Covid19Tracker.ValueConverter"
              xmlns:effects="clr-namespace:Covid19Tracker.Effects"
              Shell.NavBarIsVisible="False"
              x:Class="Covid19Tracker.Views.PortugalPage">
+    <ContentPage.Resources> 
+    <ResourceDictionary> 
+        <DataTemplate x:Key="dataMarkerTemplate"> 
+            <StackLayout Orientation="Horizontal"> 
+                <Label Text="{Binding percentagem}" VerticalOptions="Center" FontSize = "10" TextColor="Black"/> 
+                <Label Text=" %" VerticalOptions="Center" FontSize = "10" TextColor="Black"/> 
+            </StackLayout> 
+        </DataTemplate>
+        <converter:BackgroundConverter x:Key="BackgroundConverter"/>
+    </ResourceDictionary> 
+</ContentPage.Resources> 
     <ContentPage.Content>
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
@@ -25,22 +37,21 @@
                     
                     <Grid VerticalOptions="StartAndExpand" Margin="0,25">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
                         <StackLayout Orientation="Horizontal"
                                      HorizontalOptions="CenterAndExpand"
                                      Grid.Column="0"
-                                     Margin="-30,0,0,0"
+                                     Margin="0,0,0,0"
                                      >
-                            <ffimage:CachedImage Source="{Binding CountryInfo.Flag}"
+                            <ffimage:CachedImage Source="pt_flag.png"
                                 WidthRequest="30"
                                 Aspect="AspectFit"
                                 VerticalOptions="CenterAndExpand"/>
                             <Label VerticalOptions="EndAndExpand"
                                    HorizontalOptions="FillAndExpand"
-                                   Text="{Binding CountryCases.Country}"
+                                   Text="Portugal - DGS"
                                    TextColor="White"
                                    FontAttributes="Bold"
                                    FontSize="20"
@@ -59,10 +70,15 @@
                             VerticalOptions="FillAndExpand"
                             BackgroundColor="#e3e5ee"
                             >
-                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Margin="16,0">
-                        
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Margin="16,20">
+                         <Grid Padding="10">
+                            <Label Text="{Binding PortugalInfo.data_dados, StringFormat='Última actualização: {0}'}"
+                                    FontAttributes="Bold"
+                                    FontSize="Micro"
+                                    TextColor="#99A6C0"/>
+                         </Grid>
                         <!--#region Today Card -->
-                        <pancakeView:PancakeView CornerRadius="20" Padding="10" BackgroundColor="White" Elevation="1" Margin="0,20">
+                        <pancakeView:PancakeView CornerRadius="20" Padding="10" BackgroundColor="White" Elevation="1" Margin="0,0,0,20">
                             <StackLayout>
                             <!--#region Progress Bar-->
                                 <Grid ColumnSpacing="0" HeightRequest="10" HorizontalOptions="FillAndExpand">
@@ -78,17 +94,7 @@
                                 <!--#endregion-->
 
 
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
+                                <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="*, *, *">
                                     <!--#region Coluna 1 -->
                                     <Label Text="Recuperados" Grid.Row="1" Grid.Column="0" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource RecoveredColor}"/>
                                     <Label Text="{Binding CountryCases.RecoveredStringSpacing}"
@@ -117,8 +123,175 @@
                         </pancakeView:PancakeView>
                         <!--#endregion-->
 
+                        <Grid RowDefinitions="*" ColumnDefinitions="*,*" ColumnSpacing="30" Margin="0,0,0,20">
+                            <pancakeView:PancakeView CornerRadius="20" Padding="10" BackgroundColor="White" Elevation="1" Grid.Column="0">
+                                <Grid RowDefinitions="Auto,*,*">
+                                    <StackLayout Grid.Row="0">
+                                        <Label Text="Internados" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
+                                        <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                    </StackLayout>
+                                    <Label Text="{Binding PortugalInfo.internados_uci, StringFormat='UCI: {0}'}" TextColor="{StaticResource ActiveColor}" FontAttributes="Bold" FontSize="17" Grid.Row="1"/>
+                                    <Label Text="{Binding PortugalInfo.internados, StringFormat='Total: {0}'}" TextColor="{StaticResource RecoveredColor}" FontAttributes="Bold" FontSize="17" Grid.Row="2"/>
+                                </Grid>
+                            </pancakeView:PancakeView>
+                            <pancakeView:PancakeView CornerRadius="20" Padding="10" BackgroundColor="White" Elevation="1" Grid.Column="1">
+                                <Grid RowDefinitions="Auto,*,*">
+                                    <StackLayout Grid.Row="0">
+                                        <Label Text="Tipo Contágio" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
+                                        <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                    </StackLayout>
+                                    <Label Text="{Binding PortugalInfo.cadeias_transmissao, StringFormat='Local: {0}'}" TextColor="{StaticResource ActiveColor}" FontAttributes="Bold" FontSize="17" Grid.Row="1"/>
+                                    <Label Text="{Binding PortugalInfo.transmissao_importada, StringFormat='Importado: {0}'}" TextColor="{StaticResource RecoveredColor}" FontAttributes="Bold" FontSize="17" Grid.Row="2"/>
+                                </Grid>
+                            </pancakeView:PancakeView>
+                        </Grid>
+
+                        <Grid RowDefinitions="*" ColumnDefinitions="*" ColumnSpacing="30" Margin="0,0,0,20">
+                            <pancakeView:PancakeView CornerRadius="20" Padding="10" BackgroundColor="White" Elevation="1" Grid.Column="0">
+                                <Grid RowDefinitions="Auto,*">
+                                    <StackLayout Grid.Row="0">
+                                        <Label Text="Sintomas" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
+                                        <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                    </StackLayout>
+                                    <Grid Grid.Row="1">
+                                        <chart:SfChart HeightRequest="250" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                            <chart:SfChart.PrimaryAxis>
+                                                <chart:CategoryAxis ShowMajorGridLines="False">
+                                                    <chart:CategoryAxis.AxisLineStyle>
+                                                        <chart:ChartLineStyle StrokeColor="Transparent"/>
+                                                    </chart:CategoryAxis.AxisLineStyle>
+                                                    <chart:CategoryAxis.LabelStyle>
+                                                        <chart:ChartAxisLabelStyle TextColor="White" FontSize="10" FontAttributes="Bold" MaxWidth="90" WrappedLabelAlignment="Start" LabelsPosition="Inside"/>
+                                                    </chart:CategoryAxis.LabelStyle>
+                                                </chart:CategoryAxis>
+                                            </chart:SfChart.PrimaryAxis>
+ 
+                                            <chart:SfChart.SecondaryAxis>
+                                                <chart:NumericalAxis RangePadding="Auto" Minimum="0" ShowMajorGridLines="True">
+                                                    <chart:NumericalAxis.Title>
+                                                        <chart:ChartAxisTitle Text="Percentagem (%)"  FontAttributes="Bold" FontSize="12"/>
+                                                    </chart:NumericalAxis.Title>
+                                                    <chart:NumericalAxis.AxisLineStyle>
+                                                        <chart:ChartLineStyle StrokeColor="Transparent"/>
+                                                    </chart:NumericalAxis.AxisLineStyle>
+                                                    <chart:NumericalAxis.LabelStyle>
+                                                        <chart:ChartAxisLabelStyle/>
+                                                    </chart:NumericalAxis.LabelStyle>
+                                                </chart:NumericalAxis>
+                                            </chart:SfChart.SecondaryAxis>
+                                            <chart:StackingBarSeries ItemsSource="{Binding PortugalInfo.Sintomas}" XBindingPath="sintoma" YBindingPath="percentagem"  EnableAnimation="True">
+                                                <chart:StackingBarSeries.ColorModel>
+                                                    <chart:ChartColorModel Palette="Metro"/>
+                                                </chart:StackingBarSeries.ColorModel>
+                                                <chart:StackingBarSeries.DataMarker> 
+                                                    <chart:ChartDataMarker ShowLabel="True"/>
+                                                </chart:StackingBarSeries.DataMarker> 
+                                            </chart:StackingBarSeries>
+                                        </chart:SfChart>
+                                    </Grid>
+                                </Grid>
+                            </pancakeView:PancakeView>
+                        </Grid>
+
+                        <Grid RowDefinitions="*" ColumnDefinitions="*" ColumnSpacing="30">
+                            <pancakeView:PancakeView CornerRadius="20" Padding="10" BackgroundColor="White" Elevation="1" Grid.Column="0">
+                                <Grid RowDefinitions="Auto,*">
+                                    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*" Grid.Row="0">
+                                        <Label Text="Faixa Etária" TextColor="Black" FontAttributes="Bold" FontSize="20" Grid.Row="0"/>
+                                        <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.ColumnSpan="2"/>
+                                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalOptions="EndAndExpand">
+                                            <pancakeView:PancakeView BackgroundColor="{Binding ConfirmedChartIsVisible, Converter={StaticResource BackgroundConverter}}" CornerRadius="10" BorderColor="DarkGray" BorderThickness="1">
+                                                <Label Text="Confirmados" TextColor="Black" FontAttributes="Bold" FontSize="15" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="5,0"/>
+                                                <pancakeView:PancakeView.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding ChangeChartCommand}"/>
+                                                </pancakeView:PancakeView.GestureRecognizers>
+                                            </pancakeView:PancakeView>
+                                            <pancakeView:PancakeView BackgroundColor="{Binding DeathsChartIsVisible, Converter={StaticResource BackgroundConverter}}" CornerRadius="10" BorderColor="DarkGray" BorderThickness="1">
+                                                <Label Text="Óbitos" TextColor="Black" FontAttributes="Bold" FontSize="15" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="5,0"/>
+                                                <pancakeView:PancakeView.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding ChangeChartCommand}"/>
+                                                </pancakeView:PancakeView.GestureRecognizers>
+                                            </pancakeView:PancakeView>
+                                        </StackLayout>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <chart:SfChart HeightRequest="280" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"  IsVisible="{Binding ConfirmedChartIsVisible}">
+                                            <chart:SfChart.PrimaryAxis>
+                                                <chart:CategoryAxis ShowMajorGridLines="False" IsInversed="True">
+                                                    <chart:CategoryAxis.AxisLineStyle>
+                                                        <chart:ChartLineStyle StrokeColor="Transparent"/>
+                                                    </chart:CategoryAxis.AxisLineStyle>
+                                                    <chart:CategoryAxis.LabelStyle>
+                                                        <chart:ChartAxisLabelStyle FontSize="10" FontAttributes="Bold" MaxWidth="90" WrappedLabelAlignment="Start" LabelsPosition="Outside"/>
+                                                    </chart:CategoryAxis.LabelStyle>
+                                                </chart:CategoryAxis>
+                                            </chart:SfChart.PrimaryAxis>
+ 
+                                            <chart:SfChart.SecondaryAxis>
+                                                <chart:NumericalAxis RangePadding="Auto" Minimum="0" ShowMajorGridLines="True">
+                                                    <chart:NumericalAxis.Title>
+                                                        <chart:ChartAxisTitle Text="Confirmados"  FontAttributes="Bold" FontSize="12"/>
+                                                    </chart:NumericalAxis.Title>
+                                                    <chart:NumericalAxis.AxisLineStyle>
+                                                        <chart:ChartLineStyle StrokeColor="Transparent"/>
+                                                    </chart:NumericalAxis.AxisLineStyle>
+                                                    <chart:NumericalAxis.LabelStyle>
+                                                        <chart:ChartAxisLabelStyle/>
+                                                    </chart:NumericalAxis.LabelStyle>
+                                                </chart:NumericalAxis>
+                                            </chart:SfChart.SecondaryAxis>
+
+                                            <chart:StackingBarSeries ItemsSource="{Binding PortugalInfo.ConfirmadosFaixaEtaria}" XBindingPath="idade" YBindingPath="confirmados" EnableAnimation="True">
+                                                <chart:StackingBarSeries.ColorModel>
+                                                    <chart:ChartColorModel Palette="Metro"/>
+                                                </chart:StackingBarSeries.ColorModel>
+                                                <chart:StackingBarSeries.DataMarker> 
+                                                    <chart:ChartDataMarker ShowLabel="True"/>
+                                                </chart:StackingBarSeries.DataMarker> 
+                                            </chart:StackingBarSeries>
+                                        </chart:SfChart>
+                                        <chart:SfChart HeightRequest="280" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding DeathsChartIsVisible}">
+                                            <chart:SfChart.PrimaryAxis>
+                                                <chart:CategoryAxis ShowMajorGridLines="False" IsInversed="True">
+                                                    <chart:CategoryAxis.AxisLineStyle>
+                                                        <chart:ChartLineStyle StrokeColor="Transparent"/>
+                                                    </chart:CategoryAxis.AxisLineStyle>
+                                                    <chart:CategoryAxis.LabelStyle>
+                                                        <chart:ChartAxisLabelStyle FontSize="10" FontAttributes="Bold" MaxWidth="90"  LabelsPosition="Outside"/>
+                                                    </chart:CategoryAxis.LabelStyle>
+                                                </chart:CategoryAxis>
+                                            </chart:SfChart.PrimaryAxis>
+ 
+                                            <chart:SfChart.SecondaryAxis>
+                                                <chart:NumericalAxis RangePadding="Auto" ShowMajorGridLines="True">
+                                                    <chart:NumericalAxis.Title>
+                                                        <chart:ChartAxisTitle Text="Óbitos"  FontAttributes="Bold" FontSize="12"/>
+                                                    </chart:NumericalAxis.Title>
+                                                    <chart:NumericalAxis.AxisLineStyle>
+                                                        <chart:ChartLineStyle StrokeColor="Transparent"/>
+                                                    </chart:NumericalAxis.AxisLineStyle>
+                                                    <chart:NumericalAxis.LabelStyle>
+                                                        <chart:ChartAxisLabelStyle/>
+                                                    </chart:NumericalAxis.LabelStyle>
+                                                </chart:NumericalAxis>
+                                            </chart:SfChart.SecondaryAxis>
+
+                                            <chart:BarSeries ItemsSource="{Binding PortugalInfo.ObitosFaixaEtaria}" XBindingPath="idade" YBindingPath="obitos" EnableAnimation="True">
+                                                <chart:BarSeries.ColorModel>
+                                                    <chart:ChartColorModel Palette="Metro"/>
+                                                </chart:BarSeries.ColorModel>
+                                                <chart:BarSeries.DataMarker> 
+                                                    <chart:ChartDataMarker ShowLabel="True"/>
+                                                </chart:BarSeries.DataMarker> 
+                                            </chart:BarSeries>
+                                        </chart:SfChart>
+                                    </Grid>
+                                </Grid>
+                            </pancakeView:PancakeView>
+                        </Grid>
+
                         <!--#region Stats Card -->
-                        <pancakeView:PancakeView CornerRadius="20" Padding="10" BackgroundColor="White" Elevation="1">
+                        <pancakeView:PancakeView CornerRadius="20" Padding="10" BackgroundColor="White" Elevation="1" Margin="0,20" IsVisible="false">
                             <StackLayout>
                                 <Label Text="Estatísitcas Totais" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
                                 <Label Text="Casos Totais" TextColor="Black" FontAttributes="Bold" FontSize="15"/>
@@ -173,14 +346,13 @@
                         
                         <!--#endregion-->
 
-
-
                         <!--#region SF Chart -->
                         <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Elevation="1" Margin="0,20">
                             
                         <chart:SfChart x:Name="chartView" HeightRequest="400"
                                     HorizontalOptions="FillAndExpand"
                                     BackgroundColor="Transparent"
+                                    TrackballCreated="chartView_TrackballCreated"
                                     >
                             <chart:SfChart.Legend>
                                 <chart:ChartLegend Margin="0,10" ToggleSeriesVisibility="True" DockPosition="Top"/>
@@ -203,7 +375,7 @@
                             </chart:SfChart.PrimaryAxis>
  
                             <chart:SfChart.SecondaryAxis>
-                                <chart:NumericalAxis RangePadding="Auto" Minimum="0" ShowMajorGridLines="True">
+                                <chart:NumericalAxis RangePadding="Auto" Minimum="0" ShowMajorGridLines="True" LabelCreated="NumericalAxis_LabelCreated">
                                     <chart:NumericalAxis.AxisLineStyle>
                                         <chart:ChartLineStyle StrokeColor="Transparent"/>
                                         </chart:NumericalAxis.AxisLineStyle>
@@ -215,11 +387,11 @@
                                 
                             </chart:SfChart.SecondaryAxis>
 
-                            <chart:SplineAreaSeries Label="Confirmados" ItemsSource="{Binding CountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="confirmed" StrokeWidth="3"
+                            <chart:SplineAreaSeries Label="Confirmados" ItemsSource="{Binding PortugalInfo.TimeSeries}" XBindingPath="DateInfo" YBindingPath="confirmed" StrokeWidth="3"
                                                 EnableAnimation="True" StrokeColor="{StaticResource ConfirmedColor}" Opacity=".2" Color="{StaticResource ConfirmedColor}" IsVisibleOnLegend="True"/>
-                            <chart:SplineAreaSeries Label="Recuperados" ItemsSource="{Binding CountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="recovered" StrokeWidth="3"
+                            <chart:SplineAreaSeries Label="Recuperados" ItemsSource="{Binding PortugalInfo.TimeSeries}" XBindingPath="DateInfo" YBindingPath="recovered" StrokeWidth="3"
                                                 EnableAnimation="True" StrokeColor="{StaticResource RecoveredColor}" Opacity=".2" Color="{StaticResource RecoveredColor}"/>
-                            <chart:SplineAreaSeries Label="Mortes" ItemsSource="{Binding CountryCases.TimeSeries}" XBindingPath="DateInfo" YBindingPath="deaths" StrokeWidth="3"
+                            <chart:SplineAreaSeries Label="Mortes" ItemsSource="{Binding PortugalInfo.TimeSeries}" XBindingPath="DateInfo" YBindingPath="deaths" StrokeWidth="3"
                                                 EnableAnimation="True" StrokeColor="{StaticResource DeathsColor}" Opacity=".2" Color="{StaticResource DeathsColor}"/>
                             
                             
@@ -228,188 +400,199 @@
                         </pancakeView:PancakeView>
                          <!--#endregion-->
 
-                        <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Elevation="1" Margin="0">
-                            
-                            <maps:SfMaps VerticalOptions="FillAndExpand"
-                                         HorizontalOptions="FillAndExpand"
-                                         HeightRequest="400" BackgroundColor="#222327">
-                                <maps:SfMaps.Layers>
-                                    <maps:ShapeFileLayer Uri="portugal_continental.shp" ItemsSource="{Binding PortugalInfo.Regioes}" ShowMapItems="True" ShapeIDPath="name" ShapeIDTableField="name">
-                                        <maps:ShapeFileLayer.ShapeSettings>
-                                            <maps:ShapeSetting ShapeFill="#3F3F41" ShapeStroke="White" ShapeStrokeThickness="1" ShapeValuePath="confirmados"/>
-                                            
-                                        </maps:ShapeFileLayer.ShapeSettings>
-                                            <maps:ShapeFileLayer.DataLabelSettings>
-                                                <maps:DataLabelSetting TextColor="White" FontAttributes="Bold" FontFamily="Arial" FontSize="15" />
-                                            </maps:ShapeFileLayer.DataLabelSettings>
-                                            <maps:ShapeFileLayer.BubbleMarkerSettings>
-
-                                                <maps:BubbleMarkerSetting ShowBubbles="True" ValuePath="confirmados" Fill="#00C5FF"
-                                                                    MinSize="30" MaxSize="80" Opacity=".7"/>
-
-                                            </maps:ShapeFileLayer.BubbleMarkerSettings>
-                                        <maps:ShapeFileLayer.TooltipSettings>
-                                            <maps:TooltipSetting  ShowTooltip="True" EnableAnimation="False" StrokeColor="Transparent" PointerLength="20">
-                                                <maps:TooltipSetting.TooltipTemplate>
-                                                    <DataTemplate>
-                                                        <StackLayout>
-                                                            <Label Text="{Binding regiao}"
-                                                                   VerticalTextAlignment="Center"
-                                                                   HorizontalOptions="CenterAndExpand"
-                                                                   TextColor="#FFFFFF"
-                                                                   FontAttributes="Bold"
-                                                                   FontFamily="Helvetica"
-                                                                   FontSize="12" />
-                                                            <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
-                                                            <Label Text="{Binding confirmados, StringFormat='Confirmados: {0}'}"
-                                                                   VerticalTextAlignment="Center"
-                                                                   HorizontalOptions="FillAndExpand"
-                                                                   TextColor="#FFFFFF"
-                                                                   FontAttributes="Bold"
-                                                                   FontFamily="Helvetica"
-                                                                   FontSize="12" />
-                                                            <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
-                                                            <Label Text="{Binding obitos, StringFormat='Óbitos: {0}'}"
-                                                                   VerticalTextAlignment="Center"
-                                                                   HorizontalOptions="FillAndExpand"
-                                                                   TextColor="#FFFFFF"
-                                                                   FontAttributes="Bold"
-                                                                   FontFamily="Helvetica"
-                                                                   FontSize="12" />
-                                                        </StackLayout>
-                                                    </DataTemplate>
-                                                </maps:TooltipSetting.TooltipTemplate>
-                                            </maps:TooltipSetting>
-                                        </maps:ShapeFileLayer.TooltipSettings>
-                                    </maps:ShapeFileLayer>
-                                     
-                                </maps:SfMaps.Layers>
-                            </maps:SfMaps>
-
-                        </pancakeView:PancakeView>
-
-                        <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Elevation="1" Margin="0,20">
-                            <Grid RowDefinitions="*,*">
-                                <maps:SfMaps VerticalOptions="FillAndExpand"
-                                         HorizontalOptions="FillAndExpand"
-                                         HeightRequest="200" BackgroundColor="#1A161B" Grid.Row="0">
-                                <maps:SfMaps.Layers>
-                                    <maps:ShapeFileLayer Uri="acores.shp" ItemsSource="{Binding PortugalInfo.Regioes}" ShowMapItems="True" ShapeIDPath="name" ShapeIDTableField="name">
-                                        <maps:ShapeFileLayer.ShapeSettings>
-                                            <maps:ShapeSetting ShapeFill="#292A2A" ShapeStroke="Gray" ShapeStrokeThickness="1" ShapeValuePath="confirmados"/>
-                                            
-                                        </maps:ShapeFileLayer.ShapeSettings>
-                                            <maps:ShapeFileLayer.DataLabelSettings>
-                                                <maps:DataLabelSetting TextColor="White" FontAttributes="Bold" FontFamily="Arial" FontSize="15" />
-                                            </maps:ShapeFileLayer.DataLabelSettings>
-                                            <maps:ShapeFileLayer.BubbleMarkerSettings>
-
-                                                <maps:BubbleMarkerSetting ShowBubbles="True" ValuePath="confirmados" Fill="#00C5FF"
-                                                                    MinSize="30" MaxSize="80" Opacity=".7"/>
-
-                                            </maps:ShapeFileLayer.BubbleMarkerSettings>
-                                        <maps:ShapeFileLayer.TooltipSettings>
-                                            <maps:TooltipSetting  ShowTooltip="True" EnableAnimation="False" StrokeColor="Transparent" PointerLength="20">
-                                                <maps:TooltipSetting.TooltipTemplate>
-                                                    <DataTemplate>
-                                                        <StackLayout>
-                                                            <Label Text="{Binding regiao}"
-                                                                   VerticalTextAlignment="Center"
-                                                                   HorizontalOptions="CenterAndExpand"
-                                                                   TextColor="#FFFFFF"
-                                                                   FontAttributes="Bold"
-                                                                   FontFamily="Helvetica"
-                                                                   FontSize="12" />
-                                                            <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
-                                                            <Label Text="{Binding confirmados, StringFormat='Confirmados: {0}'}"
-                                                                   VerticalTextAlignment="Center"
-                                                                   HorizontalOptions="FillAndExpand"
-                                                                   TextColor="#FFFFFF"
-                                                                   FontAttributes="Bold"
-                                                                   FontFamily="Helvetica"
-                                                                   FontSize="12" />
-                                                            <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
-                                                            <Label Text="{Binding obitos, StringFormat='Óbitos: {0}'}"
-                                                                   VerticalTextAlignment="Center"
-                                                                   HorizontalOptions="FillAndExpand"
-                                                                   TextColor="#FFFFFF"
-                                                                   FontAttributes="Bold"
-                                                                   FontFamily="Helvetica"
-                                                                   FontSize="12" />
-                                                        </StackLayout>
-                                                    </DataTemplate>
-                                                </maps:TooltipSetting.TooltipTemplate>
-                                            </maps:TooltipSetting>
-                                        </maps:ShapeFileLayer.TooltipSettings>
-                                    </maps:ShapeFileLayer>
-
-                                </maps:SfMaps.Layers>
-                            </maps:SfMaps>
-
-                            <maps:SfMaps VerticalOptions="FillAndExpand"
-                                         HorizontalOptions="FillAndExpand"
-                                         HeightRequest="200" BackgroundColor="#1A161B" Grid.Row="1">
-                                <maps:SfMaps.Layers>
-                                    <maps:ShapeFileLayer Uri="madeira.shp" ItemsSource="{Binding PortugalInfo.Regioes}" ShowMapItems="True" ShapeIDPath="name" ShapeIDTableField="name">
-                                        <maps:ShapeFileLayer.ShapeSettings>
-                                            <maps:ShapeSetting ShapeFill="#292A2A" ShapeStroke="Gray" ShapeStrokeThickness="1" ShapeValuePath="confirmados"/>
-                                            
-                                        </maps:ShapeFileLayer.ShapeSettings>
-                                        <maps:ShapeFileLayer.DataLabelSettings>
-                                                <maps:DataLabelSetting TextColor="White" FontAttributes="Bold" FontFamily="Arial" FontSize="15" />
-                                            </maps:ShapeFileLayer.DataLabelSettings>
-                                            <maps:ShapeFileLayer.BubbleMarkerSettings>
-
-                                                <maps:BubbleMarkerSetting ShowBubbles="True" ValuePath="confirmados" Fill="#00C5FF"
-                                                                    MinSize="30" MaxSize="80" Opacity=".7"/>
-
-                                            </maps:ShapeFileLayer.BubbleMarkerSettings>
-                                        <maps:ShapeFileLayer.TooltipSettings>
-                                            <maps:TooltipSetting  ShowTooltip="True" EnableAnimation="False" StrokeColor="Transparent" PointerLength="20">
-                                                <maps:TooltipSetting.TooltipTemplate>
-                                                    <DataTemplate>
-                                                        <StackLayout>
-                                                            <Label Text="{Binding regiao}"
-                                                                   VerticalTextAlignment="Center"
-                                                                   HorizontalOptions="CenterAndExpand"
-                                                                   TextColor="#FFFFFF"
-                                                                   FontAttributes="Bold"
-                                                                   FontFamily="Helvetica"
-                                                                   FontSize="12" />
-                                                            <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
-                                                            <Label Text="{Binding confirmados, StringFormat='Confirmados: {0}'}"
-                                                                   VerticalTextAlignment="Center"
-                                                                   HorizontalOptions="FillAndExpand"
-                                                                   TextColor="#FFFFFF"
-                                                                   FontAttributes="Bold"
-                                                                   FontFamily="Helvetica"
-                                                                   FontSize="12" />
-                                                            <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
-                                                            <Label Text="{Binding obitos, StringFormat='Óbitos: {0}'}"
-                                                                   VerticalTextAlignment="Center"
-                                                                   HorizontalOptions="FillAndExpand"
-                                                                   TextColor="#FFFFFF"
-                                                                   FontAttributes="Bold"
-                                                                   FontFamily="Helvetica"
-                                                                   FontSize="12" />
-                                                        </StackLayout>
-                                                    </DataTemplate>
-                                                </maps:TooltipSetting.TooltipTemplate>
-                                            </maps:TooltipSetting>
-                                        </maps:ShapeFileLayer.TooltipSettings>
-                                    </maps:ShapeFileLayer>
-
-                                </maps:SfMaps.Layers>
-                            </maps:SfMaps>
+                        <!--#region Mapas -->
+                        <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Elevation="1" Margin="0,0,0,20">
+                            <Grid RowDefinitions="Auto, Auto">
+                                <Label Text="Portugal Continental"
+                                       FontAttributes="Bold"
+                                       FontSize="20"
+                                       TextColor="Black"
+                                       Margin="10"
+                                       Grid.Row="0"/>
+                                <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Grid.Row="1">
+                                    <maps:SfMaps VerticalOptions="FillAndExpand"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 HeightRequest="400" BackgroundColor="#1A161B">
+                                        <maps:SfMaps.Layers>
+                                            <maps:ShapeFileLayer Uri="portugal_continental.shp" ItemsSource="{Binding PortugalInfo.Regioes}" ShowMapItems="True" ShapeIDPath="name" ShapeIDTableField="name">
+                                                <maps:ShapeFileLayer.ShapeSettings>
+                                                    <maps:ShapeSetting ShapeFill="#292A2A" ShapeStroke="Gray" ShapeStrokeThickness="1" ShapeValuePath="confirmados"/>
+                                                </maps:ShapeFileLayer.ShapeSettings>
+                                                <maps:ShapeFileLayer.DataLabelSettings>
+                                                    <maps:DataLabelSetting TextColor="White" FontAttributes="Bold" FontFamily="Arial" FontSize="15" />
+                                                </maps:ShapeFileLayer.DataLabelSettings>
+                                                <maps:ShapeFileLayer.BubbleMarkerSettings>
+                                                    <maps:BubbleMarkerSetting ShowBubbles="True" ValuePath="confirmados" Fill="#00C5FF"
+                                                                        MinSize="30" MaxSize="80" Opacity=".7"/>
+                                                </maps:ShapeFileLayer.BubbleMarkerSettings>
+                                                <maps:ShapeFileLayer.TooltipSettings>
+                                                    <maps:TooltipSetting  ShowTooltip="True" EnableAnimation="False" StrokeColor="Transparent" PointerLength="20">
+                                                        <maps:TooltipSetting.TooltipTemplate>
+                                                            <DataTemplate>
+                                                                <StackLayout>
+                                                                    <Label Text="{Binding regiao}"
+                                                                           VerticalTextAlignment="Center"
+                                                                           HorizontalOptions="CenterAndExpand"
+                                                                           TextColor="#FFFFFF"
+                                                                           FontAttributes="Bold"
+                                                                           FontFamily="Helvetica"
+                                                                           FontSize="12" />
+                                                                    <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                                                    <Label Text="{Binding confirmados, StringFormat='Confirmados: {0}'}"
+                                                                           VerticalTextAlignment="Center"
+                                                                           HorizontalOptions="FillAndExpand"
+                                                                           TextColor="{StaticResource ConfirmedColor}"
+                                                                           FontAttributes="Bold"
+                                                                           FontFamily="Helvetica"
+                                                                           FontSize="12" />
+                                                                    <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                                                    <Label Text="{Binding obitos, StringFormat='Óbitos: {0}'}"
+                                                                           VerticalTextAlignment="Center"
+                                                                           HorizontalOptions="FillAndExpand"
+                                                                           TextColor="{StaticResource DeathsColor}"
+                                                                           FontAttributes="Bold"
+                                                                           FontFamily="Helvetica"
+                                                                           FontSize="12" />
+                                                                </StackLayout>
+                                                            </DataTemplate>
+                                                        </maps:TooltipSetting.TooltipTemplate>
+                                                    </maps:TooltipSetting>
+                                                </maps:ShapeFileLayer.TooltipSettings>
+                                            </maps:ShapeFileLayer>
+                                        </maps:SfMaps.Layers>
+                                    </maps:SfMaps>
+                                </pancakeView:PancakeView>
                             </Grid>
-                            
-                        </pancakeView:PancakeView>
-                        <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Elevation="1" Margin="0,20">
-                            
-                            
-
                         </pancakeView:PancakeView>
 
+                        <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Elevation="1" Margin="0,0,0,20">
+                            <Grid RowDefinitions="Auto, Auto">
+                                <Label Text="Açores"
+                                       FontAttributes="Bold"
+                                       FontSize="20"
+                                       TextColor="Black"
+                                       Margin="10"
+                                       Grid.Row="0"/>
+                                <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Grid.Row="1">
+                                    <maps:SfMaps VerticalOptions="FillAndExpand"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    HeightRequest="200" BackgroundColor="#1A161B">
+                                        <maps:SfMaps.Layers>
+                                            <maps:ShapeFileLayer Uri="acores.shp" ItemsSource="{Binding PortugalInfo.Regioes}" ShowMapItems="True" ShapeIDPath="name" ShapeIDTableField="name">
+                                                <maps:ShapeFileLayer.ShapeSettings>
+                                                    <maps:ShapeSetting ShapeFill="#292A2A" ShapeStroke="Gray" ShapeStrokeThickness="1" ShapeValuePath="confirmados"/>
+                                                </maps:ShapeFileLayer.ShapeSettings>
+                                                <maps:ShapeFileLayer.DataLabelSettings>
+                                                    <maps:DataLabelSetting TextColor="White" FontAttributes="Bold" FontFamily="Arial" FontSize="15" />
+                                                </maps:ShapeFileLayer.DataLabelSettings>
+                                                <maps:ShapeFileLayer.BubbleMarkerSettings>
+                                                    <maps:BubbleMarkerSetting ShowBubbles="True" ValuePath="confirmados" Fill="#00C5FF"
+                                                                        MinSize="30" MaxSize="80" Opacity=".7"/>
+                                                </maps:ShapeFileLayer.BubbleMarkerSettings>
+                                                <maps:ShapeFileLayer.TooltipSettings>
+                                                    <maps:TooltipSetting  ShowTooltip="True" EnableAnimation="False" StrokeColor="Transparent" PointerLength="20">
+                                                        <maps:TooltipSetting.TooltipTemplate>
+                                                            <DataTemplate>
+                                                                <StackLayout>
+                                                                    <Label Text="{Binding regiao}"
+                                                                            VerticalTextAlignment="Center"
+                                                                            HorizontalOptions="CenterAndExpand"
+                                                                            TextColor="#FFFFFF"
+                                                                            FontAttributes="Bold"
+                                                                            FontFamily="Helvetica"
+                                                                            FontSize="12" />
+                                                                    <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                                                    <Label Text="{Binding confirmados, StringFormat='Confirmados: {0}'}"
+                                                                            VerticalTextAlignment="Center"
+                                                                            HorizontalOptions="FillAndExpand"
+                                                                            TextColor="{StaticResource ConfirmedColor}"
+                                                                            FontAttributes="Bold"
+                                                                            FontFamily="Helvetica"
+                                                                            FontSize="12" />
+                                                                    <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                                                    <Label Text="{Binding obitos, StringFormat='Óbitos: {0}'}"
+                                                                            VerticalTextAlignment="Center"
+                                                                            HorizontalOptions="FillAndExpand"
+                                                                            TextColor="{StaticResource DeathsColor}"
+                                                                            FontAttributes="Bold"
+                                                                            FontFamily="Helvetica"
+                                                                            FontSize="12" />
+                                                                </StackLayout>
+                                                            </DataTemplate>
+                                                        </maps:TooltipSetting.TooltipTemplate>
+                                                    </maps:TooltipSetting>
+                                                </maps:ShapeFileLayer.TooltipSettings>
+                                            </maps:ShapeFileLayer>
+                                        </maps:SfMaps.Layers>
+                                    </maps:SfMaps>
+                                </pancakeView:PancakeView>
+                            </Grid>
+                        </pancakeView:PancakeView>
+
+                        <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Elevation="1" Margin="0,0,0,20">
+                            <Grid RowDefinitions="Auto, Auto">
+                                <Label Text="Madeira"
+                                       FontAttributes="Bold"
+                                       FontSize="20"
+                                       TextColor="Black"
+                                       Margin="10"
+                                       Grid.Row="0"/>
+                                <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Grid.Row="1">
+                                    <maps:SfMaps VerticalOptions="FillAndExpand"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 HeightRequest="200" BackgroundColor="#1A161B" Grid.Row="3">
+                                        <maps:SfMaps.Layers>
+                                            <maps:ShapeFileLayer Uri="madeira.shp" ItemsSource="{Binding PortugalInfo.Regioes}" ShowMapItems="True" ShapeIDPath="name" ShapeIDTableField="name">
+                                                <maps:ShapeFileLayer.ShapeSettings>
+                                                    <maps:ShapeSetting ShapeFill="#292A2A" ShapeStroke="Gray" ShapeStrokeThickness="1" ShapeValuePath="confirmados"/>
+                                                </maps:ShapeFileLayer.ShapeSettings>
+                                                <maps:ShapeFileLayer.DataLabelSettings>
+                                                    <maps:DataLabelSetting TextColor="White" FontAttributes="Bold" FontFamily="Arial" FontSize="15" />
+                                                </maps:ShapeFileLayer.DataLabelSettings>
+                                                <maps:ShapeFileLayer.BubbleMarkerSettings>
+                                                    <maps:BubbleMarkerSetting ShowBubbles="True" ValuePath="confirmados" Fill="#00C5FF"
+                                                                        MinSize="30" MaxSize="80" Opacity=".7"/>
+                                                </maps:ShapeFileLayer.BubbleMarkerSettings>
+                                                <maps:ShapeFileLayer.TooltipSettings>
+                                                    <maps:TooltipSetting  ShowTooltip="True" EnableAnimation="False" StrokeColor="Transparent" PointerLength="20">
+                                                        <maps:TooltipSetting.TooltipTemplate>
+                                                            <DataTemplate>
+                                                                <StackLayout>
+                                                                    <Label Text="{Binding regiao}"
+                                                                           VerticalTextAlignment="Center"
+                                                                           HorizontalOptions="CenterAndExpand"
+                                                                           TextColor="#FFFFFF"
+                                                                           FontAttributes="Bold"
+                                                                           FontFamily="Helvetica"
+                                                                           FontSize="12" />
+                                                                    <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                                                    <Label Text="{Binding confirmados, StringFormat='Confirmados: {0}'}"
+                                                                           VerticalTextAlignment="Center"
+                                                                           HorizontalOptions="FillAndExpand"
+                                                                           TextColor="{StaticResource ConfirmedColor}"
+                                                                           FontAttributes="Bold"
+                                                                           FontFamily="Helvetica"
+                                                                           FontSize="12" />
+                                                                    <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                                                    <Label Text="{Binding obitos, StringFormat='Óbitos: {0}'}"
+                                                                           VerticalTextAlignment="Center"
+                                                                           HorizontalOptions="FillAndExpand"
+                                                                           TextColor="{StaticResource DeathsColor}"
+                                                                           FontAttributes="Bold"
+                                                                           FontFamily="Helvetica"
+                                                                           FontSize="12" />
+                                                                </StackLayout>
+                                                            </DataTemplate>
+                                                        </maps:TooltipSetting.TooltipTemplate>
+                                                    </maps:TooltipSetting>
+                                                </maps:ShapeFileLayer.TooltipSettings>
+                                            </maps:ShapeFileLayer>
+                                        </maps:SfMaps.Layers>
+                                    </maps:SfMaps>
+                                </pancakeView:PancakeView>
+                            </Grid>
+                        </pancakeView:PancakeView>
+                        <!--#endregion-->
                     </StackLayout>
 
                 </ScrollView>

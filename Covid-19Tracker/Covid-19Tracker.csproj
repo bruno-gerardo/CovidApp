@@ -16,7 +16,7 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Syncfusion.Xamarin.SfMaps" Version="18.1.0.59" />
-    <PackageReference Include="Esri.ArcGISRuntime.Xamarin.Forms" Version="100.8.0" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
@@ -29,6 +29,9 @@
     <Folder Include="ViewModels\FAQ\" />
     <Folder Include="CustomRenderers\" />
     <Folder Include="Effects\" />
+    <Folder Include="Views\Popups\" />
+    <Folder Include="ViewModels\Popups\" />
+    <Folder Include="ValueConverter\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\FabMDL2.ttf" />
