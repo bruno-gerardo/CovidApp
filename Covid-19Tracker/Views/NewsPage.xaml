@@ -45,13 +45,13 @@
                     </tb:SfTabView.SelectionIndicatorSettings>
                     <tb:SfTabItem Title="Últimas" TitleFontColor="#99A6C0" SelectionColor="#3F94B5" TitleFontSize="20">
                         <tb:SfTabItem.Content>
-                            <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
+                            <RefreshView IsClippedToBounds="False" IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
                                 <StackLayout>
 
                                     <SearchBar BackgroundColor="Transparent"
                                                         HorizontalOptions="FillAndExpand"
                                                         WidthRequest="100"
-                                                        TextColor="White"
+                                                        TextColor="Black"
                                                         Placeholder="Pesquisa por palavras-chave"
                                                         PlaceholderColor="Black"
                                                         CancelButtonColor="White"
@@ -157,7 +157,7 @@
                                 <SearchBar BackgroundColor="Transparent"
                                            HorizontalOptions="FillAndExpand"
                                            WidthRequest="100"
-                                           TextColor="White"
+                                           TextColor="Black"
                                            Placeholder="Pesquisa por palavras-chave"
                                            PlaceholderColor="Black"
                                            CancelButtonColor="White"
