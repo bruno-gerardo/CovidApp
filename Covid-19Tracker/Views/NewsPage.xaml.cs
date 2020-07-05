@@ -48,6 +48,16 @@ namespace Covid19Tracker.Views
                                                               i.author.RemoveDiacriticalMarks().ToLower().Contains(e.NewTextValue.RemoveDiacriticalMarks().ToLower()));
         }
 
+        void SearchBarReadLater_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(e.NewTextValue))
+                ReadLaterList.ItemsSource = vm.ToReadLaterList;
+            else
+                ReadLaterList.ItemsSource = vm.ToReadLaterList.Where(i => i.title.RemoveDiacriticalMarks().ToLower().Contains(e.NewTextValue.RemoveDiacriticalMarks().ToLower()) ||
+                                                              i.description.RemoveDiacriticalMarks().ToLower().Contains(e.NewTextValue.RemoveDiacriticalMarks().ToLower()) ||
+                                                              i.author.RemoveDiacriticalMarks().ToLower().Contains(e.NewTextValue.RemoveDiacriticalMarks().ToLower()));
+        }
+
         async void SwipeItem_Invoked(object sender, EventArgs e)
         {
 

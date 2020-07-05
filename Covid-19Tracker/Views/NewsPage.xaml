@@ -162,7 +162,7 @@
                                            PlaceholderColor="Black"
                                            CancelButtonColor="White"
                                            Margin="10,10,10,0"
-                                           TextChanged="SearchBar_TextChanged"
+                                           TextChanged="SearchBarReadLater_TextChanged"
                                            />
                                 <CollectionView x:Name="ReadLaterList"
                                                 VerticalOptions="FillAndExpand"
