@@ -153,6 +153,7 @@
     <BundleResource Include="Resources\icon_compare%402x.png" />
     <BundleResource Include="Resources\icon_compare%403x.png" />
     <BundleResource Include="Resources\pt_flag.png" />
+    <BundleResource Include="Resources\loading.gif" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -163,7 +164,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.968" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1080" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView">
       <Version>18.1.0.59</Version>

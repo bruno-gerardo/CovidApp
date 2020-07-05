@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Covid19Tracker.Helpers;
 using Xamarin.Forms;
 
 namespace Covid19Tracker.Model
@@ -150,6 +151,38 @@ namespace Covid19Tracker.Model
         public int confirmados_70_79_total { get => confirmados_70_79_f + confirmados_70_79_m; }
         public int confirmados_80_plus_total { get => confirmados_80_plus_f + confirmados_80_plus_m; }
         #endregion
+
+        public GridLength RecoveredWidht { get => new GridLength((double)recuperados / confirmados, GridUnitType.Star); }
+        public GridLength ActiveWidht { get => new GridLength((double)suspeitos / confirmados, GridUnitType.Star); }
+        public GridLength DeathsWidht { get => new GridLength((double)obitos / confirmados, GridUnitType.Star); }
+
+
+        #region String Spacings
+        public string ConfirmadosStringSpacing  => confirmados.TransformNumberToSpacing();
+        public string SuspeitosStringSpacing  => suspeitos.TransformNumberToSpacing();
+        public string RecuperadosStringSpacing  => recuperados.TransformNumberToSpacing();
+        public string ObitosStringSpacing  => obitos.TransformNumberToSpacing();
+        #endregion
+
+        public class ConfirmadoGenero
+        {
+            public string genero { get; set; }
+            public int confirmados { get; set; }
+        }
+
+        public ObservableCollection<ConfirmadoGenero> ConfirmadosGenero => new ObservableCollection<ConfirmadoGenero>()
+        {
+            new ConfirmadoGenero
+            {
+                genero = "Masculino",
+                confirmados = confirmados_m
+            },
+            new ConfirmadoGenero
+            {
+                genero = "Feminino",
+                confirmados = confirmados_f
+            }
+        };
 
         public class ConfirmadosIdade
         {

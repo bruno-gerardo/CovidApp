@@ -42,15 +42,19 @@
                     BackgroundGradientEndColor="#1373A1"
                     Grid.Row="0"
                     Grid.RowSpan="2">
+                <Grid VerticalOptions="FillAndExpand"
+                             HorizontalOptions="CenterAndExpand"
+                             Margin="0,25">
+                    <Label 
+                            HorizontalOptions="FillAndExpand"
+                            Text="COVID-19 Info"
+                            FontFamily="Helvetica"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontSize="30"
+                        Grid.Row="0"/>
 
-                <ffimage:CachedImage Source="logo.png"
-                                        Aspect="AspectFit"
-                                        HeightRequest="70"
-                                        VerticalOptions="StartAndExpand"
-                                        HorizontalOptions="CenterAndExpand"
-                                        Grid.Row="0"
-                                        Margin="0,20"/>
-
+                </Grid>
             </pancakeView:PancakeView>
             <pancakeView:PancakeView x:Name="SecondRowGrid"
                     CornerRadius="30,30,0,0"
@@ -65,18 +69,18 @@
                                     <StackLayout>
                                         <Label Text="Mundialmente"
                                                 FontAttributes="Bold"
-                                                FontSize="Large"
+                                                FontSize="20"
                                                 TextColor="Black"/>
                                         <Label Text="{Binding UpdatedTime}"
                                                 FontAttributes="Bold"
-                                                FontSize="Micro"
+                                                FontSize="11"
                                                 TextColor="#99A6C0"
                                                 Margin="0,0,0,10"/>
                                     </StackLayout>
                                     <Label Text="Detalhes"
                                             FontAttributes="Bold"
                                             TextDecorations="Underline"
-                                            FontSize="Small"
+                                            FontSize="13"
                                             TextColor="#3F94B5"
                                             VerticalOptions="CenterAndExpand"
                                             HorizontalOptions="EndAndExpand"/>
@@ -116,7 +120,7 @@
                                             <Label Text="Confirmados"
                                                     TextColor="#99A6C0"
                                                     FontAttributes="Bold"
-                                                    FontSize="Small"
+                                                    FontSize="13"
                                                     VerticalOptions="StartAndExpand"
                                                     HorizontalOptions="CenterAndExpand"/>
                                                 
@@ -144,7 +148,7 @@
                                             <Label Text="Activos"
                                                     TextColor="#99A6C0"
                                                     FontAttributes="Bold"
-                                                    FontSize="Small"
+                                                    FontSize="13"
                                                     VerticalOptions="StartAndExpand"
                                                     HorizontalOptions="CenterAndExpand"/>
                                                 
@@ -173,7 +177,7 @@
                                             <Label Text="Recuperados"
                                                     TextColor="#99A6C0"
                                                     FontAttributes="Bold"
-                                                    FontSize="Small"
+                                                    FontSize="13"
                                                     VerticalOptions="CenterAndExpand"
                                                     HorizontalOptions="CenterAndExpand"
                                                     LineBreakMode="NoWrap"/>
@@ -203,7 +207,7 @@
                                             <Label Text="Mortes"
                                                     TextColor="#99A6C0"
                                                     FontAttributes="Bold"
-                                                    FontSize="Small"
+                                                    FontSize="13"
                                                     VerticalOptions="StartAndExpand"
                                                     HorizontalOptions="CenterAndExpand"/>
                                                 
@@ -218,7 +222,7 @@
                             <StackLayout Orientation="Vertical" Margin="0,35,0,0" >
                                 <Label  Text="Países mais afectados"
                                         FontAttributes="Bold"
-                                        FontSize="Large"
+                                        FontSize="20"
                                         TextColor="Black"
                                         Margin="16,0"/>
                                 <CollectionView HorizontalOptions="FillAndExpand" ItemSizingStrategy="MeasureAllItems"
@@ -324,18 +328,16 @@
                                         CornerRadius="30,0"
                                         IsVisible="{Binding IsBusy}">
                 <StackLayout VerticalOptions="CenterAndExpand">
-                    <ActivityIndicator
-                        HeightRequest="36"
-                        IsRunning="{Binding IsBusy}"
-                        IsVisible="True"
-                        Color="{StaticResource ConfirmedColor}"
-                        WidthRequest="36" />
+                    <ffimage:CachedImage HorizontalOptions="Center" VerticalOptions="Center"
+                                            WidthRequest="100" HeightRequest="100"
+                                            DownsampleToViewSize="true"
+                                            Source = "loading.gif"/>
                     <Label
-                        FontSize="Small"
+                        FontSize="13"
                         HorizontalOptions="FillAndExpand"
                         HorizontalTextAlignment="Center"
-                        Text="Carregando..."
-                        TextColor="{StaticResource ConfirmedColor}" />
+                        Text="A carregar....."
+                        TextColor="{StaticResource ConfirmedColor}" IsVisible="false"/>
                 </StackLayout>
 
             </pancakeView:PancakeView>

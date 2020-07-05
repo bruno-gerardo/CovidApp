@@ -26,7 +26,7 @@
                                                     >
                             <Grid RowDefinitions="Auto, *" ColumnDefinitions=".7*, .3*">
                                 <Label Text="{Binding Symptom}" TextColor="Black" FontAttributes="Bold" VerticalOptions="CenterAndExpand" Grid.Row="0" Margin="0,10"/>
-                                <Label Text="{Binding Description}" TextColor="#99A6C0" FontSize="Small" VerticalOptions="FillAndExpand" Grid.Row="1"/>
+                                <Label Text="{Binding Description}" TextColor="#99A6C0" FontSize="13" VerticalOptions="FillAndExpand" Grid.Row="1"/>
                                 <ffimage:CachedImage Source="{Binding Image}" HeightRequest="100" Aspect="AspectFit" VerticalOptions="CenterAndExpand" Grid.Column="1" Grid.RowSpan="2"/>
                             </Grid>
                         </pancakeView:PancakeView>

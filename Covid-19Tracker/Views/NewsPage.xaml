@@ -21,17 +21,18 @@
                         BackgroundGradientEndColor="#1373A1"
                         Grid.Row="0"
                         Grid.RowSpan="2">
-                <StackLayout VerticalOptions="FillAndExpand"
+                <Grid VerticalOptions="FillAndExpand"
                              HorizontalOptions="CenterAndExpand"
-                             Padding="0,20">
+                             Margin="0,25">
                     <Label 
                             HorizontalOptions="FillAndExpand"
                             Text="Notícias"
                             TextColor="White"
                             FontAttributes="Bold"
-                            FontSize="20"/>
+                            FontSize="25"
+                        Grid.Row="0"/>
 
-                </StackLayout>
+                </Grid>
             </pancakeView:PancakeView>
             <pancakeView:PancakeView VerticalOptions="FillAndExpand"
                                      CornerRadius="30,30,0,0"
@@ -69,7 +70,7 @@
                                         </CollectionView.ItemsLayout>
                                         <CollectionView.EmptyView>
                                             <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                                <Label Text="Ups..Sem resultados!" TextColor="#99A6C0" FontAttributes="Bold" FontSize="Large" VerticalOptions="CenterAndExpand"
+                                                <Label Text="Ups..Sem resultados!" TextColor="#99A6C0" FontAttributes="Bold" FontSize="20" VerticalOptions="CenterAndExpand"
                                                     HorizontalOptions="CenterAndExpand"/>
                                             </StackLayout>
                                         </CollectionView.EmptyView>
@@ -109,10 +110,10 @@
                                                                         LineBreakMode="TailTruncation"
                                                                         MaxLines="2"
                                                                         FontAttributes="Bold"
-                                                                        FontSize="Medium" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand"/>
+                                                                        FontSize="16" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand"/>
                                                                 <Label Text="{Binding description}"
                                                                         TextColor="Black"
-                                                                        FontSize="Small"
+                                                                        FontSize="13"
                                                                         HorizontalOptions="FillAndExpand"
                                                                         MaxLines="4"
                                                                         LineBreakMode="TailTruncation"
@@ -126,14 +127,14 @@
                                                                     <BoxView HeightRequest="1" BackgroundColor="Gray" VerticalOptions="Start" Grid.Row="0" Grid.ColumnSpan="2"/>
                                                                     <Label Text="{Binding author}"
                                                                             TextColor="Black"
-                                                                            FontSize="Small"
+                                                                            FontSize="13"
                                                                             HorizontalOptions="Start"
                                                                             LineBreakMode="TailTruncation"
                                                                             Grid.Row="1"
                                                                             Grid.Column="0"/>
                                                                     <Label Text="{Binding pubDateFormatted}"
                                                                             TextColor="Black"
-                                                                            FontSize="Small"
+                                                                            FontSize="13"
                                                                             HorizontalOptions="EndAndExpand"
                                                                             Grid.Row="1"
                                                                             Grid.Column="1"/>
@@ -175,7 +176,7 @@
                                     </CollectionView.ItemsLayout>
                                     <CollectionView.EmptyView>
                                         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                            <Label Text="Sem notícias para ler.." TextColor="#99A6C0" FontAttributes="Bold" FontSize="Large" VerticalOptions="CenterAndExpand"
+                                            <Label Text="Sem notícias para ler.." TextColor="#99A6C0" FontAttributes="Bold" FontSize="20" VerticalOptions="CenterAndExpand"
                                                 HorizontalOptions="CenterAndExpand"/>
                                         </StackLayout>
                                     </CollectionView.EmptyView>
@@ -216,10 +217,10 @@
                                                                     LineBreakMode="TailTruncation"
                                                                     MaxLines="2"
                                                                     FontAttributes="Bold"
-                                                                    FontSize="Medium" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand"/>
+                                                                    FontSize="16" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand"/>
                                                             <Label Text="{Binding description}"
                                                                     TextColor="Black"
-                                                                    FontSize="Small"
+                                                                    FontSize="13"
                                                                     HorizontalOptions="FillAndExpand"
                                                                     MaxLines="4"
                                                                     LineBreakMode="TailTruncation"
@@ -233,14 +234,14 @@
                                                                 <BoxView HeightRequest="1" BackgroundColor="Gray" VerticalOptions="Start" Grid.Row="0" Grid.ColumnSpan="2"/>
                                                                 <Label Text="{Binding author}"
                                                                         TextColor="Black"
-                                                                        FontSize="Small"
+                                                                        FontSize="13"
                                                                         HorizontalOptions="Start"
                                                                         LineBreakMode="TailTruncation"
                                                                         Grid.Row="1"
                                                                         Grid.Column="0"/>
                                                                 <Label Text="{Binding pubDateFormatted}"
                                                                         TextColor="Black"
-                                                                        FontSize="Small"
+                                                                        FontSize="13"
                                                                         HorizontalOptions="EndAndExpand"
                                                                         Grid.Row="1"
                                                                         Grid.Column="1"/>
@@ -264,18 +265,16 @@
                                      CornerRadius="30,0"
                                      IsVisible="{Binding IsBusy}">
                 <StackLayout VerticalOptions="CenterAndExpand">
-                    <ActivityIndicator
-                        HeightRequest="36"
-                        IsRunning="{Binding IsBusy}"
-                        Color="Black"
-                        IsVisible="True"
-                        WidthRequest="36" />
+                    <ffimage:CachedImage HorizontalOptions="Center" VerticalOptions="Center"
+                                            WidthRequest="100" HeightRequest="100"
+                                            DownsampleToViewSize="true"
+                                            Source = "loading.gif"/>
                     <Label
-                        FontSize="Small"
+                        FontSize="13"
                         HorizontalOptions="FillAndExpand"
                         HorizontalTextAlignment="Center"
-                        Text="Carregando..."
-                        TextColor="Black" />
+                        Text="A carregar....."
+                        TextColor="Black" IsVisible="False"/>
                 </StackLayout>
 
             </pancakeView:PancakeView>

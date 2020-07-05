@@ -38,7 +38,7 @@
                     <ffimage:CachedImage Source="bookmarked.gif" HeightRequest="150" WidthRequest="150"
                                          VerticalOptions="Center" HorizontalOptions="Center"/>
                     <Label
-                        FontSize="Small"
+                        FontSize="13"
                         HorizontalOptions="CenterAndExpand"
                         HorizontalTextAlignment="Start"
                         Text="Guardada!"

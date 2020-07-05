@@ -32,7 +32,7 @@ namespace Covid19Tracker.Views
 
             WorldwideInfoStack.GestureRecognizers.Add(tap);
 
-
+                
 
         }
 
