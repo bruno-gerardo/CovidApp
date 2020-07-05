@@ -164,6 +164,26 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\drawable\bookmarked.gif">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\icon_compare.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\loading.gif">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\portugal_map.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\pt_flag.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Covid-19Tracker\Covid-19Tracker.csproj">
@@ -181,6 +201,13 @@
     <Folder Include="Resources\drawable-land-xxhdpi\" />
     <Folder Include="Resources\drawable-land-xxxhdpi\" />
     <Folder Include="Renderers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\acores.dbf" />
+    <AndroidAsset Include="Assets\acores.shp" />
+    <AndroidAsset Include="Assets\madeira.dbf" />
+    <AndroidAsset Include="Assets\madeira.shp" />
+    <AndroidAsset Include="Assets\portugal_continental.shp" />
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

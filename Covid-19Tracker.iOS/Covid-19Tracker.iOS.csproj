@@ -139,10 +139,7 @@
     <BundleResource Include="Resources\CovidIcons\Symptoms\tiredness.png" />
     <BundleResource Include="Resources\CovidIcons\Symptoms\difficulty_breathing.png" />
     <BundleResource Include="Resources\CovidIcons\Prevention\mask.png" />
-    <BundleResource Include="Resources\portugal-map.png" />
-    <BundleResource Include="Resources\portugal.shp" />
     <BundleResource Include="Resources\bookmarked.gif" />
-    <BundleResource Include="Resources\portugal.dbf" />
     <BundleResource Include="Resources\acores.dbf" />
     <BundleResource Include="Resources\acores.shp" />
     <BundleResource Include="Resources\madeira.dbf" />
@@ -154,6 +151,7 @@
     <BundleResource Include="Resources\icon_compare%403x.png" />
     <BundleResource Include="Resources\pt_flag.png" />
     <BundleResource Include="Resources\loading.gif" />
+    <BundleResource Include="Resources\portugal_map.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
