@@ -389,14 +389,12 @@
                         <!--#region Mapas -->
                         <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Elevation="1" Margin="0,0,0,20">
                             <Grid RowDefinitions="Auto, Auto">
-                                <Label Text="Portugal Continental"
-                                       FontAttributes="Bold"
-                                       FontSize="20"
-                                       TextColor="Black"
-                                       Margin="10"
-                                       Grid.Row="0"/>
+                                <StackLayout Grid.Row="0" Padding="10">
+                                        <Label Text="Portugal Continental" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
+                                        <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                </StackLayout>
                                 <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Grid.Row="1">
-                                    <maps:SfMaps VerticalOptions="FillAndExpand"
+                                    <maps:SfMaps x:Name="portugal_map" VerticalOptions="FillAndExpand"
                                                  HorizontalOptions="FillAndExpand"
                                                  HeightRequest="400" BackgroundColor="#1A161B">
                                         <maps:SfMaps.Layers>
@@ -408,8 +406,12 @@
                                                     <maps:DataLabelSetting TextColor="White" FontAttributes="Bold" FontFamily="Arial" FontSize="15" />
                                                 </maps:ShapeFileLayer.DataLabelSettings>
                                                 <maps:ShapeFileLayer.BubbleMarkerSettings>
-                                                    <maps:BubbleMarkerSetting ShowBubbles="True" ValuePath="confirmados" Fill="#00C5FF"
+                                                    <OnPlatform x:TypeArguments="maps:BubbleMarkerSetting">
+                                                        <On Platform="iOS">
+                                                            <maps:BubbleMarkerSetting ShowBubbles="True" ValuePath="confirmados" Fill="#00C5FF"
                                                                         MinSize="30" MaxSize="80" Opacity=".7"/>
+                                                        </On>
+                                                    </OnPlatform>
                                                 </maps:ShapeFileLayer.BubbleMarkerSettings>
                                                 <maps:ShapeFileLayer.TooltipSettings>
                                                     <maps:TooltipSetting  ShowTooltip="True" EnableAnimation="False" StrokeColor="Transparent" PointerLength="20">
@@ -453,14 +455,12 @@
 
                         <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Elevation="1" Margin="0,0,0,20">
                             <Grid RowDefinitions="Auto, Auto">
-                                <Label Text="Açores"
-                                       FontAttributes="Bold"
-                                       FontSize="20"
-                                       TextColor="Black"
-                                       Margin="10"
-                                       Grid.Row="0"/>
+                                <StackLayout Grid.Row="0" Padding="10">
+                                        <Label Text="Açores" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
+                                        <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                </StackLayout>
                                 <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Grid.Row="1">
-                                    <maps:SfMaps VerticalOptions="FillAndExpand"
+                                    <maps:SfMaps x:Name="acores_map" VerticalOptions="FillAndExpand"
                                                     HorizontalOptions="FillAndExpand"
                                                     HeightRequest="200" BackgroundColor="#1A161B">
                                         <maps:SfMaps.Layers>
@@ -472,9 +472,17 @@
                                                     <maps:DataLabelSetting TextColor="White" FontAttributes="Bold" FontFamily="Arial" FontSize="15" />
                                                 </maps:ShapeFileLayer.DataLabelSettings>
                                                 <maps:ShapeFileLayer.BubbleMarkerSettings>
+                                                    <OnPlatform x:TypeArguments="maps:BubbleMarkerSetting">
+                                                        <On Platform="iOS">
+                                                            <maps:BubbleMarkerSetting ShowBubbles="True" ValuePath="confirmados" Fill="#00C5FF"
+                                                                        MinSize="30" MaxSize="80" Opacity=".7"/>
+                                                        </On>
+                                                    </OnPlatform>
+                                                </maps:ShapeFileLayer.BubbleMarkerSettings>
+                                                <!--<maps:ShapeFileLayer.BubbleMarkerSettings>
                                                     <maps:BubbleMarkerSetting ShowBubbles="True" ValuePath="confirmados" Fill="#00C5FF"
                                                                         MinSize="30" MaxSize="80" Opacity=".7"/>
-                                                </maps:ShapeFileLayer.BubbleMarkerSettings>
+                                                </maps:ShapeFileLayer.BubbleMarkerSettings>-->
                                                 <maps:ShapeFileLayer.TooltipSettings>
                                                     <maps:TooltipSetting  ShowTooltip="True" EnableAnimation="False" StrokeColor="Transparent" PointerLength="20">
                                                         <maps:TooltipSetting.TooltipTemplate>
@@ -517,14 +525,12 @@
 
                         <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Elevation="1" Margin="0,0,0,20">
                             <Grid RowDefinitions="Auto, Auto">
-                                <Label Text="Madeira"
-                                       FontAttributes="Bold"
-                                       FontSize="20"
-                                       TextColor="Black"
-                                       Margin="10"
-                                       Grid.Row="0"/>
+                                <StackLayout Grid.Row="0" Padding="10">
+                                        <Label Text="Madeira" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
+                                        <BoxView Color="#888C91" HeightRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                </StackLayout>
                                 <pancakeView:PancakeView CornerRadius="20" BackgroundColor="White" Grid.Row="1">
-                                    <maps:SfMaps VerticalOptions="FillAndExpand"
+                                    <maps:SfMaps x:Name="madeira_map" VerticalOptions="FillAndExpand"
                                                  HorizontalOptions="FillAndExpand"
                                                  HeightRequest="200" BackgroundColor="#1A161B" Grid.Row="3">
                                         <maps:SfMaps.Layers>
@@ -536,8 +542,12 @@
                                                     <maps:DataLabelSetting TextColor="White" FontAttributes="Bold" FontFamily="Arial" FontSize="15" />
                                                 </maps:ShapeFileLayer.DataLabelSettings>
                                                 <maps:ShapeFileLayer.BubbleMarkerSettings>
-                                                    <maps:BubbleMarkerSetting ShowBubbles="True" ValuePath="confirmados" Fill="#00C5FF"
+                                                    <OnPlatform x:TypeArguments="maps:BubbleMarkerSetting">
+                                                        <On Platform="iOS">
+                                                            <maps:BubbleMarkerSetting ShowBubbles="True" ValuePath="confirmados" Fill="#00C5FF"
                                                                         MinSize="30" MaxSize="80" Opacity=".7"/>
+                                                        </On>
+                                                    </OnPlatform>
                                                 </maps:ShapeFileLayer.BubbleMarkerSettings>
                                                 <maps:ShapeFileLayer.TooltipSettings>
                                                     <maps:TooltipSetting  ShowTooltip="True" EnableAnimation="False" StrokeColor="Transparent" PointerLength="20">

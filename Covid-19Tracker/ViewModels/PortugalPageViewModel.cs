@@ -52,12 +52,14 @@ namespace Covid19Tracker.ViewModels
 
         public PortugalPageViewModel()
         {
-            GetData();
+            //GetData();
         }
 
         public async Task GetData()
         {
             IsBusy = true;
+
+            
 
             var portugalCases = await Api.GetPortugalCasesInfoAsync();
             var timeSeries = await Api.GetCountryTimeSeriesAsync("PRT");

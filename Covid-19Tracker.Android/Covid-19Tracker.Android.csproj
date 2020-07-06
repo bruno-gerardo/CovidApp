@@ -208,6 +208,7 @@
     <AndroidAsset Include="Assets\madeira.dbf" />
     <AndroidAsset Include="Assets\madeira.shp" />
     <AndroidAsset Include="Assets\portugal_continental.shp" />
+    <AndroidAsset Include="Assets\portugal_continental.dbf" />
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

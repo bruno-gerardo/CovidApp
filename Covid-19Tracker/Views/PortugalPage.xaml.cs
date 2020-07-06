@@ -20,11 +20,11 @@ namespace Covid19Tracker.Views
             BindingContext = vm;
         }
 
-        //protected async override void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //    await vm.GetData();
-        //}
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            await vm.GetData();
+        }
 
         void NumericalAxis_LabelCreated(System.Object sender, ChartAxisLabelEventArgs e)
         {
