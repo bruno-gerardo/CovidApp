@@ -25,7 +25,6 @@ namespace Covid19Tracker.Views
         //protected async override void OnAppearing()
         //{
         //    base.OnAppearing();
-        //    //var cenas = await Api.GetNewsItemAsync();
         //    await vm.GetData();
         //}
 

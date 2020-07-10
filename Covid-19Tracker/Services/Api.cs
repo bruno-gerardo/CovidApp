@@ -16,7 +16,7 @@ namespace Covid19Tracker.Services
 {
     public class Api
     {
-        private static RestClient _restClient = new RestClient("https://disease.sh/v2/"); // API Corona
+        private static RestClient _restClient = new RestClient("https://disease.sh/v3/covid-19/"); // API Corona
         //private static RestClient _restClient = new RestClient("https://api.caw.sh/v2/"); // API Corona
 
         private static RestClient _restClientPortugal = new RestClient("https://covid19-api.vost.pt/Requests"); // API DSSG
@@ -109,9 +109,9 @@ namespace Covid19Tracker.Services
 
             var doc = await web.LoadFromWebAsync(link);
 
-            var cenas = doc.DocumentNode.SelectSingleNode("//div[@class='lBwEZb BL5WZb xP6mwf']");
+            var firstNode = doc.DocumentNode.SelectSingleNode("//div[@class='lBwEZb BL5WZb xP6mwf']");
 
-            var child = cenas.SelectNodes("//div[@class='NiLAwe y6IFtc R7GTQ keNKEd j7vNaf nID9nc']//article").ToList();
+            var child = firstNode.SelectNodes("//div[@class='NiLAwe y6IFtc R7GTQ keNKEd j7vNaf nID9nc']//article").ToList();
 
             var rssInfo = new NewsInfo()
             {

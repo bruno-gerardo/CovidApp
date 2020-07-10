@@ -47,8 +47,8 @@ namespace Covid19Tracker.Views
             if (e.CurrentSelection.FirstOrDefault() is CountryCasesInfo selectedCountry)
             {
                 var countryName = selectedCountry;
-                var cenas = JsonConvert.SerializeObject(countryName);
-                await Shell.Current.GoToAsync($"countryDetailsPage?CountryName={cenas}");
+                var obj = JsonConvert.SerializeObject(countryName);
+                await Shell.Current.GoToAsync($"countryDetailsPage?CountryName={obj}");
             }
 
             ((CollectionView)sender).SelectedItem = null;

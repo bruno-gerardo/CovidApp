@@ -48,10 +48,10 @@
         <Tab Route="newsPage" Title="Notícias" Icon="tab_feed.png">
             <ShellContent ContentTemplate="{DataTemplate views:NewsPage}" />
         </Tab>
-        <Tab Title="Portugal" Icon="portugal_map.png">
+        <Tab Route="portugalPage" Title="Portugal" Icon="portugal_map.png">
             <ShellContent ContentTemplate="{DataTemplate views:PortugalPage}" />
         </Tab>
-        <Tab Title="FAQ" Icon="tab_about.png">
+        <Tab Route="faqPage" Title="FAQ" Icon="tab_about.png">
             <ShellContent ContentTemplate="{DataTemplate faq:FaqPage}" />
         </Tab>
     </TabBar>
